@@ -33,7 +33,10 @@ public class Account {
 
 	@Column(name = "status")
 	private boolean status;
-
+	
+	@Column(name = "role_id")
+	private int roleId;
+	
 	public Long getId() {
 		return id;
 	}
@@ -65,8 +68,15 @@ public class Account {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
-	
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
 	
 	
 }
