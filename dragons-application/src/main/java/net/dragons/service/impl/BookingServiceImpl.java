@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.dragons.dto.BookingDto;
 import net.dragons.jpa.entity.Booking;
 import net.dragons.repository.BookingRepository;
 import net.dragons.service.BookingService;
+import util.BookingStatusConstant;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -21,18 +23,36 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public List<Booking> getByHotelId(Integer hotelId) {
+	public List<Booking> getByHotelId(Long hotelId) {
 		return bookingRepository.findByHotelId(hotelId);
 	}
 
 	@Override
-	public List<Booking> getByRoomId(Integer roomId) {
+	public List<Booking> getByRoomId(Long roomId) {
 		return bookingRepository.findByRoomId(roomId);
 	}
 
 	@Override
-	public List<Booking> getByCustomerId(Integer customerId) {
+	public List<Booking> getByCustomerId(Long customerId) {
 		return bookingRepository.findByCustomerId(customerId);
+	}
+
+	@Override
+	public Long create(BookingDto bookingDto) {
+		Booking booking = new Booking();
+		booking.setCustomerId(bookingDto.getCustomerId());
+		booking.setFromDate(bookingDto.getFromDate());
+		booking.setToDate(bookingDto.getToDate());
+		booking.setHotelId(bookingDto.getHotelId());
+		booking.setNumberOfGuess(bookingDto.getNumberOfGuess());
+		booking.setPrice(bookingDto.getPrice());
+		booking.setRoomId(bookingDto.getRoomId());
+		booking.setTotalAmount(bookingDto.getTotalAmount());
+		booking.setBookingStatus(BookingStatusConstant.CREATED);
+		
+		bookingRepository.save(booking);
+		
+		return booking.getId();
 	}
 	
 	

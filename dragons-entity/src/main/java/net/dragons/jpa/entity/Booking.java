@@ -39,7 +39,7 @@ public class Booking {
 	private Double price;
 	
 	@Column(name="number_of_guess")
-	private Double numberOfGuess;
+	private Integer numberOfGuess;
 	
 	@Column(name="from_date")
 	private Date fromDate;
@@ -50,6 +50,9 @@ public class Booking {
 	@Column(name="total_amount")
 	private Double totalAmount;
 
+	@Column(name="booking_status")
+	private Integer bookingStatus;
+	
 	public Long getId() {
 		return id;
 	}
@@ -90,11 +93,11 @@ public class Booking {
 		this.price = price;
 	}
 
-	public Double getNumberOfGuess() {
+	public Integer getNumberOfGuess() {
 		return numberOfGuess;
 	}
 
-	public void setNumberOfGuess(Double numberOfGuess) {
+	public void setNumberOfGuess(Integer numberOfGuess) {
 		this.numberOfGuess = numberOfGuess;
 	}
 
@@ -120,6 +123,14 @@ public class Booking {
 
 	public void setTotalAmount(Double totalAmount) {
 		this.totalAmount = totalAmount;
+	}
+
+	public Integer getBookingStatus() {
+		return bookingStatus;
+	}
+
+	public void setBookingStatus(Integer bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 	
 	

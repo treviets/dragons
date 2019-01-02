@@ -22,6 +22,5 @@ public class HotelController {
 	public Object getAllHotels(HttpServletRequest request) throws Exception {
 	 	return hotelService.getAll();
 	} 
-
 	
 }

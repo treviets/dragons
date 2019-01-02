@@ -15,11 +15,11 @@ import net.dragons.jpa.entity.Booking;
  */
 public interface BookingRepository extends JpaRepository<Booking, Long>{
 	
-	List<Booking> findByHotelId(Integer hotelId);
+	List<Booking> findByHotelId(Long hotelId);
 	
-	List<Booking> findByRoomId(Integer roomId);
+	List<Booking> findByRoomId(Long roomId);
 	
-	List<Booking> findByCustomerId(Integer customerId);
+	List<Booking> findByCustomerId(Long customerId);
 	
 	
 }
