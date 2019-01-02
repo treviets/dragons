@@ -17,6 +17,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer>{
 	Account findByUsername(String username);
 	
 	List<Account> findByRoleId(int roleId);
+	//check commmit
 	
 	Account findByUsernameAndPassword(String username, String password);
 }
