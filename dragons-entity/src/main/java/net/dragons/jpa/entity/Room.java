@@ -33,15 +33,12 @@ public class Room {
 	@Column(name="capacity")
 	private Integer capacity;
 	
-	@Column(name="room_name")
-	private String roomName;
+	@Column(name="code")
+	private String code;
 	
-	@Column(name="room_size")
-	private String roomSize;
+	@Column(name="description")
+	private String description;
 	
-	@Column(name="room_code")
-	private String roomCode;
-
 	@Column(name="floor")
 	private Integer floor;
 
@@ -80,20 +77,20 @@ public class Room {
 		this.capacity = capacity;
 	}
 
-	public String getRoomName() {
-		return roomName;
+	public String getCode() {
+		return code;
 	}
 
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public String getRoomCode() {
-		return roomCode;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setRoomCode(String roomCode) {
-		this.roomCode = roomCode;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getFloor() {
@@ -104,14 +101,6 @@ public class Room {
 		this.floor = floor;
 	}
 
-	public String getRoomSize() {
-		return roomSize;
-	}
-
-	public void setRoomSize(String roomSize) {
-		this.roomSize = roomSize;
-	}
-
 	public String getRoomStatus() {
 		return roomStatus;
 	}
@@ -119,6 +108,6 @@ public class Room {
 	public void setRoomStatus(String roomStatus) {
 		this.roomStatus = roomStatus;
 	}
-	
+
 	
 }
