@@ -18,15 +18,17 @@ CREATE TABLE `the_dragon`.`customers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
+  `email`    varchar(100) NOT NULL,
+  `phone`    varchar(20) NOT NUll,
   `status` tinyint(1) NOT NULL,
   `role_id` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO `the_dragon`.`customers` (username, password, status, role_id) VALUES ('truong_nguyen', '123456', '1', '1');
-INSERT INTO `the_dragon`.`customers` (username, password, status, role_id) VALUES ('nhan_nguyen', '123456', '1', '2');
-INSERT INTO `the_dragon`.`customers` (username, password, status, role_id) VALUES ('thoai_tran', '123456', '1', '3');
-INSERT INTO `the_dragon`.`customers` (username, password, status, role_id) VALUES ('vu_cao', '123456', '1', '3');
+INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, role_id) VALUES ('truong_nguyen', '123456', 'truongnguyen1110@gmail.com', '0123456789', '1', '1');
+INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, role_id) VALUES ('nhan_nguyen', '123456', 'vunhankhtn@gmail.com', '0123456789', '1', '2');
+INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, role_id) VALUES ('thoai_tran', '123456', 'thoaitran@gmail.com', '0123456788', '1', '3');
+INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, role_id) VALUES ('vu_cao', '123456', 'caohongvu@gmail.com', '1234556778', '1', '3');
 
 
 
