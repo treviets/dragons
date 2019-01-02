@@ -21,10 +21,10 @@ public class LoginController {
 	@Autowired
 	AccountService accountService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST) 
+	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	@ResponseBody
 	public Object createInvoice(HttpServletRequest request, @RequestBody LoginDto loginDto) throws Exception {
-	 	
+	 	System.out.println("Login");
 		
 		
 		return null;

@@ -6,9 +6,6 @@ import org.springframework.jndi.JndiLocatorDelegate;
 
 import javax.naming.NamingException;
 
-/**
- * Created by Vincent
- */
 public class SpringProfilesActiveApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     private static final String[] DEFAULT_PROFILES_ACTIVE = {"default", "dev", "stage", "prod", "timers", "swagger"};
 

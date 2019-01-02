@@ -16,7 +16,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "accounts")
+@Table(name = "hotels")
 @NamedQuery(name = "Hotel.findAll", query = "SELECT h FROM Hotel h")
 public class Hotel {
 
@@ -34,11 +34,11 @@ public class Hotel {
 	@Column(name="address")
 	private String address;
 	
-	@Column(name="city")
-	private String city;
-	
 	@Column(name="district")
 	private String district;
+	
+	@Column(name="city")
+	private String city;
 	
 	@Column(name="hotel_status")
 	private String hotelStatus;

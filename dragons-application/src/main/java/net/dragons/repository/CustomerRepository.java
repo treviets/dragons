@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import net.dragons.jpa.entity.Customer;
 
 /**
- * @author Vincent
+ * @author NhanNguyen
  *
  */
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
+	
+	Customer findById(Long id);
 	
 	Customer findByEmail(String email);
 	

@@ -16,7 +16,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="clients")
+@Table(name="rooms")
 @NamedQuery(name="Room.findAll", query="SELECT r FROM Room r")
 public class Room {
 	@Id
@@ -45,7 +45,7 @@ public class Room {
 	@Column(name="floor")
 	private Integer floor;
 
-	@Column(name="status")
+	@Column(name="room_status")
 	private String roomStatus;
 
 	public Long getId() {
