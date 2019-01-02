@@ -47,6 +47,26 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		return customer.getId();
 	}
+
+	@Override
+	public void delete(Long customerId) {
+
+	}
+
+	@Override
+	public void update(CustomerDto customerDto) {
+		Customer customer = customerRepository.findById(customerDto.getCustomerId());
+		
+		customer.setUsername(customerDto.getUsername());
+		customer.setPassword(customerDto.getPassword());
+		customer.setEmail(customerDto.getEmail());
+		customer.setPhone(customerDto.getPhone());
+		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
+		customer.setStatus(CustomerStatusConstant.ENABLE);
+		
+		customerRepository.save(customer);
+		
+	}
 	
 	
 }

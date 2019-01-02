@@ -14,4 +14,8 @@ public interface CustomerService {
 	List<Customer> getByUsername(String username);
 	
 	Long create(CustomerDto customerDto);
+	
+	void delete(Long customerId);
+	
+	void update(CustomerDto customerDto);
 }

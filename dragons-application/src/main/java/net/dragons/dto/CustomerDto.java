@@ -3,6 +3,9 @@ package net.dragons.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CustomerDto {
+	
+	@JsonProperty("CustomerId")
+	private Long customerId;
 
 	@JsonProperty("Username")
 	private String username;
@@ -18,6 +21,14 @@ public class CustomerDto {
 
 	@JsonProperty("Phone")
 	private String phone;
+	
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
 
 	public String getUsername() {
 		return username;
