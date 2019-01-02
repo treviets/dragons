@@ -3,189 +3,80 @@
  */
 package net.dragons.jpa.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
- * @author Vincent
+ * @author NhanNguyen
  *
  */
 @Entity
 @Table(name = "customers")
 @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
-public class Customer extends BaseUser {
-	private static final long serialVersionUID = 1L;
+public class Customer {
+	
+	@Id
+	@Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(name = "username")
+	private String username;
+	
+	@Column(name = "password")
+	private String password;
 
-	@Column(name = "auth_type")
-	private int authType;
-
-	@Temporal(TemporalType.DATE)
-	private Date birthday;
-
-	private String avatar;
-
-	@Column(name = "favorite_product_ids")
-	private String favoriteProductIds;
-
-	@Column(name = "needii_cash")
-	private float neediiCash;
-
-	private int gender;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "last_login_at")
-	private Date lastLoginAt;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "reference_at")
-	private Date referenceAt;
-
-	@Column(name = "verify_code")
-	private String verifyCode;
-
-	@Column(name = "is_authenticated")
-	private boolean isAuthenticated;
-
-	@Column(name = "reference_code")
-	private String referenceCode;
-
-	@Column(name = "reference_by")
-	private long referenceBy;
-
-	@Column(name = "facebook_uid")
-	private String facebookUID;
-
-	@Column(name = "google_uid")
-	private String googleUID;
-
+	@Column(name = "status")
 	private boolean status;
-
-	public int getAuthType() {
-		return authType;
+	
+	@Column(name = "role_id")
+	private int roleId;
+	
+	public Long getId() {
+		return id;
 	}
 
-	public void setAuthType(int authType) {
-		this.authType = authType;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Date getBirthday() {
-		return birthday;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getAvatar() {
-		return avatar;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getFavoriteProductIds() {
-		return favoriteProductIds;
-	}
-
-	public void setFavoriteProductIds(String favoriteProductIds) {
-		this.favoriteProductIds = favoriteProductIds;
-	}
-
-	public float getNeediiCash() {
-		return neediiCash;
-	}
-
-	public void setNeediiCash(float neediiCash) {
-		this.neediiCash = neediiCash;
-	}
-
-	public int getGender() {
-		return gender;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-
-	public Date getLastLoginAt() {
-		return lastLoginAt;
-	}
-
-	public void setLastLoginAt(Date lastLoginAt) {
-		this.lastLoginAt = lastLoginAt;
-	}
-
-	public Date getReferenceAt() {
-		return referenceAt;
-	}
-
-	public void setReferenceAt(Date referenceAt) {
-		this.referenceAt = referenceAt;
-	}
-
-	public String getVerifyCode() {
-		return verifyCode;
-	}
-
-	public void setVerifyCode(String verifyCode) {
-		this.verifyCode = verifyCode;
-	}
-
-	public boolean isAuthenticated() {
-		return isAuthenticated;
-	}
-
-	public void setAuthenticated(boolean isAuthenticated) {
-		this.isAuthenticated = isAuthenticated;
-	}
-
-	public String getReferenceCode() {
-		return referenceCode;
-	}
-
-	public void setReferenceCode(String referenceCode) {
-		this.referenceCode = referenceCode;
-	}
-
-	public long getReferenceBy() {
-		return referenceBy;
-	}
-
-	public void setReferenceBy(long referenceBy) {
-		this.referenceBy = referenceBy;
-	}
-
-	public String getFacebookUID() {
-		return facebookUID;
-	}
-
-	public void setFacebookUID(String facebookUID) {
-		this.facebookUID = facebookUID;
-	}
-
-	public String getGoogleUID() {
-		return googleUID;
-	}
-
-	public void setGoogleUID(String googleUID) {
-		this.googleUID = googleUID;
-	}
-
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
 	
 
 	
