@@ -1,6 +1,6 @@
 package util;
 
-public class RoleConstant {
+public class CustomerRoleConstant {
 
 	public static int ADMIN_ROLE = 1;
 	

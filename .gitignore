@@ -2,3 +2,4 @@
 dragons-application/target/dragons-application-0.0.1-SNAPSHOT.jar
 .DS_Store
 *.DS_Store
+**/.DS_Store

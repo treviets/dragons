@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.dragons.dto.CustomerDto;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.repository.CustomerRepository;
 import net.dragons.service.CustomerService;
+import util.CustomerRoleConstant;
+import util.CustomerStatusConstant;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -28,6 +31,21 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getByUsername(String username) {
 		return customerRepository.findByUsername(username);
+	}
+
+	@Override
+	public Long create(CustomerDto customerDto) {
+		Customer customer = new Customer();
+		customer.setUsername(customerDto.getUsername());
+		customer.setPassword(customerDto.getPassword());
+		customer.setEmail(customerDto.getEmail());
+		customer.setPhone(customerDto.getPhone());
+		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
+		customer.setStatus(CustomerStatusConstant.ENABLE);
+		
+		customerRepository.save(customer);
+		
+		return customer.getId();
 	}
 	
 	

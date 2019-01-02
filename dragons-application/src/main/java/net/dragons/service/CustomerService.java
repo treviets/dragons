@@ -2,6 +2,7 @@ package net.dragons.service;
 
 import java.util.List;
 
+import net.dragons.dto.CustomerDto;
 import net.dragons.jpa.entity.Customer;
 
 public interface CustomerService {
@@ -11,4 +12,6 @@ public interface CustomerService {
 	Customer getById(Long customerId);
 	
 	List<Customer> getByUsername(String username);
+	
+	Long create(CustomerDto customerDto);
 }
