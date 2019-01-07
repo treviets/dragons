@@ -45,6 +45,9 @@ public class Room {
 	@Column(name="city")
 	private Integer city;
 
+	@Column(name="images")
+	private String images;
+	
 	@Column(name="status")
 	private Integer status;
 
@@ -120,8 +123,14 @@ public class Room {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
 
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
+	}
+	
 	
 }

@@ -49,23 +49,41 @@ INSERT INTO `the_dragon`.`hotels` (name, number_of_rooms, address, district, cit
 INSERT INTO `the_dragon`.`hotels` (name, number_of_rooms, address, district, city, hotel_status) VALUES ('Hotel CIS 3', '10', '2 Hong Ha', 'Tan Binh', 'Ho Chi Minh', '1');
 
 
+
 DROP TABLE IF EXISTS `the_dragon`.`rooms`;
 CREATE TABLE `the_dragon`.`rooms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `hotel_id` int(10) NOT NULL,
-  `price` decimal(10, 2) NOT NULL,
-  `capacity` varchar(100) NOT NULL,
   `code` varchar(50) NOT NULL,
+  `price` decimal(10, 2) NOT NULL,
+  `number_of_guest` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `floor` tinyint(10) NOT NULL,
-  `room_status` tinyint(1) NOT NULL,
+  `type` tinyint(1) NOT NULL,
+  `district` int(10) NOT NULL,
+  `city` int(10) NOT NULL,
+  `images` varchar(1000) NOT NULL,
+  `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM201', 500000, 3, 'Description of room', 1, 1, 1, '/static/room/1/1.png|/static/room/1/2.png|/static/room/1/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM202', 300000, 2, 'Description of room', 1, 1, 1, '/static/room/2/1.png|/static/room/2/2.png|/static/room/2/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM203', 400000, 3, 'Description of room', 1, 2, 1, '/static/room/3/1.png|/static/room/3/2.png|/static/room/3/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM204', 200000, 2, 'Description of room', 1, 3, 1, '/static/room/4/1.png|/static/room/4/2.png|/static/room/4/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM205', 100000, 1, 'Description of room', 1, 4, 2, '/static/room/5/1.png|/static/room/5/2.png|/static/room/5/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM206', 600000, 3, 'Description of room', 1, 3, 2, '/static/room/6/1.png|/static/room/6/2.png|/static/room/6/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM207', 700000, 4, 'Description of room', 1, 2, 2, '/static/room/7/1.png|/static/room/7/2.png|/static/room/7/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM208', 800000, 4, 'Description of room', 1, 2, 2, '/static/room/8/1.png|/static/room/8/2.png|/static/room/8/3.png', 1);
+INSERT INTO `the_dragon`.`rooms` (code, price, number_of_guest, description, type, district, city, images, status) 
+VALUES ('ROOM209', 400000, 3, 'Description of room', 1, 1, 1, '/static/room/9/1.png|/static/room/9/2.png|/static/room/9/3.png', 1);
 
 
-INSERT INTO `the_dragon`.`rooms` (hotel_id, price, capacity, code, description, floor, room_status) VALUES (1, 20000, 10, 'P202', 10, 'Phong 202', 2, '1');
-INSERT INTO `the_dragon`.`rooms` (hotel_id, price, capacity, code, description, floor, room_status) VALUES (2, 20000, 10, 'P202', 10, 'Phong 202', 2, '1');
-INSERT INTO `the_dragon`.`rooms` (hotel_id, price, capacity, code, description, floor, room_status) VALUES (3, 20000, 10, 'P202', 10, 'Phong 202', 2, '1');
 
 
 DROP TABLE IF EXISTS `the_dragon`.`bookings`;

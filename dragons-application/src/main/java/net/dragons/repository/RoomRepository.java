@@ -18,8 +18,5 @@ public interface RoomRepository extends JpaRepository<Room, Integer>{
 	
 	List<Room> findByDistrict(Integer district);
 	
-	List<Room> findByType(Integer type);
-	
 	List<Room> findByStatus(Integer status);
-	
 }

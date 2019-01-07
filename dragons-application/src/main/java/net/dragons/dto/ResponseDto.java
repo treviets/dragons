@@ -1,18 +1,20 @@
 package net.dragons.dto;
 
+import org.springframework.http.HttpStatus;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ResponseDto {
-
-	@JsonProperty("Data")
-	private Object data;
+	
+	@JsonProperty("Status")
+	private HttpStatus status;
 	
 	@JsonProperty("Message")
 	private String message;
 	
-	@JsonProperty("Status")
-	private Integer status;
-
+	@JsonProperty("Data")
+	private Object data;
+	
 	public Object getData() {
 		return data;
 	}
@@ -29,11 +31,11 @@ public class ResponseDto {
 		this.message = message;
 	}
 
-	public Integer getStatus() {
+	public HttpStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(HttpStatus status) {
 		this.status = status;
 	}
 

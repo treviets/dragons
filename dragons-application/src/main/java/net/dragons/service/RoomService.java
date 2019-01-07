@@ -8,5 +8,5 @@ public interface RoomService {
 
 	List<Room> getAll();
 	
-	List<Room> getByPriceRange(double from, double to);
+	List<Room> getByFilter(Integer city, Integer from, Integer to, Integer numberOfGuest);
 }
