@@ -24,11 +24,6 @@ public class RoomController {
 	 	return roomService.getAll();
 	} 
 	
-	@RequestMapping(value = "/by_hotel_id", method = RequestMethod.GET) 
-	@ResponseBody
-	public Object getRoomsByHotelId(HttpServletRequest request, @RequestParam("hotelId") Integer hotelId) throws Exception {
-	 	return roomService.getByHotelId(hotelId);
-	} 
 	
 	@RequestMapping(value = "/by_price_range", method = RequestMethod.GET) 
 	@ResponseBody

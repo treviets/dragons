@@ -24,14 +24,14 @@ public class Room {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="hotel_id")
-	private Integer hotelId;
-	
 	@Column(name="price")
 	private String price;
 	
-	@Column(name="capacity")
-	private Integer capacity;
+	@Column(name="number_of_guest")
+	private Integer numberOfGuest;
+	
+	@Column(name="type")
+	private Integer type;
 	
 	@Column(name="code")
 	private String code;
@@ -39,11 +39,14 @@ public class Room {
 	@Column(name="description")
 	private String description;
 	
-	@Column(name="floor")
-	private Integer floor;
+	@Column(name="district")
+	private Integer district;
+	
+	@Column(name="city")
+	private Integer city;
 
-	@Column(name="room_status")
-	private String roomStatus;
+	@Column(name="status")
+	private Integer status;
 
 	public Long getId() {
 		return id;
@@ -51,14 +54,6 @@ public class Room {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Integer getHotelId() {
-		return hotelId;
-	}
-
-	public void setHotelId(Integer hotelId) {
-		this.hotelId = hotelId;
 	}
 
 	public String getPrice() {
@@ -69,14 +64,7 @@ public class Room {
 		this.price = price;
 	}
 
-	public Integer getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(Integer capacity) {
-		this.capacity = capacity;
-	}
-
+	
 	public String getCode() {
 		return code;
 	}
@@ -93,21 +81,47 @@ public class Room {
 		this.description = description;
 	}
 
-	public Integer getFloor() {
-		return floor;
+	public Integer getNumberOfGuest() {
+		return numberOfGuest;
 	}
 
-	public void setFloor(Integer floor) {
-		this.floor = floor;
+	public void setNumberOfGuest(Integer numberOfGuest) {
+		this.numberOfGuest = numberOfGuest;
 	}
 
-	public String getRoomStatus() {
-		return roomStatus;
+	public Integer getType() {
+		return type;
 	}
 
-	public void setRoomStatus(String roomStatus) {
-		this.roomStatus = roomStatus;
+	public void setType(Integer type) {
+		this.type = type;
 	}
+
+	public Integer getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(Integer district) {
+		this.district = district;
+	}
+
+	public Integer getCity() {
+		return city;
+	}
+
+	public void setCity(Integer city) {
+		this.city = city;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	
 
 	
 }

@@ -17,14 +17,7 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public List<Room> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Room> getByHotelId(Integer hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+		return roomRepository.findAll();
 	}
 
 	@Override
@@ -32,6 +25,8 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 	
 
 }
