@@ -38,7 +38,7 @@ public class DragonUserDetails implements UserDetailsService {
 		BaseUser user = null; 
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		if(sTemp.length < 2) {
-			user = customerRepository.findByPhone(s);
+//			user = customerRepository.findByPhone(s);
 			authorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
 		} else {
 			user = clientRepository.findByUsername(sTemp[0]);

@@ -25,8 +25,16 @@ public class RoomController {
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET) 
 	@ResponseBody
-	public Object getAllRooms(HttpServletRequest request) throws Exception {
-	 	return roomService.getAll();
+	public ResponseDto getAllRooms(HttpServletRequest request) throws Exception {
+		
+		List<Room> rooms = roomService.getAll();
+		
+		ResponseDto response = new ResponseDto();
+		response.setData(rooms);
+		response.setStatus(HttpStatus.OK);
+		response.setMessage("");
+	 	
+	 	return response;
 	} 
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET) 
