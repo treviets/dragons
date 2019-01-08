@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author NhanNguyen
  *
@@ -19,38 +21,50 @@ import javax.persistence.Table;
 @Table(name="rooms")
 @NamedQuery(name="Room.findAll", query="SELECT r FROM Room r")
 public class Room {
+	
+	@JsonProperty("Id")
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonProperty("HomeId")
 	@Column(name="home_id")
 	private Long homeId;
 	
+	@JsonProperty("Price")
 	@Column(name="price")
 	private String price;
 	
+	@JsonProperty("NumberOfGuest")
 	@Column(name="number_of_guest")
 	private Integer numberOfGuest;
 	
+	@JsonProperty("Type")
 	@Column(name="type")
 	private Integer type;
 	
+	@JsonProperty("Code")
 	@Column(name="code")
 	private String code;
 	
+	@JsonProperty("Description")
 	@Column(name="description")
 	private String description;
 	
+	@JsonProperty("District")
 	@Column(name="district")
 	private Integer district;
 	
+	@JsonProperty("City")
 	@Column(name="city")
 	private Integer city;
 
+	@JsonProperty("Images")
 	@Column(name="images")
 	private String images;
 	
+	@JsonProperty("Status")
 	@Column(name="status")
 	private Integer status;
 	

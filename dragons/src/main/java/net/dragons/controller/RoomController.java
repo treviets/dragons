@@ -55,7 +55,6 @@ public class RoomController {
 		
 		return response;
 	} 
-	
 
 	@RequestMapping(value = "/by_home_id", method = RequestMethod.GET) 
 	@ResponseBody
