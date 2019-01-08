@@ -24,6 +24,9 @@ public class Room {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name="home_id")
+	private Long homeId;
+	
 	@Column(name="price")
 	private String price;
 	

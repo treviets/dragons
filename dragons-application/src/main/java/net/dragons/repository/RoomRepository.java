@@ -19,4 +19,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer>{
 	List<Room> findByDistrict(Integer district);
 	
 	List<Room> findByStatus(Integer status);
+	
+	List<Room> findByHomeId(Long homeId);
 }

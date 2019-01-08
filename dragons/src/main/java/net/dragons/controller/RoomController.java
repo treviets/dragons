@@ -53,6 +53,20 @@ public class RoomController {
 		response.setMessage("");
 		
 		
+		return response;
+	} 
+	
+
+	@RequestMapping(value = "/by_home_id", method = RequestMethod.GET) 
+	@ResponseBody
+	public Object getRoomsByHomeId(HttpServletRequest request, @RequestParam("homeId") Long homeId) throws Exception {
+		List<Room> rooms = roomService.getByHomeId(homeId);
+		
+		ResponseDto response = new ResponseDto();
+		response.setData(rooms);
+		response.setStatus(HttpStatus.OK);
+		response.setMessage("");
+		
 		
 		return response;
 	} 

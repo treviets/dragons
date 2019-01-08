@@ -42,6 +42,11 @@ public class RoomServiceImpl implements RoomService {
 		
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Room> getByHomeId(Long homeId) {
+		return roomRepository.findByHomeId(homeId);
+	}
 	
 	
 

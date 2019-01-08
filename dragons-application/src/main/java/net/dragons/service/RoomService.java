@@ -8,5 +8,7 @@ public interface RoomService {
 
 	List<Room> getAll();
 	
+	List<Room> getByHomeId(Long homeId);
+	
 	List<Room> getByFilter(Integer city, Integer from, Integer to, Integer numberOfGuest);
 }
