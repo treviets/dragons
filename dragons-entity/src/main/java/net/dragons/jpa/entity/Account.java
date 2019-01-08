@@ -16,10 +16,10 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "customers")
-@NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
-public class Customer {
-	
+@Table(name = "accounts")
+@NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
+public class Account {
+
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,15 +30,9 @@ public class Customer {
 	
 	@Column(name = "password")
 	private String password;
-	
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "phone")
-	private String phone;
 
 	@Column(name = "status")
-	private Integer status;
+	private boolean status;
 	
 	@Column(name = "role_id")
 	private int roleId;
@@ -67,27 +61,11 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Integer getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
@@ -100,6 +78,5 @@ public class Customer {
 	}
 
 	
-
 	
 }
