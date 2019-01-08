@@ -26,9 +26,6 @@ public class Booking {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="hotel_id")
-	private Integer hotelId;
-	
 	@Column(name="room_id")
 	private Integer roomId;
 	
@@ -59,14 +56,6 @@ public class Booking {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Integer getHotelId() {
-		return hotelId;
-	}
-
-	public void setHotelId(Integer hotelId) {
-		this.hotelId = hotelId;
 	}
 
 	public Integer getRoomId() {

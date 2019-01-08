@@ -4,13 +4,13 @@
 package net.dragons.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import net.dragons.jpa.entity.Hotel;
+import net.dragons.jpa.entity.Home;
 
 /**
  * @author NhanNguyen
  *
  */
-public interface HotelRepository extends JpaRepository<Hotel, Integer>{
+public interface HomeRepository extends JpaRepository<Home, Integer>{
 	
-	Hotel findById(Integer holteId);
+	Home findById(Integer holteId);
 }

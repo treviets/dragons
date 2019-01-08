@@ -23,11 +23,6 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public List<Booking> getByHotelId(Long hotelId) {
-		return bookingRepository.findByHotelId(hotelId);
-	}
-
-	@Override
 	public List<Booking> getByRoomId(Long roomId) {
 		return bookingRepository.findByRoomId(roomId);
 	}
@@ -43,7 +38,6 @@ public class BookingServiceImpl implements BookingService {
 		booking.setCustomerId(bookingDto.getCustomerId());
 		booking.setFromDate(bookingDto.getFromDate());
 		booking.setToDate(bookingDto.getToDate());
-		booking.setHotelId(bookingDto.getHotelId());
 		booking.setNumberOfGuess(bookingDto.getNumberOfGuess());
 		booking.setPrice(bookingDto.getPrice());
 		booking.setRoomId(bookingDto.getRoomId());

@@ -26,12 +26,6 @@ public class BookingController {
 	 	return bookingService.getAll();
 	} 
 	
-	@RequestMapping(value = "/by_hotel_id", method = RequestMethod.GET) 
-	@ResponseBody
-	public Object getRoomsByHotel(HttpServletRequest request, @RequestParam("hotelId") Long hotelId) throws Exception {
-	 	return bookingService.getByHotelId(hotelId);
-	} 
-	
 	@RequestMapping(value = "/by_room_id", method = RequestMethod.GET) 
 	@ResponseBody
 	public Object getRoomsByRoom(HttpServletRequest request, @RequestParam("roomId") Long roomId) throws Exception {

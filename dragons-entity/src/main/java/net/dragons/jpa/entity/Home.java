@@ -16,9 +16,9 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "hotels")
-@NamedQuery(name = "Hotel.findAll", query = "SELECT h FROM Hotel h")
-public class Hotel {
+@Table(name = "homes")
+@NamedQuery(name = "Home.findAll", query = "SELECT h FROM Home h")
+public class Home {
 
 	@Id
 	@Column(name="id")
@@ -34,14 +34,14 @@ public class Hotel {
 	@Column(name="address")
 	private String address;
 	
-	@Column(name="district")
-	private String district;
-	
 	@Column(name="city")
 	private String city;
 	
-	@Column(name="hotel_status")
-	private String hotelStatus;
+	@Column(name="images")
+	private String images;
+	
+	@Column(name="status")
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -83,20 +83,20 @@ public class Hotel {
 		this.city = city;
 	}
 
-	public String getDistrict() {
-		return district;
+	public String getImages() {
+		return images;
 	}
 
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setImages(String images) {
+		this.images = images;
 	}
 
-	public String getHotelStatus() {
-		return hotelStatus;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setHotelStatus(String hotelStatus) {
-		this.hotelStatus = hotelStatus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

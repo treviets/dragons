@@ -9,8 +9,6 @@ public interface BookingService {
 
 	List<Booking> getAll();
 	
-	List<Booking> getByHotelId(Long hotelId);
-	
 	List<Booking> getByRoomId(Long hotelId);
 	
 	List<Booking> getByCustomerId(Long customerId);

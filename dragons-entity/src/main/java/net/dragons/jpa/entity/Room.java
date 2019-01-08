@@ -50,6 +50,7 @@ public class Room {
 	
 	@Column(name="status")
 	private Integer status;
+	
 
 	public Long getId() {
 		return id;
