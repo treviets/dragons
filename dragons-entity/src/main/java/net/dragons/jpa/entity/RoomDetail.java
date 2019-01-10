@@ -28,6 +28,24 @@ public class RoomDetail {
 	@Column(name="room_id") 
 	private Long roomId;
 
+	@Column(name="title") 
+	private String title;
+	
+	@Column(name="amenity") 
+	private String amenity;
+	
+	@Column(name="bedroom") 
+	private Integer bedroom;
+	
+	@Column(name="bed") 
+	private Integer bed;
+	
+	@Column(name="bath") 
+	private Integer bath;
+	
+	@Column(name="description") 
+	private String description;
+	
 	public Long getId() {
 		return id;
 	}
@@ -43,5 +61,54 @@ public class RoomDetail {
 	public void setRoomId(Long roomId) {
 		this.roomId = roomId;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getAmenity() {
+		return amenity;
+	}
+
+	public void setAmenity(String amenity) {
+		this.amenity = amenity;
+	}
+
+	public Integer getBedroom() {
+		return bedroom;
+	}
+
+	public void setBedroom(Integer bedroom) {
+		this.bedroom = bedroom;
+	}
+
+	public Integer getBed() {
+		return bed;
+	}
+
+	public void setBed(Integer bed) {
+		this.bed = bed;
+	}
+
+	public Integer getBath() {
+		return bath;
+	}
+
+	public void setBath(Integer bath) {
+		this.bath = bath;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	
 }
