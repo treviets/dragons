@@ -3,12 +3,16 @@
  */
 package net.dragons.jpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="rooms")
+@Table(name="room")
 @NamedQuery(name="Room.findAll", query="SELECT r FROM Room r")
 public class Room {
 	
@@ -72,14 +76,13 @@ public class Room {
 	@Column(name="bath") 
 	private Integer bath;
 
-	@JsonProperty("Images")
-	@Column(name="images")
-	private String images;
-	
 	@JsonProperty("Status")
 	@Column(name="status")
 	private Integer status;
 	
+	@JsonProperty("Images")
+	@OneToMany(mappedBy="room")
+	private List<RoomImage> images = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -154,14 +157,6 @@ public class Room {
 		this.status = status;
 	}
 
-	public String getImages() {
-		return images;
-	}
-
-	public void setImages(String images) {
-		this.images = images;
-	}
-
 	public Long getHomeId() {
 		return homeId;
 	}
@@ -192,6 +187,14 @@ public class Room {
 
 	public void setBath(Integer bath) {
 		this.bath = bath;
+	}
+
+	public List<RoomImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<RoomImage> images) {
+		this.images = images;
 	}
 	
 	

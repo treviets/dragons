@@ -43,6 +43,11 @@ public class RoomImage {
 	@ManyToOne()
 	@JoinColumn(name="room_id", insertable=false, updatable=false, nullable=false)
 	private RoomDetail roomDetail;
+	
+	@JsonIgnore
+	@ManyToOne()
+	@JoinColumn(name="room_id", insertable=false, updatable=false, nullable=false)
+	private Room room;
 
 	public Long getId() {
 		return id;
@@ -76,7 +81,14 @@ public class RoomImage {
 		this.roomDetail = roomDetail;
 	}
 
-	
-	
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+
 	
 }
