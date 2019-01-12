@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.service.RoomDetailService;
 
 @RestController
 @RequestMapping("/room_detail")
+@Api(value = "Room Detail API Endpoint", description = "Room Detail Data Entities Endpoint")
 public class RoomDetailController {
 	
 	@Autowired

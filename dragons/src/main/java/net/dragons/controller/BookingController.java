@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import net.dragons.dto.BookingDto;
 import net.dragons.service.BookingService;
 
 @RestController
 @RequestMapping("/booking")
+@Api(value = "Booking API Endpoint", description = "Booking Data Entities Endpoint")
 public class BookingController {
 	
 	@Autowired

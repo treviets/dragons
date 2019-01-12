@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Home;
 import net.dragons.service.HomeService;
 
 @RestController
 @RequestMapping("/home")
+@Api(value = "Home API Endpoint", description = "Home Data Entities Endpoint")
 public class HomeController {
 	
 	@Autowired

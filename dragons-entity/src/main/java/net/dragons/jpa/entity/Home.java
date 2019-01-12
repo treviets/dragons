@@ -28,7 +28,7 @@ public class Home {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonProperty("Id")
+	@JsonProperty("Name")
 	@Column(name="name")
 	private String name;
 	
@@ -36,7 +36,7 @@ public class Home {
 	@Column(name="number_of_rooms")
 	private String numberOfRooms;
 	
-	@JsonProperty("Dddress")
+	@JsonProperty("Address")
 	@Column(name="address")
 	private String address;
 	

@@ -56,9 +56,21 @@ public class Room {
 	@Column(name="district")
 	private Integer district;
 	
-	@JsonProperty("City")
-	@Column(name="city")
-	private Integer city;
+	@JsonProperty("Province")
+	@Column(name="province")
+	private Integer province;
+	
+	@JsonProperty("Bedroom")
+	@Column(name="bedroom") 
+	private Integer bedroom;
+	
+	@JsonProperty("Bed")
+	@Column(name="bed") 
+	private Integer bed;
+	
+	@JsonProperty("Bath")
+	@Column(name="bath") 
+	private Integer bath;
 
 	@JsonProperty("Images")
 	@Column(name="images")
@@ -126,12 +138,12 @@ public class Room {
 		this.district = district;
 	}
 
-	public Integer getCity() {
-		return city;
+	public Integer getProvince() {
+		return province;
 	}
 
-	public void setCity(Integer city) {
-		this.city = city;
+	public void setProvince(Integer province) {
+		this.province = province;
 	}
 
 	public Integer getStatus() {
@@ -148,6 +160,38 @@ public class Room {
 
 	public void setImages(String images) {
 		this.images = images;
+	}
+
+	public Long getHomeId() {
+		return homeId;
+	}
+
+	public void setHomeId(Long homeId) {
+		this.homeId = homeId;
+	}
+
+	public Integer getBedroom() {
+		return bedroom;
+	}
+
+	public void setBedroom(Integer bedroom) {
+		this.bedroom = bedroom;
+	}
+
+	public Integer getBed() {
+		return bed;
+	}
+
+	public void setBed(Integer bed) {
+		this.bed = bed;
+	}
+
+	public Integer getBath() {
+		return bath;
+	}
+
+	public void setBath(Integer bath) {
+		this.bath = bath;
 	}
 	
 	

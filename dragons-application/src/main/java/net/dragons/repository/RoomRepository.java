@@ -14,7 +14,7 @@ import net.dragons.jpa.entity.Room;
  */
 public interface RoomRepository extends JpaRepository<Room, Integer>{
 	
-	List<Room> findByCity(Integer city);
+	List<Room> findByProvince(Integer city);
 	
 	List<Room> findByDistrict(Integer district);
 	
