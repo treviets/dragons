@@ -3,6 +3,7 @@
  */
 package net.dragons.jpa.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name = "customers")
+@Table(name = "customer")
 @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
 public class Customer {
 	
@@ -32,17 +33,21 @@ public class Customer {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonProperty("Username")
-	@Column(name = "username")
-	private String username;
+	@JsonProperty("FirstName")
+	@Column(name = "first_name")
+	private String firstName;
 	
-	@JsonProperty("Password")
-	@Column(name = "password")
-	private String password;
+	@JsonProperty("LastName")
+	@Column(name = "last_name")
+	private String lastName;
 	
 	@JsonProperty("Email")
 	@Column(name = "email")
 	private String email;
+	
+	@JsonProperty("Password")
+	@Column(name = "password")
+	private String password;
 	
 	@JsonProperty("Phone")
 	@Column(name = "phone")
@@ -60,6 +65,10 @@ public class Customer {
 	@Column(name = "avatar")
 	private String avatar;
 	
+	@JsonProperty("DateOfBirth")
+	@Column(name = "date_of_birth")
+	private Date dateOfBirth;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="customer")
 	private List<Review> reviews;
@@ -70,14 +79,6 @@ public class Customer {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
@@ -102,6 +103,30 @@ public class Customer {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public Integer getStatus() {

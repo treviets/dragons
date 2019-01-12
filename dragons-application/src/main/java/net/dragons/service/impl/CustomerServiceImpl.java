@@ -29,14 +29,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> getByUsername(String username) {
-		return customerRepository.findByUsername(username);
-	}
-
-	@Override
 	public Long create(CustomerDto customerDto) {
 		Customer customer = new Customer();
-		customer.setUsername(customerDto.getUsername());
 		customer.setPassword(customerDto.getPassword());
 		customer.setEmail(customerDto.getEmail());
 		customer.setPhone(customerDto.getPhone());
@@ -57,7 +51,6 @@ public class CustomerServiceImpl implements CustomerService {
 	public void update(CustomerDto customerDto) {
 		Customer customer = customerRepository.findById(customerDto.getCustomerId());
 		
-		customer.setUsername(customerDto.getUsername());
 		customer.setPassword(customerDto.getPassword());
 		customer.setEmail(customerDto.getEmail());
 		customer.setPhone(customerDto.getPhone());
@@ -69,11 +62,15 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	public List<Customer> getByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Customer getByUsernameAndPassword(String username, String password) {
-		Customer customer = customerRepository.findByUsernameAndPassword(username, password);
-		
-		
-		return customer;
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

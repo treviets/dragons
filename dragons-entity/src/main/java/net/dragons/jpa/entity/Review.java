@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="reviews")
+@Table(name="review")
 @NamedQuery(name="Review.findAll", query="SELECT r FROM Review r")
 public class Review {
 	
