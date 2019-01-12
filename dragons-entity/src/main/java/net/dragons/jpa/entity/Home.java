@@ -3,12 +3,16 @@
  */
 package net.dragons.jpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -44,13 +48,13 @@ public class Home {
 	@Column(name="city")
 	private String city;
 	
-	@JsonProperty("Images")
-	@Column(name="images")
-	private String images;
-	
 	@JsonProperty("Status")
 	@Column(name="status")
 	private String status;
+	
+	@JsonProperty("Images")
+	@OneToMany(mappedBy="home")
+	private List<HomeImage> images = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -92,14 +96,6 @@ public class Home {
 		this.city = city;
 	}
 
-	public String getImages() {
-		return images;
-	}
-
-	public void setImages(String images) {
-		this.images = images;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -107,5 +103,14 @@ public class Home {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public List<HomeImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<HomeImage> images) {
+		this.images = images;
+	}
+	
 	
 }
