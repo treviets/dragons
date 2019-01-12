@@ -18,9 +18,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="amenity")
-@NamedQuery(name="Amenity.findAll", query="SELECT a FROM Amenity a")
-public class Amenity {
+@Table(name="accessibility")
+@NamedQuery(name="Accessibility.findAll", query="SELECT a FROM Accessibility a")
+public class Accessibility {
 	
 	@JsonProperty("Id")
 	@Id
@@ -29,16 +29,16 @@ public class Amenity {
 	private Long id;
 	
 	@JsonProperty("CategoryId")
-	@Column(name="type_id")
+	@Column(name="category_id")
 	private Long categoryId;
 	
 	@JsonProperty("Name")
 	@Column(name="name") 
 	private String name;
 
-	@JsonProperty("Desctiption")
-	@Column(name="desctiption") 
-	private String desctiption;
+	@JsonProperty("Description")
+	@Column(name="description") 
+	private String description;
 	
 	public Long getId() {
 		return id;
@@ -46,14 +46,6 @@ public class Amenity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
 	}
 
 	public String getName() {
@@ -64,15 +56,22 @@ public class Amenity {
 		this.name = name;
 	}
 
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	public String getDescription() {
-		return desctiption;
+		return description;
 	}
 
-	public void setDescription(String desctiption) {
-		this.desctiption = desctiption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	
 	
 	
 }

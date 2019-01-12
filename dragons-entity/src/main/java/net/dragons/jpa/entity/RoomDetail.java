@@ -56,30 +56,22 @@ public class RoomDetail {
 	@Column(name="bath") 
 	private Integer bath;
 
-	@JsonProperty("Description")
-	@Column(name="description") 
-	private String description;
+	@JsonProperty("ShortDescription")
+	@Column(name="short_description") 
+	private String shortDescription;
 	
-	@JsonProperty("TheSpace")
-	@Column(name="the_space") 
-	private String theSpace;
-	
-	@JsonProperty("GuestAccess")
-	@Column(name="guest_access") 
-	private String guestAccess;
-	
-	@JsonProperty("InteractionWithGuests")
-	@Column(name="interaction_with_guests") 
-	private String interactionWithGuests;
-	
-	@JsonProperty("OtherThings")
-	@Column(name="other_things") 
-	private String otherThings;
+	@JsonProperty("LongDescription")
+	@Column(name="long_description") 
+	private String longDescription;
 	
 	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
 	private List<Review> reviews = new ArrayList<>();
 	
+	@JsonProperty("Images")
+	@OneToMany(mappedBy="roomDetail")
+	private List<RoomImage> images = new ArrayList<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -136,46 +128,22 @@ public class RoomDetail {
 		this.bath = bath;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getShortDescription() {
+		return shortDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}
 
-	public String getTheSpace() {
-		return theSpace;
+	public String getLongDescription() {
+		return longDescription;
 	}
 
-	public void setTheSpace(String theSpace) {
-		this.theSpace = theSpace;
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
 	}
 
-	public String getGuestAccess() {
-		return guestAccess;
-	}
-
-	public void setGuestAccess(String guestAccess) {
-		this.guestAccess = guestAccess;
-	}
-
-	public String getInteractionWithGuests() {
-		return interactionWithGuests;
-	}
-
-	public void setInteractionWithGuests(String interactionWithGuests) {
-		this.interactionWithGuests = interactionWithGuests;
-	}
-
-	public String getOtherThings() {
-		return otherThings;
-	}
-
-	public void setOtherThings(String otherThings) {
-		this.otherThings = otherThings;
-	}
-	
 	public List<Review> getReviews() {
 		return reviews;
 	}
@@ -183,6 +151,16 @@ public class RoomDetail {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+
+	public List<RoomImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<RoomImage> images) {
+		this.images = images;
+	}
+	
+	
 
 	
 	

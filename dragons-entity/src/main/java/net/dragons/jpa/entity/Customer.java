@@ -3,13 +3,19 @@
  */
 package net.dragons.jpa.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author NhanNguyen
@@ -20,32 +26,44 @@ import javax.persistence.Table;
 @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
 public class Customer {
 	
+	@JsonProperty("Id")
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonProperty("Username")
 	@Column(name = "username")
 	private String username;
 	
+	@JsonProperty("Password")
 	@Column(name = "password")
 	private String password;
 	
+	@JsonProperty("Email")
 	@Column(name = "email")
 	private String email;
 	
+	@JsonProperty("Phone")
 	@Column(name = "phone")
 	private String phone;
 
+	@JsonProperty("Status")
 	@Column(name = "status")
 	private Integer status;
 	
+	@JsonProperty("RoleId")
 	@Column(name = "role_id")
 	private int roleId;
 	
+	@JsonProperty("Avatar")
 	@Column(name = "avatar")
 	private String avatar;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="customer")
+	private List<Review> reviews;
+
 	public Long getId() {
 		return id;
 	}
@@ -108,7 +126,16 @@ public class Customer {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
-	}	
+	}
 
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
+	
 	
 }

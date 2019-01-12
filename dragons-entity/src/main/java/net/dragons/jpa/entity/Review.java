@@ -44,9 +44,10 @@ public class Review {
 	@Column(name="created_at") 
 	private String createdAt;
 	
-	@JsonProperty("CustomerId")
-	@Column(name="customer_id") 
-	private Long customerId;
+	@JsonProperty("Customer")
+	@ManyToOne()
+	@JoinColumn(name="customer_id", insertable=false, updatable=false, nullable=false)
+	private Customer customer;
 
 	public Long getId() {
 		return id;
@@ -80,14 +81,13 @@ public class Review {
 		this.createdAt = createdAt;
 	}
 
-	public Long getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	
 	
 }

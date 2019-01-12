@@ -18,9 +18,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="amenity")
-@NamedQuery(name="Amenity.findAll", query="SELECT a FROM Amenity a")
-public class Amenity {
+@Table(name="amenity_category")
+@NamedQuery(name="AmenityCategory.findAll", query="SELECT a FROM AmenityCategory a")
+public class AmenityCategory {
 	
 	@JsonProperty("Id")
 	@Id
@@ -28,32 +28,16 @@ public class Amenity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonProperty("CategoryId")
-	@Column(name="type_id")
-	private Long categoryId;
-	
 	@JsonProperty("Name")
 	@Column(name="name") 
 	private String name;
 
-	@JsonProperty("Desctiption")
-	@Column(name="desctiption") 
-	private String desctiption;
-	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
 	}
 
 	public String getName() {
@@ -63,16 +47,5 @@ public class Amenity {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getDescription() {
-		return desctiption;
-	}
-
-	public void setDescription(String desctiption) {
-		this.desctiption = desctiption;
-	}
-
-	
-	
 	
 }
