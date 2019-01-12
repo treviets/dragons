@@ -1,6 +1,17 @@
 
 CREATE DATABASE the_dragon
 
+DROP TABLE IF EXISTS `the_dragon`.`accounts`;
+CREATE TABLE `the_dragon`.`accounts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `role_id` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
 
 DROP TABLE IF EXISTS `the_dragon`.`customers`;
 CREATE TABLE `the_dragon`.`customers` (
@@ -45,6 +56,20 @@ INSERT INTO `the_dragon`.`homes` (name, number_of_rooms, address, city, images, 
 VALUES ('Vinhomes Golden River - Ho Chi Minh City', 2, 'District 1, Ho Chi Minh City', 1, '/static/img/home/5/home5.jpg', 1);
 
 
+
+DROP TABLE IF EXISTS `the_dragon`.`home_image`;
+CREATE TABLE `the_dragon`.`home_image` (
+  `id`      int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `home_id` int(10) NOT NULL,
+  `image`   varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO `the_dragon`.`home_image` (home_id, image) VALUES (1, '/static/home/1/1.png');
+INSERT INTO `the_dragon`.`home_image` (home_id, image) VALUES (2, '/static/home/1/2.png');
+INSERT INTO `the_dragon`.`home_image` (home_id, image) VALUES (3, '/static/home/1/3.png');
+INSERT INTO `the_dragon`.`home_image` (home_id, image) VALUES (4, '/static/home/1/4.png');
+INSERT INTO `the_dragon`.`home_image` (home_id, image) VALUES (5, '/static/home/1/5.png');
 
 
 DROP TABLE IF EXISTS `the_dragon`.`room`;
