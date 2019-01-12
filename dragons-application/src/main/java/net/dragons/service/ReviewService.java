@@ -6,6 +6,6 @@ import net.dragons.jpa.entity.Review;
 
 public interface ReviewService {
 
-	List<Review> getByRoomId(Long roomId);
+	List<Review> getByRoomDetailId(Long roomId);
 	
 }

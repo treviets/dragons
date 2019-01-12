@@ -16,8 +16,8 @@ public class ReviewServiceImpl implements ReviewService {
 	ReviewRepository reviewRepository;
 
 	@Override
-	public List<Review> getByRoomId(Long roomId) {
-		return reviewRepository.findByRoomId(roomId);
+	public List<Review> getByRoomDetailId(Long roomId) {
+		return reviewRepository.findByRoomDetailId(roomId);
 	}
 	
 

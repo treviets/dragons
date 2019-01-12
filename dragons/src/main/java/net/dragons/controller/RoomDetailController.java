@@ -27,7 +27,7 @@ public class RoomDetailController {
 	@ResponseBody
 	public Object getRoomsByRoomId(HttpServletRequest request, @RequestParam("roomId") Long roomId) throws Exception {
 		RoomDetail room = roomDetailService.getByRoomId(roomId);
-		
+	
 		ResponseDto response = new ResponseDto();
 		response.setData(room);
 		response.setStatus(HttpStatus.OK);

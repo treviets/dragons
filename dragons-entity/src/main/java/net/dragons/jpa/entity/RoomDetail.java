@@ -3,8 +3,8 @@
  */
 package net.dragons.jpa.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -76,8 +76,9 @@ public class RoomDetail {
 	@Column(name="other_things") 
 	private String otherThings;
 	
+	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
-	private Set<Review> reviews = new HashSet<>();
+	private List<Review> reviews = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -173,6 +174,14 @@ public class RoomDetail {
 
 	public void setOtherThings(String otherThings) {
 		this.otherThings = otherThings;
+	}
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	

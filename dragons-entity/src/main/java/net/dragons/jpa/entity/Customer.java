@@ -43,6 +43,9 @@ public class Customer {
 	@Column(name = "role_id")
 	private int roleId;
 	
+	@Column(name = "avatar")
+	private String avatar;
+	
 	public Long getId() {
 		return id;
 	}
@@ -99,7 +102,13 @@ public class Customer {
 		this.roleId = roleId;
 	}
 
-	
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}	
 
 	
 }

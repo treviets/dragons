@@ -14,5 +14,5 @@ import net.dragons.jpa.entity.Review;
  */
 public interface ReviewRepository extends JpaRepository<Review, Integer>{
 	
-	List<Review> findByRoomId(Long roomId);
+	List<Review> findByRoomDetailId(Long roomId);
 }

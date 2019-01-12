@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -30,10 +30,10 @@ public class Review {
 	@Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonIgnoreProperties
-	@ManyToOne
-	@JoinColumn(name="id")
+
+	@JsonIgnore
+	@ManyToOne()
+	@JoinColumn(name="room_detail_id", insertable=false, updatable=false, nullable=false)
 	private RoomDetail roomDetailId;
 
 	@JsonProperty("Content")
@@ -56,11 +56,11 @@ public class Review {
 		this.id = id;
 	}
 
-	public RoomDetail getRoomId() {
+	public RoomDetail getRoomDetailId() {
 		return roomDetailId;
 	}
 
-	public void setRoomId(RoomDetail roomDetailId) {
+	public void setRoomDetailId(RoomDetail roomDetailId) {
 		this.roomDetailId = roomDetailId;
 	}
 
