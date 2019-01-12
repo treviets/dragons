@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name = "homes")
+@Table(name = "home")
 @NamedQuery(name = "Home.findAll", query = "SELECT h FROM Home h")
 public class Home {
 

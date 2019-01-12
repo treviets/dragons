@@ -1,39 +1,28 @@
 
 CREATE DATABASE the_dragon
 
-DROP TABLE IF EXISTS `the_dragon`.`accounts`;
-CREATE TABLE `the_dragon`.`accounts` (
+DROP TABLE IF EXISTS `the_dragon`.`customer`;
+CREATE TABLE `the_dragon`.`customer` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(200) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `role_id` tinyint(1) NOT NULL,
+  `first_name` varchar(200) NOT NULL,
+  `last_name`  varchar(200) NOT NULL,
+  `email`     varchar(100) NOT NULL,
+  `password`   text NOT NULL,
+  `phone`     varchar(20) NOT NUll,
+  `status`    tinyint(1) NOT NULL,
+  `avatar`    varchar(500) NOT NULL,
+  `role_id`   tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO `the_dragon`.`customer` (first_name, last_name, email, password, phone, status, avatar, role_id) VALUES ('truong', 'nguyen', 'truongnguyen1110@gmail.com', '123456', '0123456789', '1', '/static/img/customer/1.jpg', '1');
+INSERT INTO `the_dragon`.`customer` (first_name, last_name, email, password, phone, status, avatar, role_id) VALUES ('nhan', 'nguyen', 'vunhankhtn@gmail.com', '123456', '0123456789', '1', '/static/img/customer/2.jpg', '2');
+INSERT INTO `the_dragon`.`customer` (first_name, last_name, email, password, phone, status, avatar, role_id) VALUES ('thoai', 'tran', 'thoaitran@gmail.com', '123456', '0123456788', '1', '/static/img/customer/3.jpg', '3');
+INSERT INTO `the_dragon`.`customer` (first_name, last_name, email, password, phone, status, avatar, role_id) VALUES ('vincent', 'cao', 'caohongvu@gmail.com', '123456', '1234556778', '1', '/static/img/customer/4.jpg', '3');
 
 
 
-DROP TABLE IF EXISTS `the_dragon`.`customers`;
-CREATE TABLE `the_dragon`.`customers` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(200) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `email`    varchar(100) NOT NULL,
-  `phone`    varchar(20) NOT NUll,
-  `status` tinyint(1) NOT NULL,
-  `avatar` varchar(500) NOT NULL,
-  `role_id` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, avatar, role_id) VALUES ('truong_nguyen', '123456', 'truongnguyen1110@gmail.com', '0123456789', '1', '/static/img/customer/1.jpg', '1');
-INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, avatar, role_id) VALUES ('nhan_nguyen', '123456', 'vunhankhtn@gmail.com', '0123456789', '1', '/static/img/customer/2.jpg', '2');
-INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, avatar, role_id) VALUES ('thoai_tran', '123456', 'thoaitran@gmail.com', '0123456788', '1', '/static/img/customer/3.jpg', '3');
-INSERT INTO `the_dragon`.`customers` (username, password, email, phone, status, avatar, role_id) VALUES ('vu_cao', '123456', 'caohongvu@gmail.com', '1234556778', '1', '/static/img/customer/4.jpg', '3');
-
-
-
-DROP TABLE IF EXISTS `the_dragon`.`homes`;
-CREATE TABLE `the_dragon`.`homes` (
+DROP TABLE IF EXISTS `the_dragon`.`home`;
+CREATE TABLE `the_dragon`.`home` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `number_of_rooms` int(10) NOT NULL,
@@ -44,15 +33,15 @@ CREATE TABLE `the_dragon`.`homes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO `the_dragon`.`homes` (name, number_of_rooms, address, city, images, status) 
+INSERT INTO `the_dragon`.`home` (name, number_of_rooms, address, city, images, status) 
 VALUES ('Vung Tau City', 5, 'Vung Tau City', 5, '/static/img/home/1/home1.jpg', 1);
-INSERT INTO `the_dragon`.`homes` (name, number_of_rooms, address, city, images, status) 
+INSERT INTO `the_dragon`.`home` (name, number_of_rooms, address, city, images, status) 
 VALUES ('Vinhomes Central Park - Ho Chi Minh City', 17, 'Binh Thanh district', 1, '/static/img/home/2/home2.jpg', 1);
-INSERT INTO `the_dragon`.`homes` (name, number_of_rooms, address, city, images, status) 
+INSERT INTO `the_dragon`.`home` (name, number_of_rooms, address, city, images, status) 
 VALUES ('Ho Chi Minh City Center', 28, 'Ho Chi Minh City', 1, '/static/img/home/3/home3.jpg', 1);
-INSERT INTO `the_dragon`.`homes` (name, number_of_rooms, address, city, images, status) 
+INSERT INTO `the_dragon`.`home` (name, number_of_rooms, address, city, images, status) 
 VALUES ('TDH Tre Tresor', 3, 'Ho Chi Minh City', 1, '/static/img/home/4/home4.jpg', 1);
-INSERT INTO `the_dragon`.`homes` (name, number_of_rooms, address, city, images, status) 
+INSERT INTO `the_dragon`.`home` (name, number_of_rooms, address, city, images, status) 
 VALUES ('Vinhomes Golden River - Ho Chi Minh City', 2, 'District 1, Ho Chi Minh City', 1, '/static/img/home/5/home5.jpg', 1);
 
 
@@ -149,23 +138,24 @@ We give our guests space but are available when needed. We love to make our gues
 
 
 
-DROP TABLE IF EXISTS `the_dragon`.`bookings`;
-CREATE TABLE `the_dragon`.`bookings` (
+DROP TABLE IF EXISTS `the_dragon`.`booking`;
+CREATE TABLE `the_dragon`.`booking` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `home_id` int(10) NOT NULL,
   `room_id` int(10) NOT NULL,
   `customer_id` int(10) NOT NULL,
   `price` decimal(10, 2) NOT NULL,
   `number_of_guess` int(10) NOT NULL,
+  `number_of_night` decimal(10, 2) NOT NULL,
   `from_date` datetime NOT NULL,
   `to_date` datetime NOT NULL,
   `total_amount` decimal(10, 2) NOT NULL,
   `booking_status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-INSERT INTO `the_dragon`.`bookings` (home_id, room_id, customer_id, price, number_of_guess, from_date, to_date, total_amount, booking_status) VALUES (1, 1, 1, 100000, 10, '2019-01-01 08:40:00', '2019-01-06 08:40:00', 500000, 1);
-INSERT INTO `the_dragon`.`bookings` (home_id, room_id, customer_id, price, number_of_guess, from_date, to_date, total_amount, booking_status) VALUES (1, 1, 2, 100000, 10, '2019-01-01 08:40:00', '2019-01-06 08:40:00', 500000, 1);
-INSERT INTO `the_dragon`.`bookings` (home_id, room_id, customer_id, price, number_of_guess, from_date, to_date, total_amount, booking_status) VALUES (1, 1, 3, 100000, 10, '2019-01-01 08:40:00', '2019-01-06 08:40:00', 500000, 1);
+INSERT INTO `the_dragon`.`booking` (home_id, room_id, customer_id, price, number_of_guess, number_of_night, from_date, to_date, total_amount, booking_status) VALUES (1, 1, 1, 100000, 10, 5, '2019-01-01 08:40:00', '2019-01-06 08:40:00', 500000, 1);
+INSERT INTO `the_dragon`.`booking` (home_id, room_id, customer_id, price, number_of_guess, number_of_night, from_date, to_date, total_amount, booking_status) VALUES (1, 1, 2, 100000, 10, 5, '2019-01-01 08:40:00', '2019-01-06 08:40:00', 500000, 1);
+INSERT INTO `the_dragon`.`booking` (home_id, room_id, customer_id, price, number_of_guess, number_of_night, from_date, to_date, total_amount, booking_status) VALUES (1, 1, 3, 100000, 10, 5, '2019-01-01 08:40:00', '2019-01-06 08:40:00', 500000, 1);
 
 
 
@@ -263,8 +253,8 @@ INSERT INTO `the_dragon`.`districts` (province_id, name, type) VALUES (1, 'Binh 
 
 
 
-DROP TABLE IF EXISTS `the_dragon`.`reviews`;
-CREATE TABLE `the_dragon`.`reviews` (
+DROP TABLE IF EXISTS `the_dragon`.`review`;
+CREATE TABLE `the_dragon`.`review` (
   `id`             int(10) unsigned NOT NULL AUTO_INCREMENT,
   `room_detail_id` int(10) NOT NULL,
   `customer_id`    int(10) NOT NULL,
@@ -272,15 +262,15 @@ CREATE TABLE `the_dragon`.`reviews` (
   `created_at`     datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (1, 1, "Exceptional value, a newly furnished modern apartment located in the heart of the city. The best experience I've ever had with Airbnb, will highly recommend The Dragons Hosts' properties without a doubt", '2019-01-09 18:23:34');
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (1, 2, 'Clean & nice apartment. I would bring my family here again whenever I am in VT.', '2019-01-09 18:23:34');
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (1, 3, '바다 도보로 5-7분정도 떨어져있고 주변에 편의점도 있고 새로지은 신축아파트라서 엄청 깨끗해요. 추천합니다.', '2019-01-09 18:23:34');
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (1, 4, 'The apartment is very clean . The host is very friendly and helpful', '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (1, 1, "Exceptional value, a newly furnished modern apartment located in the heart of the city. The best experience I've ever had with Airbnb, will highly recommend The Dragons Hosts' properties without a doubt", '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (1, 2, 'Clean & nice apartment. I would bring my family here again whenever I am in VT.', '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (1, 3, '바다 도보로 5-7분정도 떨어져있고 주변에 편의점도 있고 새로지은 신축아파트라서 엄청 깨끗해요. 추천합니다.', '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (1, 4, 'The apartment is very clean . The host is very friendly and helpful', '2019-01-09 18:23:34');
 
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (2, 1, "Exceptional value, a newly furnished modern apartment located in the heart of the city. The best experience I've ever had with Airbnb, will highly recommend The Dragons Hosts' properties without a doubt", '2019-01-09 18:23:34');
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (2, 2, 'Clean & nice apartment. I would bring my family here again whenever I am in VT.', '2019-01-09 18:23:34');
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (2, 3, '바다 도보로 5-7분정도 떨어져있고 주변에 편의점도 있고 새로지은 신축아파트라서 엄청 깨끗해요. 추천합니다.', '2019-01-09 18:23:34');
-INSERT INTO `the_dragon`.`reviews` (room_detail_id, customer_id, content, created_at) VALUES (2, 4, 'The apartment is very clean . The host is very friendly and helpful', '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (2, 1, "Exceptional value, a newly furnished modern apartment located in the heart of the city. The best experience I've ever had with Airbnb, will highly recommend The Dragons Hosts' properties without a doubt", '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (2, 2, 'Clean & nice apartment. I would bring my family here again whenever I am in VT.', '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (2, 3, '바다 도보로 5-7분정도 떨어져있고 주변에 편의점도 있고 새로지은 신축아파트라서 엄청 깨끗해요. 추천합니다.', '2019-01-09 18:23:34');
+INSERT INTO `the_dragon`.`review` (room_detail_id, customer_id, content, created_at) VALUES (2, 4, 'The apartment is very clean . The host is very friendly and helpful', '2019-01-09 18:23:34');
 
 
 
