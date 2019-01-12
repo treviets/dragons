@@ -18,7 +18,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="bookings")
+@Table(name="booking")
 @NamedQuery(name="Booking.findAll", query="SELECT b FROM Booking b")
 public class Booking {
 	@Id
@@ -37,6 +37,9 @@ public class Booking {
 	
 	@Column(name="number_of_guess")
 	private Integer numberOfGuess;
+	
+	@Column(name="number_of_nights")
+	private Double numberOfNights;
 	
 	@Column(name="from_date")
 	private Date fromDate;
@@ -88,6 +91,14 @@ public class Booking {
 
 	public void setNumberOfGuess(Integer numberOfGuess) {
 		this.numberOfGuess = numberOfGuess;
+	}
+
+	public Double getNumberOfNights() {
+		return numberOfNights;
+	}
+
+	public void setNumberOfNights(Double numberOfNights) {
+		this.numberOfNights = numberOfNights;
 	}
 
 	public Date getFromDate() {
