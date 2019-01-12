@@ -67,6 +67,14 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepository.save(customer);
 		
 	}
+
+	@Override
+	public Customer getByUsernameAndPassword(String username, String password) {
+		Customer customer = customerRepository.findByUsernameAndPassword(username, password);
+		
+		
+		return customer;
+	}
 	
 	
 }

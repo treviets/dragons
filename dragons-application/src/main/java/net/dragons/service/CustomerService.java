@@ -13,6 +13,8 @@ public interface CustomerService {
 	
 	List<Customer> getByUsername(String username);
 	
+	Customer getByUsernameAndPassword(String username, String password);
+	
 	Long create(CustomerDto customerDto);
 	
 	void delete(Long customerId);
