@@ -44,9 +44,13 @@ public class Room {
 	@Column(name="number_of_guest")
 	private Integer numberOfGuest;
 	
-	@JsonProperty("Type")
-	@Column(name="type")
-	private Integer type;
+	@JsonProperty("RoomType")
+	@Column(name="room_type")
+	private Integer roomType;
+	
+	@JsonProperty("RentalType")
+	@Column(name="rental_type")
+	private Integer rentalType;
 	
 	@JsonProperty("Code")
 	@Column(name="code")
@@ -125,12 +129,20 @@ public class Room {
 		this.numberOfGuest = numberOfGuest;
 	}
 
-	public Integer getType() {
-		return type;
+	public Integer getRoomType() {
+		return roomType;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setRoomType(Integer roomType) {
+		this.roomType = roomType;
+	}
+
+	public Integer getRentalType() {
+		return rentalType;
+	}
+
+	public void setRentalType(Integer rentalType) {
+		this.rentalType = rentalType;
 	}
 
 	public Integer getDistrict() {

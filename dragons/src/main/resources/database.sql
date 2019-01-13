@@ -69,7 +69,8 @@ CREATE TABLE `the_dragon`.`room` (
   `price` decimal(10, 2) NOT NULL,
   `number_of_guest` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `type` tinyint(1) NOT NULL,
+  `room_type` tinyint(1) NOT NULL,
+  `rental_type` tinyint(1) NOT NULL,
   `bedroom` int(10) NOT NULL,
   `bed` int(10) NOT NULL,
   `bath` int(10) NOT NULL,
@@ -78,23 +79,20 @@ CREATE TABLE `the_dragon`.`room` (
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, room_type, rental_type, bedroom, bed, bath, district, province, status) 
+VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs B0407', 1, 625676, 6, 'Description of room', 1, 1, 2, 3, 4, 1, 3, 1);
 
+INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, room_type, rental_type, bedroom, bed, bath, district, province, status) 
+VALUES ('The Dragons Host @ Vung Tau Melody 3 BRs A1112', 1, 1042794, 8, 'Description of room', 1, 1, 2, 3, 4, 1, 3, 1);
 
+INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, room_type, rental_type, bedroom, bed, bath, district, province, status) 
+VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs B1809', 1, 1042794, 8, 'Description of room', 1, 1, 2, 3, 4, 1, 3, 1);
 
-INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, type, bedroom, bed, bath, district, province, status) 
-VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs B0407', 1, 625676, 6, 'Description of room', 1, 2, 3, 4, 1, 3, 1);
+INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, room_type, rental_type, bedroom, bed, bath, district, province, status) 
+VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs A0525', 1, 509810, 6, 'Description of room', 1, 1, 2, 3, 4, 1, 3, 1);
 
-INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, type, bedroom, bed, bath, district, province, status) 
-VALUES ('The Dragons Host @ Vung Tau Melody 3 BRs A1112', 1, 1042794, 8, 'Description of room', 1, 2, 3, 4, 1, 3, 1);
-
-INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, type, bedroom, bed, bath, district, province, status) 
-VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs B1809', 1, 1042794, 8, 'Description of room', 1, 2, 3, 4, 1, 3, 1);
-
-INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, type, bedroom, bed, bath, district, province, status) 
-VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs A0525', 1, 509810, 6, 'Description of room', 1, 2, 3, 4, 1, 3, 1);
-
-INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, type, bedroom, bed, bath, district, province, status) 
-VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs B0407', 1, 1,042,794, 8, 'Description of room', 1, 2, 3, 4, 1, 3, 1);
+INSERT INTO `the_dragon`.`room` (code, home_id, price, number_of_guest, description, room_type, rental_type, bedroom, bed, bath, district, province, status) 
+VALUES ('The Dragons Host @ Vung Tau Melody 2 BRs B0407', 1, 1042794, 8, 'Description of room', 1, 1, 2, 3, 4, 1, 3, 1);
 
 
 
