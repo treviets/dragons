@@ -1,12 +1,17 @@
 package net.dragons.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.dragons.dto.CustomerDto;
+import net.dragons.dto.CustomerNewDto;
 import net.dragons.jpa.entity.Customer;
+import net.dragons.jpa.entity.CustomerNewEntity;
+import net.dragons.repository.CustomerNewRepository;
 import net.dragons.repository.CustomerRepository;
 import net.dragons.service.CustomerService;
 import util.CustomerRoleConstant;
@@ -17,6 +22,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerRepository customerRepository;
+	
+	@Autowired
+	CustomerNewRepository customerNewRepository;
 
 	@Override
 	public Customer getById(Long customerId) {
@@ -71,6 +79,47 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer getByUsernameAndPassword(String username, String password) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Long createCustomer(CustomerNewDto customerNewDto) {
+		
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
+        
+		CustomerNewEntity customer = new CustomerNewEntity();
+
+		
+		customer.setEmail(customerNewDto.getEmail());
+		customer.setFirstName(customerNewDto.getFirstname());
+		customer.setLastName(customerNewDto.getLastname());
+		customer.setPassword(customerNewDto.getPassword());
+		try {
+			customer.setDateOfBirth(formatter.parse(customerNewDto.getDayofbirth()));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			customer.setDateOfBirth(null);
+			e1.printStackTrace();
+		}
+		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
+		customer.setStatus(CustomerStatusConstant.ENABLE);
+
+		try {
+			customerNewRepository.save(customer);
+		}catch (Exception e) {
+			// TODO: handle exception
+            System.out.println("++++++++++++++++++++");
+            System.out.println(e.getMessage());
+
+		}
+		
+		return customer.getId();
+	}
+
+	@Override
+	public CustomerNewEntity getByEmail(String email) {
+		// TODO Auto-generated method stub
+		return customerNewRepository.findByEmail(email);
 	}
 	
 	
