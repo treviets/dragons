@@ -3,7 +3,9 @@ package net.dragons.service;
 import java.util.List;
 
 import net.dragons.dto.CustomerDto;
+import net.dragons.dto.CustomerNewDto;
 import net.dragons.jpa.entity.Customer;
+import net.dragons.jpa.entity.CustomerNewEntity;
 
 public interface CustomerService {
 	
@@ -20,4 +22,10 @@ public interface CustomerService {
 	void delete(Long customerId);
 	
 	void update(CustomerDto customerDto);
+	
+	Long createCustomer(CustomerNewDto customerNewDto);
+	
+	CustomerNewEntity getByEmail(String email);
+	
+	
 }

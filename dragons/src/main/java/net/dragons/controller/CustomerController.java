@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.dragons.dto.CustomerDto;
+import net.dragons.dto.CustomerNewDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
+import net.dragons.jpa.entity.CustomerNewEntity;
 import net.dragons.service.CustomerService;
 
 @RestController
@@ -80,6 +82,31 @@ public class CustomerController {
 	 	customerService.update(customerDto);
 	 	
 	 	return null;
+	} 
+	
+	
+	// NEW API FOR CREATE USER
+	@RequestMapping(value = "/create_user", method = RequestMethod.POST) 
+	@ResponseBody
+	public ResponseDto createNewUser(HttpServletRequest request, @RequestBody CustomerNewDto customerNewDto) throws Exception {
+		
+		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
+		ResponseDto response = new ResponseDto();
+		
+		//check account ton tai
+		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
+		if (customerNewEntity == null) {
+			customerService.createCustomer(customerNewDto);
+			response.setData("");
+			response.setMessage("Success");
+			response.setStatus(HttpStatus.OK);
+		}else {
+			response.setData("");
+			response.setMessage("Email existed!");
+			response.setStatus(HttpStatus.BAD_REQUEST);
+		}
+			
+		return response;
 	} 
 	
 }
