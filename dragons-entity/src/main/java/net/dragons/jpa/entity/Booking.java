@@ -26,6 +26,9 @@ public class Booking {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name="home_id")
+	private Integer homeId;
+	
 	@Column(name="room_id")
 	private Integer roomId;
 	
@@ -38,7 +41,7 @@ public class Booking {
 	@Column(name="number_of_guess")
 	private Integer numberOfGuess;
 	
-	@Column(name="number_of_nights")
+	@Column(name="number_of_night")
 	private Double numberOfNights;
 	
 	@Column(name="from_date")
@@ -132,6 +135,15 @@ public class Booking {
 	public void setBookingStatus(Integer bookingStatus) {
 		this.bookingStatus = bookingStatus;
 	}
+
+	public Integer getHomeId() {
+		return homeId;
+	}
+
+	public void setHomeId(Integer homeId) {
+		this.homeId = homeId;
+	}
+	
 	
 	
 }

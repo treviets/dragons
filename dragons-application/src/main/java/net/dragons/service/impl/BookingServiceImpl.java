@@ -1,5 +1,7 @@
 package net.dragons.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class BookingServiceImpl implements BookingService {
 
 	@Autowired
 	BookingRepository bookingRepository;
+	 private SimpleDateFormat dateFormat = new SimpleDateFormat(
+	            "yyyy-MM-dd HH:mm:ss");
 
 	@Override
 	public List<Booking> getAll() {
@@ -34,19 +38,29 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public Long create(BookingDto bookingDto) {
+		try {
 		Booking booking = new Booking();
 		booking.setCustomerId(bookingDto.getCustomerId());
-		booking.setFromDate(bookingDto.getFromDate());
-		booking.setToDate(bookingDto.getToDate());
+		booking.setHomeId(bookingDto.getHomeId());
+		booking.setFromDate(dateFormat.parse(bookingDto.getFromDate()));
+		booking.setToDate(dateFormat.parse(bookingDto.getToDate()));
 		booking.setNumberOfGuess(bookingDto.getNumberOfGuess());
 		booking.setPrice(bookingDto.getPrice());
 		booking.setRoomId(bookingDto.getRoomId());
 		booking.setTotalAmount(bookingDto.getTotalAmount());
+		booking.setNumberOfNights(bookingDto.getNumberOfNights());
 		booking.setBookingStatus(BookingStatusConstant.CREATED);
 		
-		bookingRepository.save(booking);
 		
+		bookingRepository.save(booking);
 		return booking.getId();
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return (long) 0;
+		}
+		
 	}
 	
 	

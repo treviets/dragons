@@ -9,8 +9,8 @@ public class BookingDto {
 	@JsonProperty("CustomerId")
 	private Integer customerId;
 	
-	@JsonProperty("HotelId")
-	private Integer hotelId;
+	@JsonProperty("HomeId")
+	private Integer homeId;
 	
 	@JsonProperty("RoomId")
 	private Integer roomId;
@@ -18,11 +18,14 @@ public class BookingDto {
 	@JsonProperty("NumberOfGuess")
 	private Integer numberOfGuess;
 	
+	@JsonProperty("NumberOfNights")
+	private double numberOfNights;
+	
 	@JsonProperty("FromDate")
-	private Date fromDate;
+	private String fromDate;
 	
 	@JsonProperty("ToDate")
-	private Date toDate;
+	private String toDate;
 
 	@JsonProperty("Price")
 	private Double price;
@@ -38,12 +41,12 @@ public class BookingDto {
 		this.customerId = customerId;
 	}
 
-	public Integer getHotelId() {
-		return hotelId;
+	public Integer getHomeId() {
+		return homeId;
 	}
 
-	public void setHotelId(Integer hotelId) {
-		this.hotelId = hotelId;
+	public void setHomeId(Integer hotelId) {
+		this.homeId = hotelId;
 	}
 
 	public Integer getRoomId() {
@@ -62,19 +65,19 @@ public class BookingDto {
 		this.numberOfGuess = numberOfGuess;
 	}
 
-	public Date getFromDate() {
+	public String getFromDate() {
 		return fromDate;
 	}
 
-	public void setFromDate(Date fromDate) {
+	public void setFromDate(String fromDate) {
 		this.fromDate = fromDate;
 	}
 
-	public Date getToDate() {
+	public String getToDate() {
 		return toDate;
 	}
 
-	public void setToDate(Date toDate) {
+	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
 
@@ -93,6 +96,16 @@ public class BookingDto {
 	public void setTotalAmount(Double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+
+	public double getNumberOfNights() {
+		return numberOfNights;
+	}
+
+	public void setNumberOfNights(double numberOfNights) {
+		this.numberOfNights = numberOfNights;
+	}
+	
+	
 	
 
 }

@@ -3,6 +3,7 @@ package net.dragons.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,7 +41,7 @@ public class BookingController {
 	 	return bookingService.getByCustomerId(customerId);
 	} 
 	
-	@RequestMapping(value = "/create_booking", method = RequestMethod.POST) 
+	@RequestMapping(value = "/create_booking", method = RequestMethod.POST,  consumes=MediaType.APPLICATION_JSON_VALUE) 
 	@ResponseBody
 	public Object createNewBooking(HttpServletRequest request, @RequestBody BookingDto bookingDto) throws Exception {
 	 	return bookingService.create(bookingDto);
