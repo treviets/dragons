@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import net.dragons.dto.ResponseDto;
+import net.dragons.dto.RoomDetailDto;
 import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.service.RoomDetailService;
 
@@ -26,7 +27,7 @@ public class RoomDetailController {
 	@RequestMapping(value = "/by_room_id", method = RequestMethod.GET) 
 	@ResponseBody
 	public Object getRoomsByRoomId(HttpServletRequest request, @RequestParam("roomId") Long roomId) throws Exception {
-		RoomDetail room = roomDetailService.getByRoomId(roomId);
+		RoomDetailDto room = roomDetailService.getByRoomId(roomId);
 	
 		ResponseDto response = new ResponseDto();
 		response.setData(room);

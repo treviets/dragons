@@ -3,12 +3,17 @@
  */
 package net.dragons.jpa.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,16 +34,21 @@ public class Amenity {
 	private Long id;
 	
 	@JsonProperty("CategoryId")
-	@Column(name="type_id")
+	@Column(name="category_id")
 	private Long categoryId;
 	
 	@JsonProperty("Name")
 	@Column(name="name") 
 	private String name;
 
-	@JsonProperty("Desctiption")
-	@Column(name="desctiption") 
-	private String desctiption;
+	@JsonProperty("Description")
+	@Column(name="description") 
+	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="category_id", insertable = false, updatable = false)
+	private AmenityCategory amenityCategory;
+
 	
 	public Long getId() {
 		return id;
@@ -64,13 +74,26 @@ public class Amenity {
 		this.name = name;
 	}
 
+	
+
 	public String getDescription() {
-		return desctiption;
+		return description;
 	}
 
-	public void setDescription(String desctiption) {
-		this.desctiption = desctiption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
+	public AmenityCategory getAmenityCategory() {
+		return amenityCategory;
+	}
+
+	public void setAmenityCategory(AmenityCategory amenityCategory) {
+		this.amenityCategory = amenityCategory;
+	}
+	
+	
+
 
 	
 	
