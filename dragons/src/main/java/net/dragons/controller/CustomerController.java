@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.client.test.OAuth2ContextConfiguration.Password;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -95,8 +97,11 @@ public class CustomerController {
 		
 		//check account ton tai
 		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
+		
 		if (customerNewEntity == null) {
-			customerService.createCustomer(customerNewDto);
+			String pass = BCrypt.hashpw(customerNewDto.getPassword(), BCrypt.gensalt(12)); 
+			customerNewDto.setPassword(pass);
+			long Id = customerService.createCustomer(customerNewDto);
 			response.setData("");
 			response.setMessage("Success");
 			response.setStatus(HttpStatus.OK);
