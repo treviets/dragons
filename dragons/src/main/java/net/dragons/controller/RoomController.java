@@ -42,8 +42,8 @@ public class RoomController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET) 
 	@ResponseBody
 	public Object getRooms(HttpServletRequest request,  @RequestParam(name = "city", required = false) Integer city,
-														@RequestParam(name = "from", required = false) Integer from,
-														@RequestParam(name = "to", required = false) Integer to,
+														@RequestParam(name = "from", required = false) Long from,
+														@RequestParam(name = "to", required = false) Long to,
 														@RequestParam(name = "number_of_guest", required = false) Integer numberOfGuest) throws Exception {
 		
 		
