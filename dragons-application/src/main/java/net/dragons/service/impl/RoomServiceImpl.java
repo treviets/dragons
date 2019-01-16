@@ -3,13 +3,13 @@ package net.dragons.service.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.dragons.jpa.entity.Room;
 import net.dragons.repository.RoomRepository;
+import net.dragons.service.BookingService;
 import net.dragons.service.RoomService;
 
 @Service
@@ -19,6 +19,9 @@ public class RoomServiceImpl implements RoomService {
 	RoomRepository roomRepository;
 	
 	@Autowired
+	BookingService bookingService;
+	
+	@Autowired
 	EntityManager entityManager;
 
 	@Override
@@ -26,26 +29,26 @@ public class RoomServiceImpl implements RoomService {
 		return roomRepository.findAll();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Room> getByFilter(Integer city, Integer from, Integer to, Integer numberOfGuest) {
-		String sql = "SELECT r FROM Room r WHERE r.status = 1";
-		if (city != 0 && city != null) {
-			sql += " AND r.city = " + city;
-		}
+	public List<Room> getByFilter(Integer province, Long fromDate, Long toDate, Integer numberOfGuest) {
+		// Get List of Room that're booked
+		long[] bookings = bookingService.getBookingRoom(fromDate, toDate);
 		
-		if (numberOfGuest != 0 && numberOfGuest != null) {
-			sql += " AND r.numberOfGuest = " + numberOfGuest;
-		}
+		// Get List of Room not In booked list
+		List<Room> rooms = getRoomsNotBook(bookings, province, numberOfGuest);
 		
-		Query query = entityManager.createQuery(sql);
+		return rooms;
 		
-		return query.getResultList();
 	}
 
 	@Override
 	public List<Room> getByHomeId(Long homeId) {
 		return roomRepository.findByHomeId(homeId);
+	}
+
+	@Override
+	public List<Room> getRoomsNotBook(long[] ids, Integer province, Integer numberOfGuest) {
+		return roomRepository.findRoomsNotBooked(ids, province, numberOfGuest);
 	}
 	
 	
