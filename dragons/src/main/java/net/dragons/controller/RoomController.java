@@ -63,7 +63,7 @@ public class RoomController {
 	public Object getRoomsByHomeId(HttpServletRequest request, @RequestParam("homeId") Long homeId) throws Exception {
 		List<Room> rooms = roomService.getByHomeId(homeId);
 		
-		ResponseDto response = new ResponseDto();
+		ResponseDto response = new ResponseDto(	);
 		response.setData(rooms);
 		response.setStatus(HttpStatus.OK);
 		response.setMessage("");

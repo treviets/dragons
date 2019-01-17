@@ -3,6 +3,7 @@ package net.dragons.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,11 +31,20 @@ public class RoomDetailDto {
 	@JsonProperty("Bath")
 	private Integer bath;
 
-	@JsonProperty("ShortDescription")
-	private String shortDescription;
+	@JsonProperty("Description")
+	private String description;
 	
-	@JsonProperty("LongDescription")
-	private String longDescription;
+	@JsonProperty("TheSpace")
+	private String the_space;
+	
+	@JsonProperty("GuestAccess")
+	private String guest_access;
+	
+	@JsonProperty("InteractionWithGuests")
+	private String interaction_with_guests;
+	
+	@JsonProperty("OtherThings")
+	private String other_things;
 	
 	@JsonProperty("Reviews")
 	private List<Review> reviews = new ArrayList<>();
@@ -93,22 +103,6 @@ public class RoomDetailDto {
 		this.bath = bath;
 	}
 
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
-	}
-
-	public String getLongDescription() {
-		return longDescription;
-	}
-
-	public void setLongDescription(String longDescription) {
-		this.longDescription = longDescription;
-	}
-
 	public List<Review> getReviews() {
 		return reviews;
 	}
@@ -132,6 +126,48 @@ public class RoomDetailDto {
 	public void setAmenities(List<Amenity> amenities) {
 		this.amenities = amenities;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getThe_space() {
+		return the_space;
+	}
+
+	public void setThe_space(String the_space) {
+		this.the_space = the_space;
+	}
+
+	public String getGuest_access() {
+		return guest_access;
+	}
+
+	public void setGuest_access(String guest_access) {
+		this.guest_access = guest_access;
+	}
+
+	public String getInteraction_with_guests() {
+		return interaction_with_guests;
+	}
+
+	public void setInteraction_with_guests(String interaction_with_guests) {
+		this.interaction_with_guests = interaction_with_guests;
+	}
+
+	public String getOther_things() {
+		return other_things;
+	}
+
+	public void setOther_things(String other_things) {
+		this.other_things = other_things;
+	}
+	
+	
 	
 	
 	

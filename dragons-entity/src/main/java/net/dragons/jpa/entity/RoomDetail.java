@@ -56,13 +56,25 @@ public class RoomDetail {
 	@Column(name="bath") 
 	private Integer bath;
 
-	@JsonProperty("ShortDescription")
-	@Column(name="short_description") 
-	private String shortDescription;
+	@JsonProperty("description")
+	@Column(name="description") 
+	private String description;
 	
-	@JsonProperty("LongDescription")
-	@Column(name="long_description") 
-	private String longDescription;
+	@JsonProperty("TheSpace")
+	@Column(name="the_space") 
+	private String the_space;
+	
+	@JsonProperty("GuestAccess")
+	@Column(name="guest_access") 
+	private String guest_access;
+	
+	@JsonProperty("InteractionWithGuests")
+	@Column(name="interaction_with_guests") 
+	private String interaction_with_guests;
+	
+	@JsonProperty("OtherThings")
+	@Column(name="other_things") 
+	private String other_things;
 	
 	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
@@ -128,22 +140,6 @@ public class RoomDetail {
 		this.bath = bath;
 	}
 
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
-	}
-
-	public String getLongDescription() {
-		return longDescription;
-	}
-
-	public void setLongDescription(String longDescription) {
-		this.longDescription = longDescription;
-	}
-
 	public List<Review> getReviews() {
 		return reviews;
 	}
@@ -159,6 +155,48 @@ public class RoomDetail {
 	public void setImages(List<RoomImage> images) {
 		this.images = images;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getThe_space() {
+		return the_space;
+	}
+
+	public void setThe_space(String the_space) {
+		this.the_space = the_space;
+	}
+
+	public String getGuest_access() {
+		return guest_access;
+	}
+
+	public void setGuest_access(String guest_access) {
+		this.guest_access = guest_access;
+	}
+
+	public String getInteraction_with_guests() {
+		return interaction_with_guests;
+	}
+
+	public void setInteraction_with_guests(String interaction_with_guests) {
+		this.interaction_with_guests = interaction_with_guests;
+	}
+
+	public String getOther_things() {
+		return other_things;
+	}
+
+	public void setOther_things(String other_things) {
+		this.other_things = other_things;
+	}
+	
+	
 	
 	
 
