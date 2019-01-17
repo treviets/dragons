@@ -14,4 +14,7 @@ public interface BookingService {
 	List<Booking> getByCustomerId(Long customerId);
 	
 	Long create(BookingDto bookingDto);
+	
+	long[] getBookingRoom(Long from, Long to);
+
 }

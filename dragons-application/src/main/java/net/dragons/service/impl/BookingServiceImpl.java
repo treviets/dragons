@@ -18,7 +18,8 @@ public class BookingServiceImpl implements BookingService {
 
 	@Autowired
 	BookingRepository bookingRepository;
-	 private SimpleDateFormat dateFormat = new SimpleDateFormat(
+	
+	private SimpleDateFormat dateFormat = new SimpleDateFormat(
 	            "yyyy-MM-dd HH:mm:ss");
 
 	@Override
@@ -61,6 +62,11 @@ public class BookingServiceImpl implements BookingService {
 			return (long) 0;
 		}
 		
+	}
+
+	@Override
+	public long[] getBookingRoom(Long from, Long to) {
+		return bookingRepository.findBookingRoom(from, to);
 	}
 	
 	
