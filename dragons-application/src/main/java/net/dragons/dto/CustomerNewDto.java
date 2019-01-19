@@ -1,7 +1,10 @@
 package net.dragons.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerNewDto {
 
 	@JsonProperty("Lastname")
@@ -21,6 +24,9 @@ public class CustomerNewDto {
 	
 	@JsonProperty("Avatar")
 	private String avatar;
+	
+	@JsonProperty("Phone")
+	private String phone;
 	
 	
 
@@ -70,6 +76,14 @@ public class CustomerNewDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 	

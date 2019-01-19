@@ -4,11 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.bouncycastle.crypto.tls.EncryptionAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.CustomerNewDto;
+import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.CustomerNewEntity;
 import net.dragons.repository.CustomerNewRepository;
@@ -25,6 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	CustomerNewRepository customerNewRepository;
+
 
 	@Override
 	public Customer getById(Long customerId) {
@@ -86,9 +90,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
-        
 		CustomerNewEntity customer = new CustomerNewEntity();
-
 		
 		customer.setEmail(customerNewDto.getEmail());
 		customer.setFirstName(customerNewDto.getFirstname());
@@ -120,6 +122,21 @@ public class CustomerServiceImpl implements CustomerService {
 	public CustomerNewEntity getByEmail(String email) {
 		// TODO Auto-generated method stub
 		return customerNewRepository.findByEmail(email);
+	}
+
+	@Override
+	public ResponseDto updateNewUser(CustomerNewDto customerNewDto) {
+		
+		CustomerNewEntity entity = customerNewRepository.findByEmail(customerNewDto.getEmail());
+		entity.setPhone(customerNewDto.getPhone());
+		
+		customerNewRepository.save(entity);
+		ResponseDto response = new ResponseDto();
+		response.setData(entity);
+		response.setMessage("OK");
+		response.setStatus(HttpStatus.OK);
+
+		return response;
 	}
 	
 	

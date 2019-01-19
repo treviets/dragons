@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.client.test.OAuth2ContextConfiguration.Password;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,10 +89,8 @@ public class CustomerController {
 	
 	
 	// NEW API FOR CREATE USER
-	@RequestMapping(value = "/create_user", method = RequestMethod.POST) 
-	@ResponseBody
-	public ResponseDto createNewUser(HttpServletRequest request, @RequestBody CustomerNewDto customerNewDto) throws Exception {
-		
+	@RequestMapping(value = "/create_user/", method = RequestMethod.POST,produces = "application/json") 
+	public @ResponseBody ResponseDto createNewUser(@RequestBody CustomerNewDto customerNewDto) throws Exception {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
 		
@@ -111,6 +110,12 @@ public class CustomerController {
 			response.setStatus(HttpStatus.BAD_REQUEST);
 		}
 			
+		return response;
+	} 
+	
+	@RequestMapping(value = "/update_user/", method = RequestMethod.POST,produces = "application/json") 
+	public @ResponseBody ResponseDto updateNewUser(@RequestBody CustomerNewDto customerNewDto) throws Exception {
+		ResponseDto response = customerService.updateNewUser(customerNewDto);
 		return response;
 	} 
 	
