@@ -3,10 +3,9 @@ package net.dragons.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.dragons.jpa.entity.Accessibility;
 import net.dragons.jpa.entity.Amenity;
 import net.dragons.jpa.entity.Review;
 import net.dragons.jpa.entity.RoomImage;
@@ -45,6 +44,12 @@ public class RoomDetailDto {
 	
 	@JsonProperty("OtherThings")
 	private String other_things;
+		
+	@JsonProperty("GetAround")
+	private String get_around;
+	
+	@JsonProperty("AboutNeighborhood")
+	private String about_neighborhood;
 	
 	@JsonProperty("Reviews")
 	private List<Review> reviews = new ArrayList<>();
@@ -54,6 +59,9 @@ public class RoomDetailDto {
 	
 	@JsonProperty("Amenities")
 	private List<Amenity> amenities = new ArrayList<>();
+	
+	@JsonProperty("Accessibilities")
+	private List<Accessibility> accessibilities = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -166,6 +174,31 @@ public class RoomDetailDto {
 	public void setOther_things(String other_things) {
 		this.other_things = other_things;
 	}
+
+	public String getGet_around() {
+		return get_around;
+	}
+
+	public void setGet_around(String get_around) {
+		this.get_around = get_around;
+	}
+
+	public String getAbout_neighborhood() {
+		return about_neighborhood;
+	}
+
+	public void setAbout_neighborhood(String about_neighborhood) {
+		this.about_neighborhood = about_neighborhood;
+	}
+
+	public List<Accessibility> getAccessibilities() {
+		return accessibilities;
+	}
+
+	public void setAccessibilities(List<Accessibility> accessibilities) {
+		this.accessibilities = accessibilities;
+	}
+	
 	
 	
 	

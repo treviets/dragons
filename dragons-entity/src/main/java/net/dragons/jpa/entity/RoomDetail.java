@@ -76,6 +76,18 @@ public class RoomDetail {
 	@Column(name="other_things") 
 	private String other_things;
 	
+	@JsonProperty("GetAround")
+	@Column(name="get_around") 
+	private String get_around;
+	
+	@JsonProperty("AboutNeighborhood")
+	@Column(name="about_neighborhood") 
+	private String about_neighborhood;
+	
+	@JsonProperty("Accessibility")
+	@Column(name="accessibility") 
+	private String accessibility;
+	
 	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
 	private List<Review> reviews = new ArrayList<>();
@@ -195,6 +207,32 @@ public class RoomDetail {
 	public void setOther_things(String other_things) {
 		this.other_things = other_things;
 	}
+
+	public String getGet_around() {
+		return get_around;
+	}
+
+	public void setGet_around(String get_around) {
+		this.get_around = get_around;
+	}
+
+	public String getAbout_neighborhood() {
+		return about_neighborhood;
+	}
+
+	public void setAbout_neighborhood(String about_neighborhood) {
+		this.about_neighborhood = about_neighborhood;
+	}
+
+	public String getAccessibility() {
+		return accessibility;
+	}
+
+	public void setAccessibility(String accessibility) {
+		this.accessibility = accessibility;
+	}
+	
+	
 	
 	
 	

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -40,6 +42,10 @@ public class Accessibility {
 	@Column(name="description") 
 	private String description;
 	
+	@ManyToOne
+	@JoinColumn(name="category_id", insertable = false, updatable = false)
+	private AccessibilityCategory accessibilityCategory;
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,6 +77,15 @@ public class Accessibility {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public AccessibilityCategory getAccessibilityCategory() {
+		return accessibilityCategory;
+	}
+
+	public void setAccessibilityCategory(AccessibilityCategory accessibilityCategory) {
+		this.accessibilityCategory = accessibilityCategory;
+	}
+	
 
 	
 	

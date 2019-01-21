@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.dragons.dto.RoomDetailDto;
+import net.dragons.jpa.entity.Accessibility;
 import net.dragons.jpa.entity.Amenity;
 import net.dragons.jpa.entity.RoomDetail;
+import net.dragons.repository.AccessibilityRepository;
 import net.dragons.repository.AmenityRepository;
 import net.dragons.repository.RoomDetailRepository;
 import net.dragons.service.RoomDetailService;
@@ -25,6 +27,9 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 	
 	@Autowired 
 	AmenityRepository amenityRepository;
+	
+	@Autowired 
+	AccessibilityRepository accessibilityRepository;
 	
 	@Autowired
 	EntityManager entityManager;
@@ -54,6 +59,15 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 		if (idList.size() > 0) {
 			List<Amenity> amenities = amenityRepository.findByIdIn(idList);
 			roomDetailDto.setAmenities(amenities);
+		}
+		
+		String accessibility =  detail.getAccessibility();
+		String[] accessibilitiesId = accessibility.split(",");
+		ArrayList<Long> idAccessibilityList = new ArrayList<Long>();
+		for(String id : accessibilitiesId) idAccessibilityList.add(Long.valueOf(id).longValue());
+		if (idList.size() > 0) {
+			List<Accessibility> accessibilities = accessibilityRepository.findByIdIn(idAccessibilityList);
+			roomDetailDto.setAccessibilities(accessibilities);
 		}
 		
 		return roomDetailDto;
