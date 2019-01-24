@@ -96,13 +96,14 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setFirstName(customerNewDto.getFirstname());
 		customer.setLastName(customerNewDto.getLastname());
 		customer.setPassword(customerNewDto.getPassword());
-		try {
-			customer.setDateOfBirth(formatter.parse(customerNewDto.getDayofbirth()));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			customer.setDateOfBirth(null);
-			e1.printStackTrace();
-		}
+//		customer.setDateOfBirth(null);
+//		try {
+//			customer.setDateOfBirth(formatter.parse(customerNewDto.getDayofbirth()));
+//		} catch (ParseException e1) {
+//			// TODO Auto-generated catch block
+//			customer.setDateOfBirth(null);
+//			e1.printStackTrace();
+//		}
 		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
 		customer.setStatus(CustomerStatusConstant.ENABLE);
 

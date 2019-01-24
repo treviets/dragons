@@ -9,11 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonObject;
 
+import net.dragons.dto.CustomerNewDto;
 import net.dragons.dto.LoginDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.CustomerNewEntity;
@@ -35,20 +37,23 @@ public class LoginController {
 	
 	@RequestMapping(value = "/account", method = RequestMethod.POST) 
 	@ResponseBody
-	public Object login(HttpServletRequest request, @RequestBody LoginDto loginDto) throws Exception {
+	public Object login(CustomerNewDto customerNewDto) throws Exception {
 		//check account ton tai
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
+		String email = customerNewDto.getEmail();
+		String password = customerNewDto.getPassword();
 
-		customerNewEntity = customerService.getByEmail(loginDto.getUsername());
+		customerNewEntity = customerService.getByEmail(email);
 		
 		if (customerNewEntity == null) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
 			response.setMessage("Tài khoản không tồn ");
 		}else {
-			Boolean check = BCrypt.checkpw(loginDto.getPassword(), customerNewEntity.getPassword());
+			Boolean check = BCrypt.checkpw(password, customerNewEntity.getPassword());
 			System.out.println(check);
 			if (!check) {
+				response.setData("");
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				response.setMessage("Mật khẩu không chính xác");
 			}else {

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.dragons.commom.util.Utils;
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.CustomerNewDto;
 import net.dragons.dto.ResponseDto;
@@ -89,10 +90,17 @@ public class CustomerController {
 	
 	
 	// NEW API FOR CREATE USER
-	@RequestMapping(value = "/create_user/", method = RequestMethod.POST,produces = "application/json") 
-	public @ResponseBody ResponseDto createNewUser(@RequestBody CustomerNewDto customerNewDto) throws Exception {
+	@RequestMapping(value = "/create_user", method = RequestMethod.POST) 
+	public @ResponseBody ResponseDto createNewUser(CustomerNewDto customerNewDto) throws Exception {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
+		
+		if(!Utils.validateEmail(customerNewDto.getEmail())) {
+			response.setData("");
+			response.setMessage("Sai định dạng ");
+			response.setStatus(HttpStatus.BAD_REQUEST);
+			return response;
+		}
 		
 		//check account ton tai
 		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
