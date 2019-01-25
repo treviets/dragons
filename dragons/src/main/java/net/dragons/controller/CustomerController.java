@@ -23,6 +23,8 @@ import net.dragons.dto.CustomerNewDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.CustomerNewEntity;
+import net.dragons.jpa.entity.SocialLinkAccount;
+import net.dragons.security.TokenAuthenticationService;
 import net.dragons.service.CustomerService;
 
 @RestController
@@ -124,6 +126,55 @@ public class CustomerController {
 	@RequestMapping(value = "/update_user/", method = RequestMethod.POST,produces = "application/json") 
 	public @ResponseBody ResponseDto updateNewUser(@RequestBody CustomerNewDto customerNewDto) throws Exception {
 		ResponseDto response = customerService.updateNewUser(customerNewDto);
+		return response;
+	} 
+	
+
+	// SIGN UP BY SOCIAL USER
+	@RequestMapping(value = "/sign_up_user", method = RequestMethod.POST) 
+	public @ResponseBody ResponseDto signUpBySocial(CustomerNewDto customerNewDto) throws Exception {
+		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
+		ResponseDto response = new ResponseDto();
+		
+
+		
+		//check account ton tai trong customer
+		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
+		String passFake ="";
+		if (customerNewEntity == null) {
+			if(customerNewDto.getGgid() != "") {
+				passFake = customerNewDto.getGgid() +"tdh";
+			}
+			if(customerNewDto.getFbid() != "") {
+				passFake = customerNewDto.getFbid() +"tdh";
+			}
+			customerNewDto.setPassword(BCrypt.hashpw(passFake, BCrypt.gensalt(12)));
+			long id = customerService.createCustomer(customerNewDto);
+			customerService.signUpBySocial(customerNewDto);
+			
+			CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
+			
+			long nowMillis = System.currentTimeMillis();
+			String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+			
+			response.setData(token);
+			response.setMessage("Success");
+			response.setStatus(HttpStatus.OK);
+		}else {
+			
+			customerService.signUpBySocial(customerNewDto);
+			
+			CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
+			
+			long nowMillis = System.currentTimeMillis();
+			String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+			
+			response.setData(token);
+			response.setMessage("Success");
+			response.setStatus(HttpStatus.OK);
+			
+		}
+			
 		return response;
 	} 
 	

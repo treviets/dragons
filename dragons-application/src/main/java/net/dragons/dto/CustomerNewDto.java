@@ -28,15 +28,14 @@ public class CustomerNewDto {
 	@JsonProperty("Phone")
 	private String phone;
 	
+	@JsonProperty("Googleid")
+	private String ggid;
 	
-
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+	@JsonProperty("Facebookid")
+	private String fbid;
+	
+	@JsonProperty("Fullname")
+	private String fullname;
 
 	public String getLastname() {
 		return lastname;
@@ -78,6 +77,14 @@ public class CustomerNewDto {
 		this.email = email;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -85,7 +92,35 @@ public class CustomerNewDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public String getGgid() {
+		return ggid;
+	}
+
+	public void setGgid(String ggid) {
+		this.ggid = ggid;
+	}
+
+	public String getFbid() {
+		return fbid;
+	}
+
+	public void setFbid(String fbid) {
+		this.fbid = fbid;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
 	
 	
+	
+	
+
 
 }

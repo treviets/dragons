@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.bouncycastle.crypto.tls.EncryptionAlgorithm;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,10 @@ import net.dragons.dto.CustomerNewDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.CustomerNewEntity;
+import net.dragons.jpa.entity.SocialLinkAccount;
 import net.dragons.repository.CustomerNewRepository;
 import net.dragons.repository.CustomerRepository;
+import net.dragons.repository.SocialLinkReponsitory;
 import net.dragons.service.CustomerService;
 import util.CustomerRoleConstant;
 import util.CustomerStatusConstant;
@@ -28,6 +31,12 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	CustomerNewRepository customerNewRepository;
+	
+	@Autowired
+	SocialLinkReponsitory socialLinkRepository;
+	
+	ModelMapper mapper;
+
 
 
 	@Override
@@ -96,14 +105,6 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setFirstName(customerNewDto.getFirstname());
 		customer.setLastName(customerNewDto.getLastname());
 		customer.setPassword(customerNewDto.getPassword());
-//		customer.setDateOfBirth(null);
-//		try {
-//			customer.setDateOfBirth(formatter.parse(customerNewDto.getDayofbirth()));
-//		} catch (ParseException e1) {
-//			// TODO Auto-generated catch block
-//			customer.setDateOfBirth(null);
-//			e1.printStackTrace();
-//		}
 		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
 		customer.setStatus(CustomerStatusConstant.ENABLE);
 
@@ -139,6 +140,20 @@ public class CustomerServiceImpl implements CustomerService {
 
 		return response;
 	}
+
+	@Override
+	public SocialLinkAccount signUpBySocial(CustomerNewDto customerNewDto) {
+		// TODO Auto-generated method stub
+		SocialLinkAccount entity = new SocialLinkAccount();
+		
+		mapper.map(customerNewDto, entity);
+		
+		SocialLinkAccount result = socialLinkRepository.save(entity);
+		
+		return result;
+	}
+
+
 	
 	
 }
