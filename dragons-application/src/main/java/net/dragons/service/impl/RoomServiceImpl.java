@@ -30,7 +30,7 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<Room> getByFilter(Integer province, Long fromDate, Long toDate, Integer numberOfGuest) {
+	public List<Room> getByFilter(Integer province, Long fromDate, Long toDate, Integer numberOfGuest,String min, String max, Integer roomtype) {
 		// Get List of Room that're booked
 		long[] bookings = bookingService.getBookingRoom(fromDate, toDate);
 		
@@ -41,7 +41,7 @@ public class RoomServiceImpl implements RoomService {
 		if (province == 0) {
 			province = null;
 		}
-		List<Room> rooms = getRoomsNotBook(bookings, province, numberOfGuest);
+		List<Room> rooms = getRoomsNotBook(bookings, province, numberOfGuest, min, max, roomtype);
 		
 		return rooms;
 		
@@ -53,8 +53,8 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<Room> getRoomsNotBook(long[] ids, Integer province, Integer numberOfGuest) {
-		return roomRepository.findRoomsNotBooked(ids, province, numberOfGuest);
+	public List<Room> getRoomsNotBook(long[] ids, Integer province, Integer numberOfGuest, String min, String max, Integer roomtype) {
+		return roomRepository.findRoomsNotBooked(roomtype,min, max,ids, province, numberOfGuest);
 	}
 	
 	

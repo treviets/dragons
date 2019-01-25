@@ -44,10 +44,13 @@ public class RoomController {
 	public Object getRooms(HttpServletRequest request,  @RequestParam(name = "province", required = false) Integer province,
 														@RequestParam(name = "from", required = false) Long from,
 														@RequestParam(name = "to", required = false) Long to,
+														@RequestParam(name = "min", required = false) String min,
+														@RequestParam(name = "max", required = false) String max,
+														@RequestParam(name = "roomtype", required = false) Integer roomtype,
 														@RequestParam(name = "number_of_guest", required = false) Integer numberOfGuest) throws Exception {
 		
 		
-		List<Room> rooms = roomService.getByFilter(province, from, to, numberOfGuest);
+		List<Room> rooms = roomService.getByFilter(province, from, to, numberOfGuest, min, max, roomtype);
 		
 		ResponseDto response = new ResponseDto();
 		response.setData(rooms);
