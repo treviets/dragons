@@ -32,9 +32,6 @@ public class LoginController {
 	@Autowired
 	private CustomerService customerService;
 	
-
-
-	
 	@RequestMapping(value = "/account", method = RequestMethod.POST) 
 	@ResponseBody
 	public Object login(CustomerNewDto customerNewDto) throws Exception {
@@ -48,14 +45,14 @@ public class LoginController {
 		
 		if (customerNewEntity == null) {
 			response.setStatus(HttpStatus.BAD_REQUEST);
-			response.setMessage("Tài khoản không tồn ");
+			response.setMessage("The password you entered is incorrect. Try again, or choose another login option.");
 		}else {
 			Boolean check = BCrypt.checkpw(password, customerNewEntity.getPassword());
 			System.out.println(check);
 			if (!check) {
 				response.setData("");
 				response.setStatus(HttpStatus.BAD_REQUEST);
-				response.setMessage("Mật khẩu không chính xác");
+				response.setMessage("The password you entered is incorrect. Try again, or choose another login option.");
 			}else {
 				long nowMillis = System.currentTimeMillis();
 				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(customerNewEntity.getId()), String.valueOf(customerNewEntity.getEmail()), String.valueOf(customerNewEntity.getRoleId()), nowMillis);
@@ -66,4 +63,67 @@ public class LoginController {
 		}	 	
 		return response;
 	} 
+	// LOGIN BY SOCIAL USER
+		@RequestMapping(value = "/social", method = RequestMethod.POST) 
+		public @ResponseBody ResponseDto signUpBySocial(CustomerNewDto customerNewDto) throws Exception {
+			CustomerNewEntity customerNewEntity = new CustomerNewEntity();
+			ResponseDto response = new ResponseDto();
+			
+			System.out.println(customerNewDto.getGoogleid());
+			System.out.println(customerNewDto.getFbid());
+
+			
+			//check account ton tai trong customer
+			customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
+			String passFake ="";
+			if (customerNewEntity == null) {
+				if(customerNewDto.getGoogleid() != "") {
+					passFake = customerNewDto.getGoogleid() +"tdh";
+				}
+				if(customerNewDto.getFbid() != null) {
+					passFake = customerNewDto.getFbid() +"tdh";
+				}
+				customerNewDto.setPassword(BCrypt.hashpw(passFake, BCrypt.gensalt(12)));
+				int id = customerService.createCustomer(customerNewDto);
+				customerNewDto.setUserId(id);
+				
+				customerService.signUpBySocial(customerNewDto);
+				
+				//get customer vua duoc tao
+				CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
+				
+				long nowMillis = System.currentTimeMillis();
+				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+				
+				response.setData(token);
+				response.setMessage("Success");
+				response.setStatus(HttpStatus.OK);
+			}else {
+				CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
+				
+				//check da ton tai account social
+				customerService.getByCustomerId(customerNewDto);
+				
+				CustomerNewEntity linkExist = customerService.getByEmail(customerNewDto.getEmail());
+				if (linkExist != null) {
+					long nowMillis = System.currentTimeMillis();
+					String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+					
+					response.setData(token);
+					response.setMessage("Success");
+					response.setStatus(HttpStatus.OK);
+				}else {
+					customerService.signUpBySocial(customerNewDto);
+					long nowMillis = System.currentTimeMillis();
+					String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+					
+					response.setData(token);
+					response.setMessage("Success");
+					response.setStatus(HttpStatus.OK);
+				}
+				
+			}
+				
+			return response;
+		} 
 }

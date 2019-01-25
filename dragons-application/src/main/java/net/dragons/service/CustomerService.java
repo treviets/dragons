@@ -25,13 +25,15 @@ public interface CustomerService {
 	
 	void update(CustomerDto customerDto);
 	
-	Long createCustomer(CustomerNewDto customerNewDto);
+	int createCustomer(CustomerNewDto customerNewDto);
 	
 	CustomerNewEntity getByEmail(String email);
 	
 	ResponseDto updateNewUser(CustomerNewDto customerNewDto);
 	
 	SocialLinkAccount signUpBySocial(CustomerNewDto customerNewDto);	
+	
+	SocialLinkAccount getByCustomerId(CustomerNewDto customerNewDto);
 	
 	
 }

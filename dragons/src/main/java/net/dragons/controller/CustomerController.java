@@ -99,7 +99,7 @@ public class CustomerController {
 		
 		if(!Utils.validateEmail(customerNewDto.getEmail())) {
 			response.setData("");
-			response.setMessage("Sai định dạng ");
+			response.setMessage("Email invalid ");
 			response.setStatus(HttpStatus.BAD_REQUEST);
 			return response;
 		}
@@ -136,22 +136,27 @@ public class CustomerController {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
 		
+		System.out.println(customerNewDto.getGoogleid());
+		System.out.println(customerNewDto.getFbid());
 
 		
 		//check account ton tai trong customer
 		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
 		String passFake ="";
 		if (customerNewEntity == null) {
-			if(customerNewDto.getGgid() != "") {
-				passFake = customerNewDto.getGgid() +"tdh";
+			if(customerNewDto.getGoogleid() != "") {
+				passFake = customerNewDto.getGoogleid() +"tdh";
 			}
-			if(customerNewDto.getFbid() != "") {
+			if(customerNewDto.getFbid() != null) {
 				passFake = customerNewDto.getFbid() +"tdh";
 			}
 			customerNewDto.setPassword(BCrypt.hashpw(passFake, BCrypt.gensalt(12)));
-			long id = customerService.createCustomer(customerNewDto);
+			int id = customerService.createCustomer(customerNewDto);
+			customerNewDto.setUserId(id);
+			
 			customerService.signUpBySocial(customerNewDto);
 			
+			//get customer vua duoc tao
 			CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
 			
 			long nowMillis = System.currentTimeMillis();
@@ -161,17 +166,28 @@ public class CustomerController {
 			response.setMessage("Success");
 			response.setStatus(HttpStatus.OK);
 		}else {
-			
-			customerService.signUpBySocial(customerNewDto);
-			
 			CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
 			
-			long nowMillis = System.currentTimeMillis();
-			String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+			//check da ton tai account social
+			customerService.getByCustomerId(customerNewDto);
 			
-			response.setData(token);
-			response.setMessage("Success");
-			response.setStatus(HttpStatus.OK);
+			CustomerNewEntity linkExist = customerService.getByEmail(customerNewDto.getEmail());
+			if (linkExist != null) {
+				long nowMillis = System.currentTimeMillis();
+				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+				
+				response.setData(token);
+				response.setMessage("Success");
+				response.setStatus(HttpStatus.OK);
+			}else {
+				customerService.signUpBySocial(customerNewDto);
+				long nowMillis = System.currentTimeMillis();
+				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()), String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+				
+				response.setData(token);
+				response.setMessage("Success");
+				response.setStatus(HttpStatus.OK);
+			}
 			
 		}
 			

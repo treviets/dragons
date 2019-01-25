@@ -28,16 +28,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	@Autowired
 	CustomerNewRepository customerNewRepository;
-	
+
 	@Autowired
 	SocialLinkReponsitory socialLinkRepository;
-	
+
 	ModelMapper mapper;
-
-
 
 	@Override
 	public Customer getById(Long customerId) {
@@ -57,9 +55,9 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setPhone(customerDto.getPhone());
 		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
 		customer.setStatus(CustomerStatusConstant.ENABLE);
-		
+
 		customerRepository.save(customer);
-		
+
 		return customer.getId();
 	}
 
@@ -71,15 +69,15 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void update(CustomerDto customerDto) {
 		Customer customer = customerRepository.findById(customerDto.getCustomerId());
-		
+
 		customer.setPassword(customerDto.getPassword());
 		customer.setEmail(customerDto.getEmail());
 		customer.setPhone(customerDto.getPhone());
 		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
 		customer.setStatus(CustomerStatusConstant.ENABLE);
-		
+
 		customerRepository.save(customer);
-		
+
 	}
 
 	@Override
@@ -95,12 +93,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Long createCustomer(CustomerNewDto customerNewDto) {
-		
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+	public int createCustomer(CustomerNewDto customerNewDto) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
 		CustomerNewEntity customer = new CustomerNewEntity();
-		
+
 		customer.setEmail(customerNewDto.getEmail());
 		customer.setFirstName(customerNewDto.getFirstname());
 		customer.setLastName(customerNewDto.getLastname());
@@ -110,13 +108,13 @@ public class CustomerServiceImpl implements CustomerService {
 
 		try {
 			customerNewRepository.save(customer);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
-            System.out.println("++++++++++++++++++++");
-            System.out.println(e.getMessage());
+			System.out.println("++++++++++++++++++++");
+			System.out.println(e.getMessage());
 
 		}
-		
+
 		return customer.getId();
 	}
 
@@ -128,10 +126,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public ResponseDto updateNewUser(CustomerNewDto customerNewDto) {
-		
+
 		CustomerNewEntity entity = customerNewRepository.findByEmail(customerNewDto.getEmail());
 		entity.setPhone(customerNewDto.getPhone());
-		
+
 		customerNewRepository.save(entity);
 		ResponseDto response = new ResponseDto();
 		response.setData(entity);
@@ -145,15 +143,27 @@ public class CustomerServiceImpl implements CustomerService {
 	public SocialLinkAccount signUpBySocial(CustomerNewDto customerNewDto) {
 		// TODO Auto-generated method stub
 		SocialLinkAccount entity = new SocialLinkAccount();
-		
-		mapper.map(customerNewDto, entity);
-		
+
+		entity.setFullName(customerNewDto.getFullname());
+
+		if (customerNewDto.getGoogleid() != null) {
+			entity.setGgId(customerNewDto.getGoogleid());
+		} else {
+			entity.setFbId(customerNewDto.getFbid());
+		}
+		entity.setFamilyName(customerNewDto.getLastname());
+		entity.setGivenName(customerNewDto.getFirstname());
+		entity.setImg(customerNewDto.getAvatar());
+		entity.setUserId(customerNewDto.getUserId());
 		SocialLinkAccount result = socialLinkRepository.save(entity);
-		
+
 		return result;
 	}
 
+	@Override
+	public SocialLinkAccount getByCustomerId(CustomerNewDto customerNewDto) {
+		SocialLinkAccount result = socialLinkRepository.findOne(customerNewDto.getUserId());
+		return result;
+	}
 
-	
-	
 }

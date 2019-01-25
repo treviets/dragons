@@ -29,13 +29,24 @@ public class CustomerNewDto {
 	private String phone;
 	
 	@JsonProperty("Googleid")
-	private String ggid;
+	private String googleid;
 	
 	@JsonProperty("Facebookid")
 	private String fbid;
 	
 	@JsonProperty("Fullname")
 	private String fullname;
+	
+	private int userId;
+	
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getLastname() {
 		return lastname;
@@ -93,12 +104,13 @@ public class CustomerNewDto {
 		this.phone = phone;
 	}
 
-	public String getGgid() {
-		return ggid;
+
+	public String getGoogleid() {
+		return googleid;
 	}
 
-	public void setGgid(String ggid) {
-		this.ggid = ggid;
+	public void setGoogleid(String googleid) {
+		this.googleid = googleid;
 	}
 
 	public String getFbid() {
