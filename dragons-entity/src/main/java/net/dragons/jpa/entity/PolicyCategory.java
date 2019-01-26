@@ -18,9 +18,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="amenity_category")
-@NamedQuery(name="AmenityCategory.findAll", query="SELECT a FROM AmenityCategory a")
-public class AmenityCategory {
+@Table(name="policy_category")
+@NamedQuery(name="PolicyCategory.findAll", query="SELECT pc FROM PolicyCategory pc")
+public class PolicyCategory {
 	
 	@JsonProperty("Id")
 	@Id

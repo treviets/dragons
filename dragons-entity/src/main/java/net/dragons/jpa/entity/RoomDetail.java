@@ -88,6 +88,10 @@ public class RoomDetail {
 	@Column(name="accessibility") 
 	private String accessibility;
 	
+	@JsonProperty("Policy")
+	@Column(name="policy") 
+	private String policy;
+	
 	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
 	private List<Review> reviews = new ArrayList<>();
@@ -95,7 +99,9 @@ public class RoomDetail {
 	@JsonProperty("Images")
 	@OneToMany(mappedBy="roomDetail")
 	private List<RoomImage> images = new ArrayList<>();
-
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -231,13 +237,14 @@ public class RoomDetail {
 	public void setAccessibility(String accessibility) {
 		this.accessibility = accessibility;
 	}
-	
-	
-	
-	
-	
-	
 
-	
+	public String getPolicy() {
+		return policy;
+	}
+
+	public void setPolicy(String policy) {
+		this.policy = policy;
+	}
+
 	
 }

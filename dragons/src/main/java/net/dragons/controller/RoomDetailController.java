@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.dto.ResponseDto;
 import net.dragons.dto.RoomDetailDto;
-import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.service.RoomDetailService;
 
 @RestController

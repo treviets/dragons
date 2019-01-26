@@ -20,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="amenity")
-@NamedQuery(name="Amenity.findAll", query="SELECT a FROM Amenity a")
-public class Amenity {
+@Table(name="policy")
+@NamedQuery(name="Policy.findAll", query="SELECT p FROM Policy p")
+public class Policy {
 	
 	@JsonProperty("Id")
 	@Id
@@ -44,8 +44,7 @@ public class Amenity {
 	
 	@ManyToOne
 	@JoinColumn(name="category_id", insertable = false, updatable = false)
-	private AmenityCategory amenityCategory;
-
+	private PolicyCategory policyCategory;
 	
 	public Long getId() {
 		return id;
@@ -71,8 +70,6 @@ public class Amenity {
 		this.name = name;
 	}
 
-	
-
 	public String getDescription() {
 		return description;
 	}
@@ -81,17 +78,13 @@ public class Amenity {
 		this.description = description;
 	}
 
-	public AmenityCategory getAmenityCategory() {
-		return amenityCategory;
+	public PolicyCategory getPolicyCategory() {
+		return policyCategory;
 	}
 
-	public void setAmenityCategory(AmenityCategory amenityCategory) {
-		this.amenityCategory = amenityCategory;
+	public void setPolicyCategory(PolicyCategory policyCategory) {
+		this.policyCategory = policyCategory;
 	}
-	
-	
-
-
 	
 	
 	

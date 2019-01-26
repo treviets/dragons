@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.dragons.jpa.entity.Accessibility;
 import net.dragons.jpa.entity.Amenity;
+import net.dragons.jpa.entity.Policy;
 import net.dragons.jpa.entity.Review;
 import net.dragons.jpa.entity.RoomImage;
 
@@ -63,6 +64,9 @@ public class RoomDetailDto {
 	@JsonProperty("Accessibilities")
 	private List<Accessibility> accessibilities = new ArrayList<>();
 
+	@JsonProperty("Policies")
+	private List<Policy> policies = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -198,11 +202,13 @@ public class RoomDetailDto {
 	public void setAccessibilities(List<Accessibility> accessibilities) {
 		this.accessibilities = accessibilities;
 	}
-	
-	
-	
-	
-	
-	
+
+	public List<Policy> getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(List<Policy> policies) {
+		this.policies = policies;
+	}
 	
 }

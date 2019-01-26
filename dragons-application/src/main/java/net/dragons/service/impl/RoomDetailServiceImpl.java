@@ -1,7 +1,9 @@
 package net.dragons.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -13,9 +15,11 @@ import org.springframework.stereotype.Service;
 import net.dragons.dto.RoomDetailDto;
 import net.dragons.jpa.entity.Accessibility;
 import net.dragons.jpa.entity.Amenity;
+import net.dragons.jpa.entity.Policy;
 import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.repository.AccessibilityRepository;
 import net.dragons.repository.AmenityRepository;
+import net.dragons.repository.PolicyRepository;
 import net.dragons.repository.RoomDetailRepository;
 import net.dragons.service.RoomDetailService;
 
@@ -30,6 +34,9 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 	
 	@Autowired 
 	AccessibilityRepository accessibilityRepository;
+	
+	@Autowired
+	PolicyRepository policyRepository;
 	
 	@Autowired
 	EntityManager entityManager;
@@ -70,8 +77,17 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 			roomDetailDto.setAccessibilities(accessibilities);
 		}
 		
+		String policyStr = detail.getPolicy();
+		String[] policyArr = policyStr.split(",");
+		if (policyArr.length > 0) {
+			List<Long> ids = Arrays.asList(policyArr).stream().map(s -> Long.parseLong(s.trim())).collect(Collectors.toList());
+			List<Policy> policies = policyRepository.findByIdIn(ids);
+			roomDetailDto.setPolicies(policies);
+		}
+		
 		return roomDetailDto;
 	}
+	
 	private List<RoomDetailDto> map(List<RoomDetail> source) {
 		ArrayList<RoomDetailDto> rtn = new ArrayList<>();
 		source.stream().map((entity) -> {
