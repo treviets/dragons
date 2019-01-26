@@ -33,7 +33,7 @@ public class Booking {
 	private Integer roomId;
 	
 	@Column(name="customer_id")
-	private Integer customerId;
+	private Long customerId;
 	
 	@Column(name="price")
 	private Double price;
@@ -72,11 +72,11 @@ public class Booking {
 		this.roomId = roomId;
 	}
 
-	public Integer getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 

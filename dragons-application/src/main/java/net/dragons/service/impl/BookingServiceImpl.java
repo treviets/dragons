@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import net.dragons.dto.BookingDto;
 import net.dragons.jpa.entity.Booking;
+import net.dragons.jpa.entity.Customer;
 import net.dragons.repository.BookingRepository;
+import net.dragons.repository.CustomerRepository;
 import net.dragons.service.BookingService;
+import net.dragons.service.EmailService;
 import util.BookingStatusConstant;
 
 @Service
@@ -18,6 +21,12 @@ public class BookingServiceImpl implements BookingService {
 
 	@Autowired
 	BookingRepository bookingRepository;
+	
+	@Autowired
+	CustomerRepository customerRepository;
+	
+	@Autowired
+	EmailService emailService;
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(
 	            "yyyy-MM-dd HH:mm:ss");
@@ -52,12 +61,13 @@ public class BookingServiceImpl implements BookingService {
 		booking.setNumberOfNights(bookingDto.getNumberOfNights());
 		booking.setBookingStatus(BookingStatusConstant.CREATED);
 		
-		
 		bookingRepository.save(booking);
+		
+		Customer customer = customerRepository.findById(bookingDto.getCustomerId());
+		emailService.send("The dragon host booking", "Đã book phòng", customer.getEmail());
+		
 		return booking.getId();
-
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return (long) 0;
 		}

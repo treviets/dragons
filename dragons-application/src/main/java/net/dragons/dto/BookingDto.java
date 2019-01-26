@@ -1,13 +1,11 @@
 package net.dragons.dto;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BookingDto {
 
 	@JsonProperty("CustomerId")
-	private Integer customerId;
+	private Long customerId;
 	
 	@JsonProperty("HomeId")
 	private Integer homeId;
@@ -33,11 +31,11 @@ public class BookingDto {
 	@JsonProperty("TotalAmount")
 	private Double totalAmount;
 
-	public Integer getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 
