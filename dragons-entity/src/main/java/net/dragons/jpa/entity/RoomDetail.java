@@ -108,6 +108,18 @@ public class RoomDetail {
 	@Column(name="check_out") 
 	private String check_out;
 	
+	@JsonProperty("HouseRuleDescriptions")
+	@Column(name="house_rule_descriptions") 
+	private String house_rule_descriptions;
+	
+	@JsonProperty("CleaningFee")
+	@Column(name="cleaning_fee")
+	private String cleaning_fee;
+	
+	@JsonProperty("ServiceFee")
+	@Column(name="service_fee")
+	private String service_fee;
+	
 	
 	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
@@ -295,5 +307,30 @@ public class RoomDetail {
 		this.check_out = check_out;
 	}
 
+	public String getHouse_rule_descriptions() {
+		return house_rule_descriptions;
+	}
+
+	public void setHouse_rule_descriptions(String house_rule_descriptions) {
+		this.house_rule_descriptions = house_rule_descriptions;
+	}
+
+	public String getCleaning_fee() {
+		return cleaning_fee;
+	}
+
+	public void setCleaning_fee(String cleaning_fee) {
+		this.cleaning_fee = cleaning_fee;
+	}
+
+	public String getService_fee() {
+		return service_fee;
+	}
+
+	public void setService_fee(String service_fee) {
+		this.service_fee = service_fee;
+	}
+
+	
 	
 }

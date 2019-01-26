@@ -3,6 +3,8 @@ package net.dragons.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.dragons.jpa.entity.Accessibility;
@@ -63,6 +65,15 @@ public class RoomDetailDto {
 	
 	@JsonProperty("CheckOut")
 	private String check_out;
+	
+	@JsonProperty("HouseRuleDescriptions")
+	private String house_rule_descriptions;
+	
+	@JsonProperty("CleaningFee")
+	private String cleaning_fee;
+	
+	@JsonProperty("ServiceFee")
+	private String service_fee;
 	
 	@JsonProperty("Reviews")
 	private List<Review> reviews = new ArrayList<>();
@@ -254,6 +265,32 @@ public class RoomDetailDto {
 	public void setCheck_out(String check_out) {
 		this.check_out = check_out;
 	}
+
+	public String getHouse_rule_descriptions() {
+		return house_rule_descriptions;
+	}
+
+	public void setHouse_rule_descriptions(String house_rule_descriptions) {
+		this.house_rule_descriptions = house_rule_descriptions;
+	}
+
+	public String getCleaning_fee() {
+		return cleaning_fee;
+	}
+
+	public void setCleaning_fee(String cleaning_fee) {
+		this.cleaning_fee = cleaning_fee;
+	}
+
+	public String getService_fee() {
+		return service_fee;
+	}
+
+	public void setService_fee(String service_fee) {
+		this.service_fee = service_fee;
+	}
+	
+	
 	
 	
 }
