@@ -92,6 +92,23 @@ public class RoomDetail {
 	@Column(name="policy") 
 	private String policy;
 	
+	@JsonProperty("AdditionalRules")
+	@Column(name="additional_rules") 
+	private String additional_rules;
+	
+	@JsonProperty("PolicyCancel")
+	@Column(name="policy_cancel") 
+	private String policy_cancel;
+	
+	@JsonProperty("CheckIn")
+	@Column(name="check_in") 
+	private String check_in;
+	
+	@JsonProperty("CheckOut")
+	@Column(name="check_out") 
+	private String check_out;
+	
+	
 	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
 	private List<Review> reviews = new ArrayList<>();
@@ -244,6 +261,38 @@ public class RoomDetail {
 
 	public void setPolicy(String policy) {
 		this.policy = policy;
+	}
+
+	public String getAdditional_rules() {
+		return additional_rules;
+	}
+
+	public void setAdditional_rules(String additional_rules) {
+		this.additional_rules = additional_rules;
+	}
+
+	public String getPolicy_cancel() {
+		return policy_cancel;
+	}
+
+	public void setPolicy_cancel(String policy_cancel) {
+		this.policy_cancel = policy_cancel;
+	}
+
+	public String getCheck_in() {
+		return check_in;
+	}
+
+	public void setCheck_in(String check_in) {
+		this.check_in = check_in;
+	}
+
+	public String getCheck_out() {
+		return check_out;
+	}
+
+	public void setCheck_out(String check_out) {
+		this.check_out = check_out;
 	}
 
 	

@@ -52,6 +52,18 @@ public class RoomDetailDto {
 	@JsonProperty("AboutNeighborhood")
 	private String about_neighborhood;
 	
+	@JsonProperty("AdditionalRules")
+	private String additional_rules;
+	
+	@JsonProperty("PolicyCancel")
+	private String policy_cancel;
+	
+	@JsonProperty("CheckIn")
+	private String check_in;
+	
+	@JsonProperty("CheckOut")
+	private String check_out;
+	
 	@JsonProperty("Reviews")
 	private List<Review> reviews = new ArrayList<>();
 	
@@ -210,5 +222,38 @@ public class RoomDetailDto {
 	public void setPolicies(List<Policy> policies) {
 		this.policies = policies;
 	}
+
+	public String getAdditional_rules() {
+		return additional_rules;
+	}
+
+	public void setAdditional_rules(String additional_rules) {
+		this.additional_rules = additional_rules;
+	}
+
+	public String getPolicy_cancel() {
+		return policy_cancel;
+	}
+
+	public void setPolicy_cancel(String policy_cancel) {
+		this.policy_cancel = policy_cancel;
+	}
+
+	public String getCheck_in() {
+		return check_in;
+	}
+
+	public void setCheck_in(String check_in) {
+		this.check_in = check_in;
+	}
+
+	public String getCheck_out() {
+		return check_out;
+	}
+
+	public void setCheck_out(String check_out) {
+		this.check_out = check_out;
+	}
+	
 	
 }
