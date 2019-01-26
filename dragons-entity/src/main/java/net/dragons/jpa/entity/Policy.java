@@ -42,6 +42,7 @@ public class Policy {
 	@Column(name="description") 
 	private String description;
 	
+	@JsonProperty("PolicyCategory")
 	@ManyToOne
 	@JoinColumn(name="category_id", insertable = false, updatable = false)
 	private PolicyCategory policyCategory;
