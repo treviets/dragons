@@ -11,6 +11,7 @@ import net.dragons.service.ICalendarService;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.Property;
 
 
 @Service
@@ -23,16 +24,26 @@ public class ICalendarServiceImpl implements ICalendarService {
 		
 		try {
 			
-			FileInputStream fin = new FileInputStream("/listing-31274588.ics");
+			FileInputStream fin = new FileInputStream("D:\\Projects\\Workspace\\the_dragon\\example.ics");
 			Calendar calendar = builder.build(fin);
 			
 			for (Iterator<?> itr = calendar.getComponents().iterator(); itr.hasNext();) {
 				Component component = (Component) itr.next();
-				Date start = SDF.parse(component.getProperty("DTSTART").getValue());
-	            Date end = SDF.parse(component.getProperty("DTEND").getValue());
-	            String summary = component.getProperty("SUMMARY").getValue();
-	            
-	            System.out.println("added "+start+end+summary);
+
+				Property dateStart = component.getProperty("DTSTART");
+				if (dateStart != null) {
+					
+				}
+				
+				Property dateEnd = component.getProperty("DTEND");
+				if (dateEnd != null) {
+					
+				}
+	
+				Property summary = component.getProperty("SUMMARY");
+				if (summary != null) {
+					
+				}
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
