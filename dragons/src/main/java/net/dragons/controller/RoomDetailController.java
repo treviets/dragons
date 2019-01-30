@@ -33,6 +33,7 @@ public class RoomDetailController {
 		response.setStatus(HttpStatus.OK);
 		response.setMessage("");
 		
+		
 		return response;
 	} 
 	
