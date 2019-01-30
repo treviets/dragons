@@ -71,6 +71,12 @@ public class CustomerProfile {
 	
 	@Column(name = "timezone")
 	private String timezone;
+	
+	@Column(name = "optional_language")
+	private String optionalLanguage;
+	
+	@Column(name = "work_email")
+	private String workEmail;
 
 	public Long getId() {
 		return id;
@@ -191,8 +197,22 @@ public class CustomerProfile {
 	public void setTimezone(String timezone) {
 		this.timezone = timezone;
 	}
-	
-	
+
+	public String getOptionalLanguage() {
+		return optionalLanguage;
+	}
+
+	public void setOptionalLanguage(String optionalLanguage) {
+		this.optionalLanguage = optionalLanguage;
+	}
+
+	public String getWorkEmail() {
+		return workEmail;
+	}
+
+	public void setWorkEmail(String workEmail) {
+		this.workEmail = workEmail;
+	}
 	
 	
 }
