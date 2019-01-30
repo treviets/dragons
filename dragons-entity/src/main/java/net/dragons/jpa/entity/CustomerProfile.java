@@ -45,7 +45,7 @@ public class CustomerProfile {
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
 	
-	@Column(name = "gender")
+	@Column(name = "email")
 	private String email;
 	
 	@Column(name = "phone")
