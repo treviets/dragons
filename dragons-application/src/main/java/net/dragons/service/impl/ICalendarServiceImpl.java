@@ -30,18 +30,18 @@ public class ICalendarServiceImpl implements ICalendarService {
 			for (Iterator<?> itr = calendar.getComponents().iterator(); itr.hasNext();) {
 				Component component = (Component) itr.next();
 
-				Property dateStart = component.getProperty("DTSTART");
-				if (dateStart != null) {
-					
+				Property pStart = component.getProperty("DTSTART");
+				if (pStart != null) {
+					String strStart = pStart.getValue();
 				}
 				
-				Property dateEnd = component.getProperty("DTEND");
-				if (dateEnd != null) {
-					
+				Property pEnd = component.getProperty("DTEND");
+				if (pEnd != null) {
+					String strEnd = pEnd.getValue();
 				}
 	
-				Property summary = component.getProperty("SUMMARY");
-				if (summary != null) {
+				Property pSummary = component.getProperty("SUMMARY");
+				if (pSummary != null) {
 					
 				}
 			}
