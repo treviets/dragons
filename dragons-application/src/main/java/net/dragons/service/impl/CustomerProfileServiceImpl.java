@@ -3,6 +3,7 @@ package net.dragons.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.dragons.jpa.entity.CustomerProfile;
 import net.dragons.repository.CustomerProfileRepository;
 import net.dragons.service.CustomerProfileService;
 
@@ -11,6 +12,13 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
 
 	@Autowired
 	CustomerProfileRepository customerProfileRepository;
+
+	@Override
+	public CustomerProfile findByCustomerId(Long customerId) {
+		return customerProfileRepository.findByCustomerId(customerId);
+	}
+	
+	
 
 	
 }

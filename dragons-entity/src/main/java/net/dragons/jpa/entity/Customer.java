@@ -69,6 +69,18 @@ public class Customer {
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
 	
+	@Column(name = "prefer_Language")
+	private String preferLanguage;
+	
+	@Column(name = "prefer_currency")
+	private String preferCurrency;
+	
+	@Column(name = "hometown")
+	private String hometown;
+	
+	@Column(name = "introduction")
+	private String introduction;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="customer")
 	private List<Review> reviews;
@@ -159,6 +171,38 @@ public class Customer {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
+	}
+
+	public String getPreferLanguage() {
+		return preferLanguage;
+	}
+
+	public void setPreferLanguage(String preferLanguage) {
+		this.preferLanguage = preferLanguage;
+	}
+
+	public String getPreferCurrency() {
+		return preferCurrency;
+	}
+
+	public void setPreferCurrency(String preferCurrency) {
+		this.preferCurrency = preferCurrency;
+	}
+
+	public String getHometown() {
+		return hometown;
+	}
+
+	public void setHometown(String hometown) {
+		this.hometown = hometown;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 	
 	

@@ -190,4 +190,12 @@ public class CustomerController {
 		return response;
 	} 
 	
+	@RequestMapping(value = "/detail/by_id", method = { RequestMethod.GET })
+	public ResponseDto getCustomerDetail(@RequestParam("customer_id") Long customerId) throws Exception {
+		ResponseDto response = new ResponseDto();
+		
+		
+		return response;
+	}
+	
 }
