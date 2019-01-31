@@ -81,9 +81,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public int createCustomer(CustomerDto customerNewDto) {
-
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-
 		CustomerNewEntity customer = new CustomerNewEntity();
 
 		customer.setEmail(customerNewDto.getEmail());
