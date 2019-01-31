@@ -1,41 +1,67 @@
 package net.dragons.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CustomerDto {
-	
-	@JsonProperty("CustomerId")
-	private Long customerId;
 
-	@JsonProperty("Username")
-	private String username;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CustomerDto {
+
+	@JsonProperty("Lastname")
+	private String lastname;
+	
+	@JsonProperty("Firstname")
+	private String firstname;
 	
 	@JsonProperty("Password")
 	private String password;
 	
-	@JsonProperty("ConfirmPassword")
-	private String confirmPassword;
+	@JsonProperty("DateOfBirth")
+	private String dayofbirth;
 	
 	@JsonProperty("Email")
 	private String email;
-
+	
+	@JsonProperty("Avatar")
+	private String avatar;
+	
 	@JsonProperty("Phone")
 	private String phone;
 	
-	public Long getCustomerId() {
-		return customerId;
+	@JsonProperty("Googleid")
+	private String googleid;
+	
+	@JsonProperty("Facebookid")
+	private String fbid;
+	
+	@JsonProperty("Fullname")
+	private String fullname;
+	
+	private int userId;
+	
+
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getPassword() {
@@ -46,12 +72,12 @@ public class CustomerDto {
 		this.password = password;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
+	public String getDayofbirth() {
+		return dayofbirth;
 	}
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
+	public void setDayofbirth(String dayofbirth) {
+		this.dayofbirth = dayofbirth;
 	}
 
 	public String getEmail() {
@@ -62,6 +88,14 @@ public class CustomerDto {
 		this.email = email;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -69,6 +103,36 @@ public class CustomerDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+
+	public String getGoogleid() {
+		return googleid;
+	}
+
+	public void setGoogleid(String googleid) {
+		this.googleid = googleid;
+	}
+
+	public String getFbid() {
+		return fbid;
+	}
+
+	public void setFbid(String fbid) {
+		this.fbid = fbid;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
 	
+	
+	
+	
+
 
 }

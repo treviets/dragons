@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.security.oauth2.client.test.OAuth2ContextConfiguration.Password;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.dragons.commom.util.Utils;
 import net.dragons.dto.CustomerDto;
-import net.dragons.dto.CustomerNewDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.CustomerNewEntity;
-import net.dragons.jpa.entity.SocialLinkAccount;
 import net.dragons.security.TokenAuthenticationService;
 import net.dragons.service.CustomerService;
 
@@ -93,7 +89,7 @@ public class CustomerController {
 	
 	// NEW API FOR CREATE USER
 	@RequestMapping(value = "/create_user", method = RequestMethod.POST) 
-	public @ResponseBody ResponseDto createNewUser(CustomerNewDto customerNewDto) throws Exception {
+	public @ResponseBody ResponseDto createNewUser(CustomerDto customerNewDto) throws Exception {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
 		
@@ -124,7 +120,7 @@ public class CustomerController {
 	} 
 	
 	@RequestMapping(value = "/update_user/", method = RequestMethod.POST,produces = "application/json") 
-	public @ResponseBody ResponseDto updateNewUser(@RequestBody CustomerNewDto customerNewDto) throws Exception {
+	public @ResponseBody ResponseDto updateNewUser(@RequestBody CustomerDto customerNewDto) throws Exception {
 		ResponseDto response = customerService.updateNewUser(customerNewDto);
 		return response;
 	} 
@@ -132,7 +128,7 @@ public class CustomerController {
 
 	// SIGN UP BY SOCIAL USER
 	@RequestMapping(value = "/sign_up_user", method = RequestMethod.POST) 
-	public @ResponseBody ResponseDto signUpBySocial(CustomerNewDto customerNewDto) throws Exception {
+	public @ResponseBody ResponseDto signUpBySocial(CustomerDto customerNewDto) throws Exception {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
 		

@@ -1,17 +1,14 @@
 package net.dragons.service.impl;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import org.bouncycastle.crypto.tls.EncryptionAlgorithm;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import net.dragons.dto.CustomerDto;
-import net.dragons.dto.CustomerNewDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.CustomerNewEntity;
@@ -68,16 +65,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void update(CustomerDto customerDto) {
-		Customer customer = customerRepository.findById(customerDto.getCustomerId());
-
-		customer.setPassword(customerDto.getPassword());
-		customer.setEmail(customerDto.getEmail());
-		customer.setPhone(customerDto.getPhone());
-		customer.setRoleId(CustomerRoleConstant.CUSTOMER_ROLE);
-		customer.setStatus(CustomerStatusConstant.ENABLE);
-
-		customerRepository.save(customer);
-
 	}
 
 	@Override
@@ -93,7 +80,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public int createCustomer(CustomerNewDto customerNewDto) {
+	public int createCustomer(CustomerDto customerNewDto) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -125,7 +112,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public ResponseDto updateNewUser(CustomerNewDto customerNewDto) {
+	public ResponseDto updateNewUser(CustomerDto customerNewDto) {
 
 		CustomerNewEntity entity = customerNewRepository.findByEmail(customerNewDto.getEmail());
 		entity.setPhone(customerNewDto.getPhone());
@@ -140,7 +127,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public SocialLinkAccount signUpBySocial(CustomerNewDto customerNewDto) {
+	public SocialLinkAccount signUpBySocial(CustomerDto customerNewDto) {
 		// TODO Auto-generated method stub
 		SocialLinkAccount entity = new SocialLinkAccount();
 
@@ -161,7 +148,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public SocialLinkAccount getByCustomerId(CustomerNewDto customerNewDto) {
+	public SocialLinkAccount getByCustomerId(CustomerDto customerNewDto) {
 		SocialLinkAccount result = socialLinkRepository.findOne(customerNewDto.getUserId());
 		return result;
 	}

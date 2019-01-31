@@ -1,27 +1,18 @@
 package net.dragons.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.json.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.JsonObject;
-
-import net.dragons.dto.CustomerNewDto;
-import net.dragons.dto.LoginDto;
+import net.dragons.dto.CustomerDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.CustomerNewEntity;
 import net.dragons.security.TokenAuthenticationService;
 import net.dragons.service.CustomerService;
-import net.dragons.jpa.entity.security.*;
 
 
 
@@ -34,7 +25,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/account", method = RequestMethod.POST) 
 	@ResponseBody
-	public Object login(CustomerNewDto customerNewDto) throws Exception {
+	public Object login(CustomerDto customerNewDto) throws Exception {
 		//check account ton tai
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
@@ -65,7 +56,7 @@ public class LoginController {
 	} 
 	// LOGIN BY SOCIAL USER
 		@RequestMapping(value = "/social", method = RequestMethod.POST) 
-		public @ResponseBody ResponseDto signUpBySocial(CustomerNewDto customerNewDto) throws Exception {
+		public @ResponseBody ResponseDto signUpBySocial(CustomerDto customerNewDto) throws Exception {
 			CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 			ResponseDto response = new ResponseDto();
 			
