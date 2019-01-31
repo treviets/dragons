@@ -3,6 +3,8 @@
  */
 package net.dragons.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import net.dragons.jpa.entity.GuestProfile;
@@ -14,4 +16,8 @@ import net.dragons.jpa.entity.GuestProfile;
 public interface GuestProfileRepository extends JpaRepository<GuestProfile, Long>{
 	
 	GuestProfile findById(Long id);
+	
+	List<GuestProfile> findByCustomerId(Long customerId);
+	
+	
 }
