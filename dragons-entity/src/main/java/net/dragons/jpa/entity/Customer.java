@@ -69,17 +69,33 @@ public class Customer {
 	@Column(name = "date_of_birth")
 	private Date dateOfBirth;
 	
+	@JsonProperty("PreferLanguage")
 	@Column(name = "prefer_Language")
 	private String preferLanguage;
 	
+	@JsonProperty("PreferCurrency")
 	@Column(name = "prefer_currency")
 	private String preferCurrency;
 	
+	@JsonProperty("Hometown")
 	@Column(name = "hometown")
 	private String hometown;
 	
+	@JsonProperty("introduction")
 	@Column(name = "introduction")
-	private String introduction;
+	private String Introduction;
+	
+	@JsonProperty("School")
+	@Column(name = "school")
+	private String school;
+	
+	@JsonProperty("Work")
+	@Column(name = "work")
+	private String work;
+	
+	@JsonProperty("WorkEmail")
+	@Column(name = "work_email")
+	private String workEmail;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="customer")
@@ -203,6 +219,30 @@ public class Customer {
 
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getWork() {
+		return work;
+	}
+
+	public void setWork(String work) {
+		this.work = work;
+	}
+
+	public String getWorkEmail() {
+		return workEmail;
+	}
+
+	public void setWorkEmail(String workEmail) {
+		this.workEmail = workEmail;
 	}
 	
 	

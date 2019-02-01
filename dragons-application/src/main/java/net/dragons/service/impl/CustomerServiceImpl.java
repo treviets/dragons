@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import net.dragons.dto.CustomerDetailDto;
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
@@ -147,6 +148,18 @@ public class CustomerServiceImpl implements CustomerService {
 	public SocialLinkAccount getByCustomerId(CustomerDto customerNewDto) {
 		SocialLinkAccount result = socialLinkRepository.findOne(customerNewDto.getUserId());
 		return result;
+	}
+
+	@Override
+	public CustomerDetailDto getCustomerDetail(Long customerId) {
+		CustomerDetailDto dto = new CustomerDetailDto();
+		
+		Customer customer = customerRepository.findById(customerId);
+		if (customer != null) {
+			dto.setCustomer(customer);
+		}
+			
+		return dto;
 	}
 
 }

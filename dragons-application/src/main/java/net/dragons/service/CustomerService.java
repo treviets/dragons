@@ -2,6 +2,7 @@ package net.dragons.service;
 
 import java.util.List;
 
+import net.dragons.dto.CustomerDetailDto;
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
@@ -34,5 +35,6 @@ public interface CustomerService {
 	
 	SocialLinkAccount getByCustomerId(CustomerDto customerNewDto);
 	
+	CustomerDetailDto getCustomerDetail(Long customerId);
 	
 }

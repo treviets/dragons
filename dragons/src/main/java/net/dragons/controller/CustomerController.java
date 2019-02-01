@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.dragons.commom.util.Utils;
+import net.dragons.dto.CustomerDetailDto;
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Customer;
@@ -193,6 +194,11 @@ public class CustomerController {
 	@RequestMapping(value = "/detail/by_id", method = { RequestMethod.GET })
 	public ResponseDto getCustomerDetail(@RequestParam("customer_id") Long customerId) throws Exception {
 		ResponseDto response = new ResponseDto();
+		CustomerDetailDto customerDetail = customerService.getCustomerDetail(customerId);
+		
+		response.setData(customerDetail);
+		response.setMessage("Customer Detail");
+		response.setStatus(HttpStatus.OK);
 		
 		
 		return response;
