@@ -81,9 +81,9 @@ public class Customer {
 	@Column(name = "hometown")
 	private String hometown;
 	
-	@JsonProperty("introduction")
+	@JsonProperty("Introduction")
 	@Column(name = "introduction")
-	private String Introduction;
+	private String introduction;
 	
 	@JsonProperty("School")
 	@Column(name = "school")
@@ -100,6 +100,7 @@ public class Customer {
 	@JsonIgnore
 	@OneToMany(mappedBy="customer")
 	private List<Review> reviews;
+
 
 	public Long getId() {
 		return id;

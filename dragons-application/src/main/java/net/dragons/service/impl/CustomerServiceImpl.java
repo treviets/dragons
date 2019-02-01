@@ -10,13 +10,17 @@ import org.springframework.stereotype.Service;
 import net.dragons.dto.CustomerDetailDto;
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.ResponseDto;
+import net.dragons.jpa.entity.Currency;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.CustomerNewEntity;
+import net.dragons.jpa.entity.Language;
 import net.dragons.jpa.entity.SocialLinkAccount;
 import net.dragons.repository.CustomerNewRepository;
 import net.dragons.repository.CustomerRepository;
 import net.dragons.repository.SocialLinkReponsitory;
+import net.dragons.service.CurrencyService;
 import net.dragons.service.CustomerService;
+import net.dragons.service.LanguageService;
 import util.CustomerRoleConstant;
 import util.CustomerStatusConstant;
 
@@ -31,6 +35,13 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	SocialLinkReponsitory socialLinkRepository;
+	
+	@Autowired
+	LanguageService languageService;
+	
+	@Autowired
+	CurrencyService currencyService;
+
 
 	ModelMapper mapper;
 
@@ -157,6 +168,16 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer customer = customerRepository.findById(customerId);
 		if (customer != null) {
 			dto.setCustomer(customer);
+		}
+		
+		List<Language> language = languageService.findAll();
+		if (language != null && !language.isEmpty()) {
+			dto.setLanguage(language);
+		}
+		
+		List<Currency> currency = currencyService.findAll();
+		if (currency != null && !currency.isEmpty()) {
+			dto.setCurrency(currency);
 		}
 			
 		return dto;

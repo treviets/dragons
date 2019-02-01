@@ -3,7 +3,9 @@ package net.dragons.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.dragons.jpa.entity.Currency;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.EmergencyContact;
 import net.dragons.jpa.entity.GuestProfile;
@@ -13,12 +15,19 @@ import net.dragons.jpa.entity.Language;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDetailDto {
 
+	@JsonProperty("Customer")
 	private Customer customer;
 	
+	@JsonProperty("EmergencyContact")
 	private List<EmergencyContact> emergencyContact;
 	
+	@JsonProperty("Language")
 	private List<Language> language;
 	
+	@JsonProperty("Currency")
+	private List<Currency> currency;
+	
+	@JsonProperty("GuestProfile")
 	private List<GuestProfile> guestProfile;
 
 	public Customer getCustomer() {
@@ -53,6 +62,13 @@ public class CustomerDetailDto {
 		this.guestProfile = guestProfile;
 	}
 
+	public List<Currency> getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(List<Currency> currency) {
+		this.currency = currency;
+	}
 	
 
 }

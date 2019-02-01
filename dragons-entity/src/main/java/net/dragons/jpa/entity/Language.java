@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author NhanNguyen
  *
@@ -20,14 +22,17 @@ import javax.persistence.Table;
 @NamedQuery(name="Language.findAll", query="SELECT b FROM Language b")
 public class Language {
 	
+	@JsonProperty("Id")
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonProperty("Code")
 	@Column(name="code")
 	private String code;
 	
+	@JsonProperty("Name")
 	@Column(name="name")
 	private String name;
 
