@@ -107,7 +107,7 @@ public class CustomerController {
 		if (customerNewEntity == null) {
 			String pass = BCrypt.hashpw(customerNewDto.getPassword(), BCrypt.gensalt(12)); 
 			customerNewDto.setPassword(pass);
-			long Id = customerService.createCustomer(customerNewDto);
+			customerService.createCustomer(customerNewDto);
 			response.setData("");
 			response.setMessage("Success");
 			response.setStatus(HttpStatus.OK);
