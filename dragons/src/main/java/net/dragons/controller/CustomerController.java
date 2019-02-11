@@ -36,7 +36,7 @@ public class CustomerController {
 	public ResponseDto getAllCustomers(HttpServletRequest request) throws Exception {
 		List<Customer> list = new ArrayList<Customer>();
 		list = customerService.getAll();
-
+	
 		ResponseDto response = new ResponseDto();
 		response.setData(list);
 		response.setMessage("OK");
