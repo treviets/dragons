@@ -192,6 +192,7 @@ public class CustomerController {
 	} 
 	
 	@RequestMapping(value = "/detail/by_id", method = { RequestMethod.GET })
+	@ResponseBody
 	public ResponseDto getCustomerDetail(@RequestParam("customer_id") Long customerId) throws Exception {
 		ResponseDto response = new ResponseDto();
 		CustomerDetailDto customerDetail = customerService.getCustomerDetail(customerId);
@@ -199,6 +200,17 @@ public class CustomerController {
 		response.setData(customerDetail);
 		response.setMessage("Customer Detail");
 		response.setStatus(HttpStatus.OK);
+		
+		
+		return response;
+	}
+	
+
+	@RequestMapping(value = "/detail/by_id", method = { RequestMethod.GET })
+	@ResponseBody
+	public ResponseDto updateCustomerDetail(@RequestBody CustomerDetailDto dto) throws Exception {
+		ResponseDto response = new ResponseDto();
+		
 		
 		
 		return response;
