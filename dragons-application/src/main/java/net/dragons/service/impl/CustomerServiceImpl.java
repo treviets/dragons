@@ -183,4 +183,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return dto;
 	}
 
+	@Override
+	public void updateCustomerDetail(CustomerDetailDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

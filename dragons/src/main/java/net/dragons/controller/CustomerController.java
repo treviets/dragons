@@ -206,11 +206,18 @@ public class CustomerController {
 	}
 	
 
-	@RequestMapping(value = "/detail/by_id", method = { RequestMethod.GET })
+	@RequestMapping(value = "/detail/update", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseDto updateCustomerDetail(@RequestBody CustomerDetailDto dto) throws Exception {
 		ResponseDto response = new ResponseDto();
-		
+		try {
+			customerService.updateCustomerDetail(dto);
+			
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage("ERROR");
+		}
 		
 		
 		return response;

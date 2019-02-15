@@ -28,24 +28,31 @@ public class EmergencyContact {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonProperty("CustomerId")
 	@Column(name = "customer_id")
 	private Long customerId;
 	
+	@JsonProperty("name")
 	@Column(name = "name")
 	private String name;
 	
+	@JsonProperty("Relationship")
 	@Column(name = "relationship")
 	private String relationship;
 	
+	@JsonProperty("PhonePrefix")
 	@Column(name = "phone_prefix")
 	private String phonePrefix;
 	
+	@JsonProperty("phoneNumber")
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
+	@JsonProperty("Email")
 	@Column(name = "email")
 	private String email;
 	
+	@JsonProperty("PreferLanguage")
 	@Column(name = "prefer_language")
 	private String preferLanguage;
 

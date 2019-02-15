@@ -37,4 +37,6 @@ public interface CustomerService {
 	
 	CustomerDetailDto getCustomerDetail(Long customerId);
 	
+	void updateCustomerDetail(CustomerDetailDto dto);
+	
 }

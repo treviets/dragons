@@ -30,21 +30,28 @@ public class GuestProfile {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonProperty("CustomerId")
 	@Column(name="customer_id")
 	private Long customerId;
-
+	
+	@JsonProperty("FirstName")
 	@Column(name="first_name")
 	private String firstName;
 	
+	@JsonProperty("LastName")
 	@Column(name="last_name")
 	private String lastName;
 	
+	@JsonProperty("PassportNumber")
 	@Column(name="passport_number")
 	private String passportNumber;
 	
+	@JsonProperty("Nationality")
 	@Column(name="nationality")
 	private String nationality;
 	
+	@JsonProperty("Expires")
+	@Column(name="expires")
 	private Date expires;
 
 	public Long getId() {
