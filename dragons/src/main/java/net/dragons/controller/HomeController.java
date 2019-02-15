@@ -20,22 +20,25 @@ import net.dragons.service.HomeService;
 @RequestMapping("/home")
 @Api(value = "Home API Endpoint", description = "Home Data Entities Endpoint")
 public class HomeController {
-	
+
 	@Autowired
 	private HomeService homeService;
-	
-	@RequestMapping(value = "/all", method = RequestMethod.GET) 
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseDto getAllHotels(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
-		
+
 		List<Home> homes = homeService.getAll();
-		
-		response.setData(homes);
-		response.setMessage("");
-		response.setStatus(HttpStatus.OK);
-		
-	 	return response;
+		try {
+			response.setData(homes);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
+		return response;
 	}
-	
+
 }

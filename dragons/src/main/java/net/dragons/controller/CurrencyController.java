@@ -18,16 +18,16 @@ import net.dragons.service.CurrencyService;
 @RestController
 @RequestMapping("/currency")
 public class CurrencyController {
-	
+
 	@Autowired
 	private CurrencyService currencyService;
-	
-	@RequestMapping(value = "/all", method = RequestMethod.GET) 
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseDto getAllCurrencies(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
 		List<Currency> list = currencyService.findAll();
-		
+
 		try {
 			response.setData(list);
 			response.setStatus(HttpStatus.OK);
@@ -35,9 +35,8 @@ public class CurrencyController {
 			response.setMessage(ex.toString());
 			response.setStatus(HttpStatus.BAD_GATEWAY);
 		}
-		
+
 		return response;
-	} 
-	
-	
+	}
+
 }
