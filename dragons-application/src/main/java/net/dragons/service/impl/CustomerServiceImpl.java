@@ -136,9 +136,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public SocialLinkAccount signUpBySocial(CustomerDto customerNewDto) {
-		// TODO Auto-generated method stub
 		SocialLinkAccount entity = new SocialLinkAccount();
-
 		entity.setFullName(customerNewDto.getFullname());
 
 		if (customerNewDto.getGoogleid() != null) {
@@ -146,6 +144,7 @@ public class CustomerServiceImpl implements CustomerService {
 		} else {
 			entity.setFbId(customerNewDto.getFbid());
 		}
+		
 		entity.setFamilyName(customerNewDto.getLastname());
 		entity.setGivenName(customerNewDto.getFirstname());
 		entity.setImg(customerNewDto.getAvatar());
@@ -170,9 +169,9 @@ public class CustomerServiceImpl implements CustomerService {
 			dto.setCustomer(customer);
 		}
 		
-		List<Language> language = languageService.findAll();
-		if (language != null && !language.isEmpty()) {
-			dto.setLanguage(language);
+		List<Language> languages = languageService.findAll();
+		if (languages != null && !languages.isEmpty()) {
+			dto.setLanguage(languages);
 		}
 		
 		List<Currency> currency = currencyService.findAll();
@@ -185,8 +184,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void updateCustomerDetail(CustomerDetailDto dto) {
-		// TODO Auto-generated method stub
-		
+		Customer customer = dto.getCustomer();
+		customerRepository.save(customer);
+
 	}
 
 }

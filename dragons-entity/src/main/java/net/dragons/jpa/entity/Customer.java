@@ -101,7 +101,6 @@ public class Customer {
 	@OneToMany(mappedBy="customer")
 	private List<Review> reviews;
 
-
 	public Long getId() {
 		return id;
 	}

@@ -10,4 +10,5 @@ public interface CurrencyService {
 	
 	List<Currency> findAll();
 	
+	List<Currency> findByIds(Long[] ids);
 }

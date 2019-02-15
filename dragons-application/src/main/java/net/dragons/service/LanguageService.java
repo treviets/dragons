@@ -6,7 +6,9 @@ import net.dragons.jpa.entity.Language;
 
 public interface LanguageService {
 
-	Language findById(Long customerId);
+	Language findById(Long languageId);
+	
+	List<Language> findByIds(List<Long> ids);
 	
 	List<Language> findAll();
 	

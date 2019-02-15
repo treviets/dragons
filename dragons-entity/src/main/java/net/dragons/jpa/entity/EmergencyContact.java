@@ -32,7 +32,7 @@ public class EmergencyContact {
 	@Column(name = "customer_id")
 	private Long customerId;
 	
-	@JsonProperty("name")
+	@JsonProperty("Name")
 	@Column(name = "name")
 	private String name;
 	
@@ -44,7 +44,7 @@ public class EmergencyContact {
 	@Column(name = "phone_prefix")
 	private String phonePrefix;
 	
-	@JsonProperty("phoneNumber")
+	@JsonProperty("PhoneNumber")
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
