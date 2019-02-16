@@ -35,13 +35,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	SocialLinkReponsitory socialLinkRepository;
-	
+
 	@Autowired
 	LanguageService languageService;
-	
+
 	@Autowired
 	CurrencyService currencyService;
-
 
 	ModelMapper mapper;
 
@@ -144,7 +143,7 @@ public class CustomerServiceImpl implements CustomerService {
 		} else {
 			entity.setFbId(customerNewDto.getFbid());
 		}
-		
+
 		entity.setFamilyName(customerNewDto.getLastname());
 		entity.setGivenName(customerNewDto.getFirstname());
 		entity.setImg(customerNewDto.getAvatar());
@@ -163,30 +162,30 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public CustomerDetailDto getCustomerDetail(Long customerId) {
 		CustomerDetailDto dto = new CustomerDetailDto();
-		
+
 		Customer customer = customerRepository.findById(customerId);
 		if (customer != null) {
 			dto.setCustomer(customer);
 		}
-		
+
 		List<Language> languages = languageService.findAll();
 		if (languages != null && !languages.isEmpty()) {
 			dto.setLanguage(languages);
 		}
-		
+
 		List<Currency> currency = currencyService.findAll();
 		if (currency != null && !currency.isEmpty()) {
 			dto.setCurrency(currency);
 		}
-			
+
 		return dto;
 	}
 
 	@Override
 	public void updateCustomerDetail(CustomerDetailDto dto) {
-		Customer customer = dto.getCustomer();
-		customerRepository.save(customer);
+		Customer customer = customerRepository.findById(dto.getCustomer().getId());
 
+		customerRepository.save(customer);
 	}
 
 }
