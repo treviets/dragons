@@ -30,8 +30,8 @@ public class RoomController {
 	public ResponseDto getAllRooms(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		List<Room> rooms = roomService.getAll();
 		try {
+			List<Room> rooms = roomService.getAll();
 			response.setData(rooms);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
@@ -54,8 +54,8 @@ public class RoomController {
 			@RequestParam(name = "number_of_guest", required = false) Integer numberOfGuest) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		List<Room> rooms = roomService.getByFilter(province, from, to, numberOfGuest, min, max, roomtype);
 		try {
+			List<Room> rooms = roomService.getByFilter(province, from, to, numberOfGuest, min, max, roomtype);
 			response.setData(rooms);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
@@ -71,8 +71,8 @@ public class RoomController {
 	public Object getRoomsByHomeId(HttpServletRequest request, @RequestParam("homeId") Long homeId) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		List<Room> rooms = roomService.getByHomeId(homeId);
 		try {
+			List<Room> rooms = roomService.getByHomeId(homeId);
 			response.setData(rooms);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

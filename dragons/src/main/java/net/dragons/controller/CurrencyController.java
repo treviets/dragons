@@ -26,9 +26,9 @@ public class CurrencyController {
 	@ResponseBody
 	public ResponseDto getAllCurrencies(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
-		List<Currency> list = currencyService.findAll();
-
+		
 		try {
+			List<Currency> list = currencyService.findAll();
 			response.setData(list);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

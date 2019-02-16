@@ -29,8 +29,8 @@ public class HomeController {
 	public ResponseDto getAllHotels(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		List<Home> homes = homeService.getAll();
 		try {
+			List<Home> homes = homeService.getAll();
 			response.setData(homes);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

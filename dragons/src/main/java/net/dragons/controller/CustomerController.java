@@ -35,8 +35,8 @@ public class CustomerController {
 	public ResponseDto getAllCustomers(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		List<Customer> list = customerService.getAll();
 		try {
+			List<Customer> list = customerService.getAll();
 			response.setData(list);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
@@ -53,8 +53,8 @@ public class CustomerController {
 			throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		List<Customer> customers = customerService.getByUsername(username);
 		try {
+			List<Customer> customers = customerService.getByUsername(username);
 			response.setData(customers);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
@@ -71,8 +71,8 @@ public class CustomerController {
 			throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		customerService.create(customerDto);
 		try {
+			customerService.create(customerDto);
 			response.setData("");
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
@@ -210,8 +210,8 @@ public class CustomerController {
 	public ResponseDto getCustomerDetail(@RequestParam("customer_id") Long customerId) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		CustomerDetailDto customerDetail = customerService.getCustomerDetail(customerId);
 		try {
+			CustomerDetailDto customerDetail = customerService.getCustomerDetail(customerId);
 			response.setData(customerDetail);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
@@ -227,8 +227,8 @@ public class CustomerController {
 	public ResponseDto updateCustomerDetail(@RequestBody CustomerDetailDto dto) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		customerService.updateCustomerDetail(dto);
 		try {
+			customerService.updateCustomerDetail(dto);
 			response.setStatus(HttpStatus.OK);
 			response.setData("");
 		} catch (Exception ex) {

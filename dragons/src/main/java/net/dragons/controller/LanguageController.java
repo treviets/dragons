@@ -27,9 +27,8 @@ public class LanguageController {
 	public ResponseDto getAllLanguages(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
 		
-		List<Language> list = languageService.findAll();
-
 		try {
+			List<Language> list = languageService.findAll();
 			response.setData(list);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

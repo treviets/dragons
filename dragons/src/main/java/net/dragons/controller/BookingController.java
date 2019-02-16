@@ -49,8 +49,8 @@ public class BookingController {
 	public Object createNewBooking(HttpServletRequest request, @RequestBody BookingDto bookingDto) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		Long id = bookingService.create(bookingDto);
 		try {
+			Long id = bookingService.create(bookingDto);
 			response.setData(id);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

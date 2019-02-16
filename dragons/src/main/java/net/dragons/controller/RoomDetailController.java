@@ -28,8 +28,8 @@ public class RoomDetailController {
 	public Object getRoomsByRoomId(HttpServletRequest request, @RequestParam("roomId") Long roomId) throws Exception {
 		ResponseDto response = new ResponseDto();
 
-		RoomDetailDto room = roomDetailService.getByRoomId(roomId);
 		try {
+			RoomDetailDto room = roomDetailService.getByRoomId(roomId);
 			response.setData(room);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
