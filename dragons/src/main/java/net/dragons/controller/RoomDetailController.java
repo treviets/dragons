@@ -19,24 +19,25 @@ import net.dragons.service.RoomDetailService;
 @RequestMapping("/room_detail")
 @Api(value = "Room Detail API Endpoint", description = "Room Detail Data Entities Endpoint")
 public class RoomDetailController {
-	
+
 	@Autowired
 	private RoomDetailService roomDetailService;
-	
-	@RequestMapping(value = "/by_room_id", method = RequestMethod.GET) 
+
+	@RequestMapping(value = "/by_room_id", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getRoomsByRoomId(HttpServletRequest request, @RequestParam("roomId") Long roomId) throws Exception {
-		RoomDetailDto room = roomDetailService.getByRoomId(roomId);
-	
 		ResponseDto response = new ResponseDto();
-		response.setData(room);
-		response.setStatus(HttpStatus.OK);
-		response.setMessage("");
-		
-		
+
+		RoomDetailDto room = roomDetailService.getByRoomId(roomId);
+		try {
+			response.setData(room);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
 		return response;
-	} 
-	
-	
-	
+	}
+
 }

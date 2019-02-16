@@ -21,60 +21,66 @@ import net.dragons.service.RoomService;
 @RequestMapping("/room")
 @Api(value = "Room API Endpoint", description = "Room Data Entities Endpoint")
 public class RoomController {
-	
+
 	@Autowired
 	private RoomService roomService;
-	
-	@RequestMapping(value = "/all", method = RequestMethod.GET) 
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseDto getAllRooms(HttpServletRequest request) throws Exception {
-		
-		List<Room> rooms = roomService.getAll();
-		
 		ResponseDto response = new ResponseDto();
-		response.setData(rooms);
-		response.setStatus(HttpStatus.OK);
-		response.setMessage("");
-	 	
-	 	return response;
-	} 
-	
-	@RequestMapping(value = "/list", method = RequestMethod.GET) 
-	@ResponseBody
-	public Object getRooms(HttpServletRequest request,  @RequestParam(name = "province", required = false) Integer province,
-														@RequestParam(name = "from", required = false) Long from,
-														@RequestParam(name = "to", required = false) Long to,
-														@RequestParam(name = "min", required = false) String min,
-														@RequestParam(name = "max", required = false) String max,
-														@RequestParam(name = "roomtype", required = false) Integer roomtype,
-														@RequestParam(name = "number_of_guest", required = false) Integer numberOfGuest) throws Exception {
-		
-		
-		List<Room> rooms = roomService.getByFilter(province, from, to, numberOfGuest, min, max, roomtype);
-		
-		ResponseDto response = new ResponseDto();
-		response.setData(rooms);
-		response.setStatus(HttpStatus.OK);
-		response.setMessage("");
-		
-		
-		return response;
-	} 
 
-	@RequestMapping(value = "/by_home_id", method = RequestMethod.GET) 
+		List<Room> rooms = roomService.getAll();
+		try {
+			response.setData(rooms);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
+		return response;
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@ResponseBody
+	public Object getRooms(HttpServletRequest request,
+			@RequestParam(name = "province", required = false) Integer province,
+			@RequestParam(name = "from", required = false) Long from,
+			@RequestParam(name = "to", required = false) Long to,
+			@RequestParam(name = "min", required = false) String min,
+			@RequestParam(name = "max", required = false) String max,
+			@RequestParam(name = "roomtype", required = false) Integer roomtype,
+			@RequestParam(name = "number_of_guest", required = false) Integer numberOfGuest) throws Exception {
+		ResponseDto response = new ResponseDto();
+
+		List<Room> rooms = roomService.getByFilter(province, from, to, numberOfGuest, min, max, roomtype);
+		try {
+			response.setData(rooms);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
+		return response;
+	}
+
+	@RequestMapping(value = "/by_home_id", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getRoomsByHomeId(HttpServletRequest request, @RequestParam("homeId") Long homeId) throws Exception {
+		ResponseDto response = new ResponseDto();
+
 		List<Room> rooms = roomService.getByHomeId(homeId);
-		
-		ResponseDto response = new ResponseDto(	);
-		response.setData(rooms);
-		response.setStatus(HttpStatus.OK);
-		response.setMessage("");
-		
-		
+		try {
+			response.setData(rooms);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
 		return response;
-	} 
-	
-	
-	
+	}
+
 }

@@ -1,6 +1,5 @@
 package net.dragons.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,13 +33,16 @@ public class CustomerController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseDto getAllCustomers(HttpServletRequest request) throws Exception {
-		List<Customer> list = new ArrayList<Customer>();
-		list = customerService.getAll();
-
 		ResponseDto response = new ResponseDto();
-		response.setData(list);
-		response.setMessage("OK");
-		response.setStatus(HttpStatus.OK);
+
+		List<Customer> list = customerService.getAll();
+		try {
+			response.setData(list);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setMessage(ex.toString());
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+		}
 
 		return response;
 	}
@@ -199,11 +201,15 @@ public class CustomerController {
 	@ResponseBody
 	public ResponseDto getCustomerDetail(@RequestParam("customer_id") Long customerId) throws Exception {
 		ResponseDto response = new ResponseDto();
-		CustomerDetailDto customerDetail = customerService.getCustomerDetail(customerId);
 
-		response.setData(customerDetail);
-		response.setMessage("Customer Detail");
-		response.setStatus(HttpStatus.OK);
+		CustomerDetailDto customerDetail = customerService.getCustomerDetail(customerId);
+		try {
+			response.setData(customerDetail);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setMessage(ex.toString());
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+		}
 
 		return response;
 	}
@@ -212,9 +218,9 @@ public class CustomerController {
 	@ResponseBody
 	public ResponseDto updateCustomerDetail(@RequestBody CustomerDetailDto dto) throws Exception {
 		ResponseDto response = new ResponseDto();
+
+		customerService.updateCustomerDetail(dto);
 		try {
-			customerService.updateCustomerDetail(dto);
-			
 			response.setStatus(HttpStatus.OK);
 			response.setData("");
 		} catch (Exception ex) {
