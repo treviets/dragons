@@ -51,12 +51,16 @@ public class CustomerController {
 	@ResponseBody
 	public ResponseDto getCustomerByUsername(HttpServletRequest request, @RequestParam("user_name") String username)
 			throws Exception {
-		List<Customer> customers = customerService.getByUsername(username);
-
 		ResponseDto response = new ResponseDto();
-		response.setData(customers);
-		response.setMessage("OK");
-		response.setStatus(HttpStatus.OK);
+
+		List<Customer> customers = customerService.getByUsername(username);
+		try {
+			response.setData(customers);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setMessage(ex.toString());
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+		}
 
 		return response;
 	}
@@ -65,12 +69,16 @@ public class CustomerController {
 	@ResponseBody
 	public ResponseDto createNewCustomer(HttpServletRequest request, @RequestBody CustomerDto customerDto)
 			throws Exception {
-		customerService.create(customerDto);
-
 		ResponseDto response = new ResponseDto();
-		response.setData("");
-		response.setMessage("OK");
-		response.setStatus(HttpStatus.OK);
+
+		customerService.create(customerDto);
+		try {
+			response.setData("");
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setMessage(ex.toString());
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+		}
 
 		return response;
 	}
