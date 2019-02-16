@@ -184,7 +184,22 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void updateCustomerDetail(CustomerDetailDto dto) {
 		Customer customer = customerRepository.findById(dto.getCustomer().getId());
-
+		
+		customer.setAvatar(dto.getCustomer().getAvatar());
+		customer.setDateOfBirth(dto.getCustomer().getDateOfBirth());
+		customer.setEmail(dto.getCustomer().getEmail());
+		customer.setFirstName(dto.getCustomer().getFirstName());
+		customer.setHometown(dto.getCustomer().getHometown());
+		customer.setIntroduction(dto.getCustomer().getIntroduction());
+		customer.setLastName(dto.getCustomer().getLastName());
+		customer.setPassword(dto.getCustomer().getPassword());
+		customer.setPhone(dto.getCustomer().getPhone());
+		customer.setPreferCurrency(dto.getCustomer().getPreferCurrency());
+		customer.setPreferLanguage(dto.getCustomer().getPreferLanguage());
+		customer.setSchool(dto.getCustomer().getSchool());
+		customer.setWork(dto.getCustomer().getWork());
+		customer.setWorkEmail(dto.getCustomer().getWorkEmail());
+		
 		customerRepository.save(customer);
 	}
 
