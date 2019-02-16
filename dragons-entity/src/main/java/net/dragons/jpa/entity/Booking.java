@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author NhanNguyen
  *
@@ -21,38 +23,50 @@ import javax.persistence.Table;
 @Table(name="booking")
 @NamedQuery(name="Booking.findAll", query="SELECT b FROM Booking b")
 public class Booking {
+	
+	@JsonProperty("Id")
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonProperty("HomeId")
 	@Column(name="home_id")
 	private Integer homeId;
 	
+	@JsonProperty("RoomId")
 	@Column(name="room_id")
 	private Integer roomId;
 	
+	@JsonProperty("CustomerId")
 	@Column(name="customer_id")
 	private Long customerId;
 	
+	@JsonProperty("Price")
 	@Column(name="price")
 	private Double price;
 	
+	@JsonProperty("NumberOfGuess")
 	@Column(name="number_of_guess")
 	private Integer numberOfGuess;
 	
+	@JsonProperty("NumberOfNights")
 	@Column(name="number_of_night")
 	private Double numberOfNights;
 	
+	@JsonProperty("FromDate")
 	@Column(name="from_date")
 	private Date fromDate;
 	
+	@JsonProperty("ToDate")
 	@Column(name="to_date")
 	private Date toDate;
 	
+	@JsonProperty("TotalAmount")
 	@Column(name="total_amount")
 	private Double totalAmount;
 
+	@JsonProperty("BookingStatus")
 	@Column(name="booking_status")
 	private Integer bookingStatus;
 	
