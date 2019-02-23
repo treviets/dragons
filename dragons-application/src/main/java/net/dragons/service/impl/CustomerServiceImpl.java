@@ -2,6 +2,7 @@ package net.dragons.service.impl;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -185,6 +186,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public void updateCustomerDetail(CustomerDetailDto dto) {
 		Customer customer = customerRepository.findById(dto.getCustomer().getId());
 		
+		if(dto.getCustomer().getPassword() =="") {
+			customer.setPassword(customer.getPassword());
+		}else {
+			String pass = BCrypt.hashpw(dto.getCustomer().getPassword(), BCrypt.gensalt(12));
+			customer.setPassword(pass);
+		}
+		
 		customer.setAvatar(dto.getCustomer().getAvatar());
 		customer.setDateOfBirth(dto.getCustomer().getDateOfBirth());
 		customer.setEmail(dto.getCustomer().getEmail());
@@ -192,7 +200,6 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setHometown(dto.getCustomer().getHometown());
 		customer.setIntroduction(dto.getCustomer().getIntroduction());
 		customer.setLastName(dto.getCustomer().getLastName());
-		customer.setPassword(dto.getCustomer().getPassword());
 		customer.setPhone(dto.getCustomer().getPhone());
 		customer.setPreferCurrency(dto.getCustomer().getPreferCurrency());
 		customer.setPreferLanguage(dto.getCustomer().getPreferLanguage());
