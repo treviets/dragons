@@ -18,6 +18,7 @@ import net.dragons.commom.util.Utils;
 import net.dragons.dto.CustomerDetailDto;
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.ResponseDto;
+import net.dragons.dto.ResponseLoginDto;
 import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.CustomerNewEntity;
 import net.dragons.security.TokenAuthenticationService;
@@ -106,6 +107,7 @@ public class CustomerController {
 	public @ResponseBody ResponseDto createNewUser(CustomerDto customerNewDto) throws Exception {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
+		ResponseLoginDto loginDto = new ResponseLoginDto();
 
 		if (!Utils.validateEmail(customerNewDto.getEmail())) {
 			response.setData("");
@@ -121,7 +123,16 @@ public class CustomerController {
 			String pass = BCrypt.hashpw(customerNewDto.getPassword(), BCrypt.gensalt(12));
 			customerNewDto.setPassword(pass);
 			customerService.createCustomer(customerNewDto);
-			response.setData("");
+			CustomerNewEntity cus = customerService.getByEmail(customerNewDto.getEmail());
+			
+			long nowMillis = System.currentTimeMillis();
+			String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(cus.getId()),
+				String.valueOf(cus.getEmail()), String.valueOf(cus.getRoleId()),nowMillis);
+			
+			
+			loginDto.setCusId(cus.getId());
+			loginDto.setToken(token);
+			response.setData(loginDto);
 			response.setMessage("Success");
 			response.setStatus(HttpStatus.OK);
 		} else {
