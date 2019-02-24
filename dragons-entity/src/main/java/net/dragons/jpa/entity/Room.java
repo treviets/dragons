@@ -84,6 +84,10 @@ public class Room {
 	@Column(name="status")
 	private Integer status;
 	
+	@JsonProperty("Calendar")
+	@Column(name="calendar")
+	private String calendar;
+	
 	@JsonProperty("Images")
 	@OneToMany(mappedBy="room")
 	private List<RoomImage> images = new ArrayList<>();
@@ -208,6 +212,13 @@ public class Room {
 	public void setImages(List<RoomImage> images) {
 		this.images = images;
 	}
-	
+
+	public String getCalendar() {
+		return calendar;
+	}
+
+	public void setCalendar(String calendar) {
+		this.calendar = calendar;
+	}
 	
 }
