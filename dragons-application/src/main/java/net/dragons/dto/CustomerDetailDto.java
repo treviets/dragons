@@ -10,6 +10,7 @@ import net.dragons.jpa.entity.Customer;
 import net.dragons.jpa.entity.EmergencyContact;
 import net.dragons.jpa.entity.GuestProfile;
 import net.dragons.jpa.entity.Language;
+import net.dragons.jpa.entity.SocialLinkAccount;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,6 +30,9 @@ public class CustomerDetailDto {
 	
 	@JsonProperty("GuestProfile")
 	private List<GuestProfile> guestProfile;
+	
+	@JsonProperty("SocialLinkAccount")
+	private SocialLinkAccount socialLinkAccount;
 
 	public Customer getCustomer() {
 		return customer;
@@ -69,6 +73,13 @@ public class CustomerDetailDto {
 	public void setCurrency(List<Currency> currency) {
 		this.currency = currency;
 	}
-	
 
+	public SocialLinkAccount getSocialLinkAccount() {
+		return socialLinkAccount;
+	}
+
+	public void setSocialLinkAccount(SocialLinkAccount socialLinkAccount) {
+		this.socialLinkAccount = socialLinkAccount;
+	}
+	
 }

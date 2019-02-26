@@ -2,10 +2,10 @@ package net.dragons.service.impl;
 
 import java.util.List;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import net.dragons.dto.CustomerDetailDto;
@@ -22,6 +22,7 @@ import net.dragons.repository.SocialLinkReponsitory;
 import net.dragons.service.CurrencyService;
 import net.dragons.service.CustomerService;
 import net.dragons.service.LanguageService;
+import net.dragons.service.SocialLinkAccountService;
 import util.CustomerRoleConstant;
 import util.CustomerStatusConstant;
 
@@ -42,6 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CurrencyService currencyService;
+	
+//	@Autowired
+//	SocialLinkAccountService socialLinkAccountService;
 
 	ModelMapper mapper;
 
@@ -156,7 +160,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public SocialLinkAccount getByCustomerId(CustomerDto customerNewDto) {
-		SocialLinkAccount result = socialLinkRepository.findOne(customerNewDto.getUserId());
+		SocialLinkAccount result = socialLinkRepository.findByUserId(customerNewDto.getUserId());
 		return result;
 	}
 
@@ -168,6 +172,11 @@ public class CustomerServiceImpl implements CustomerService {
 		if (customer != null) {
 			dto.setCustomer(customer);
 		}
+		
+		SocialLinkAccount result = socialLinkRepository.findByUserId(customerId.intValue());
+		dto.setSocialLinkAccount(result);
+
+		
 
 		List<Language> languages = languageService.findAll();
 		if (languages != null && !languages.isEmpty()) {
