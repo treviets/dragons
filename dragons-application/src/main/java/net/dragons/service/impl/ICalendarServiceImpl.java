@@ -1,11 +1,20 @@
 package net.dragons.service.impl;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.dragons.dto.BookingDto;
+import net.dragons.jpa.entity.Room;
 import net.dragons.service.ICalendarService;
+import net.dragons.service.RoomService;
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
@@ -14,45 +23,54 @@ import net.fortuna.ical4j.model.Property;
 @Service
 public class ICalendarServiceImpl implements ICalendarService {
 
-	// private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
+	@Autowired
+	private RoomService roomService;
+	
+	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
+	
+	private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");  
 
 	public void loadICalendarFile() throws Exception {
-		//FileInputStream fin = new FileInputStream("D:\\Projects\\Workspace\\the_dragon\\example.ics");
+		List<Room> rooms = roomService.getByHomeId(Long.valueOf(1));
 		
-		FileInputStream fin = new FileInputStream("D:\\Projects\\Workspace\\the_dragon\\dragon.ics");
-		
-		CalendarBuilder builder = new CalendarBuilder();
-		
-		Calendar calendar = builder.build(fin);
+		for (int i = 0; i < rooms.size(); i++) {
+			System.setProperty("ical4j.unfolding.relaxed", "true");
+			
+			Room room = rooms.get(i);
+			InputStream is = new URL(room.getCalendar()).openStream();
+			CalendarBuilder builder = new CalendarBuilder();
+			Calendar calendar = builder.build(is);
 
-		System.out.println("Length of calendar: " + calendar.getComponents().size());
+			for (Iterator<?> itr = calendar.getComponents().iterator(); itr.hasNext();) {
+				Component component = (Component) itr.next();
 
-		for (Iterator<?> itr = calendar.getComponents().iterator(); itr.hasNext();) {
-			Component component = (Component) itr.next();
-
-			Property pStart = component.getProperty("DTSTART");
-			if (pStart != null) {
-				String strStart = pStart.getValue();
-				System.out.println("Start: " + strStart);
-			}
-
-			Property pEnd = component.getProperty("DTEND");
-			if (pEnd != null) {
-				String strEnd = pEnd.getValue();
-				System.out.println("End: " + strEnd);
-			}
-
-			Property pSummary = component.getProperty("SUMMARY");
-			if (pSummary != null) {
-
+				Property pStart = component.getProperty("DTSTART");
+				Property pEnd = component.getProperty("DTEND");
+				Property pSummary = component.getProperty("SUMMARY");
+				
+				if (pStart != null && pEnd != null && pSummary != null) {
+					String strFrom = pStart.getValue();
+					Date fromDate = SDF.parse(strFrom);
+					
+					String strTo = pEnd.getValue();
+					Date toDate = SDF.parse(strTo);
+					
+					String strSummary = pSummary.getValue();
+					
+					BookingDto dto = new BookingDto();
+					dto.setRoomId(room.getId());
+					dto.setHomeId(room.getHomeId());
+					dto.setFromDate(DF.format(fromDate));
+					dto.setToDate(DF.format(toDate));
+					
+					//bookingService.create(dto);
+					
+				}
 			}
 		}
+		
 
 	}
 
-	@Override
-	public void loadICalendarWithURL(String url) {
-
-	}
 
 }

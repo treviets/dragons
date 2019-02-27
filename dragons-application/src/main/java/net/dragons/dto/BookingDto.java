@@ -8,10 +8,10 @@ public class BookingDto {
 	private Long customerId;
 	
 	@JsonProperty("HomeId")
-	private Integer homeId;
+	private Long homeId;
 	
 	@JsonProperty("RoomId")
-	private Integer roomId;
+	private Long roomId;
 
 	@JsonProperty("NumberOfGuess")
 	private Integer numberOfGuess;
@@ -39,19 +39,19 @@ public class BookingDto {
 		this.customerId = customerId;
 	}
 
-	public Integer getHomeId() {
+	public Long getHomeId() {
 		return homeId;
 	}
 
-	public void setHomeId(Integer hotelId) {
+	public void setHomeId(Long hotelId) {
 		this.homeId = hotelId;
 	}
 
-	public Integer getRoomId() {
+	public Long getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(Integer roomId) {
+	public void setRoomId(Long roomId) {
 		this.roomId = roomId;
 	}
 

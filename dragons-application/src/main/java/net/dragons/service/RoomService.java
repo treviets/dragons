@@ -10,7 +10,7 @@ public interface RoomService {
 	
 	List<Room> getByHomeId(Long homeId);
 	
-	List<Room> getByFilter(Integer city, Long from, Long to, Integer numberOfGuest, String min, String max, Integer roomtype);
+	List<Room> getByFilter(Long homeId, Long from, Long to, Integer numberOfGuest, String min, String max, Integer roomtype);
 	
-	List<Room> getRoomsNotBook(long[] arr, Integer city, Integer numberOfGuest, String min, String max, Integer roomtype);
+	List<Room> getRoomsNotBook(long[] arr, Long homeId, Integer numberOfGuest, String min, String max, Integer roomtype);
 }

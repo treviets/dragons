@@ -41,11 +41,11 @@ public class RoomController {
 
 		return response;
 	}
-
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getRooms(HttpServletRequest request,
-			@RequestParam(name = "province", required = false) Integer province,
+			@RequestParam(name = "homeId", required = false) Long homeId,
 			@RequestParam(name = "from", required = false) Long from,
 			@RequestParam(name = "to", required = false) Long to,
 			@RequestParam(name = "min", required = false) String min,
@@ -55,7 +55,7 @@ public class RoomController {
 		ResponseDto response = new ResponseDto();
 
 		try {
-			List<Room> rooms = roomService.getByFilter(province, from, to, numberOfGuest, min, max, roomtype);
+			List<Room> rooms = roomService.getByFilter(homeId, from, to, numberOfGuest, min, max, roomtype);
 			response.setData(rooms);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
