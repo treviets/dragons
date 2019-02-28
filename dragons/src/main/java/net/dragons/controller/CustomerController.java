@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.dragons.commom.util.Utils;
+import net.dragons.common.util.Utils;
 import net.dragons.dto.CustomerDetailDto;
 import net.dragons.dto.CustomerDto;
 import net.dragons.dto.ResponseDto;
