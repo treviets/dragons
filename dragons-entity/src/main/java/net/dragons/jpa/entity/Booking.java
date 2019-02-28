@@ -32,11 +32,11 @@ public class Booking {
 	
 	@JsonProperty("HomeId")
 	@Column(name="home_id")
-	private Integer homeId;
+	private Long homeId;
 	
 	@JsonProperty("RoomId")
 	@Column(name="room_id")
-	private Integer roomId;
+	private Long roomId;
 	
 	@JsonProperty("CustomerId")
 	@Column(name="customer_id")
@@ -78,11 +78,11 @@ public class Booking {
 		this.id = id;
 	}
 
-	public Integer getRoomId() {
+	public Long getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(Integer roomId) {
+	public void setRoomId(Long roomId) {
 		this.roomId = roomId;
 	}
 
@@ -150,11 +150,11 @@ public class Booking {
 		this.bookingStatus = bookingStatus;
 	}
 
-	public Integer getHomeId() {
+	public Long getHomeId() {
 		return homeId;
 	}
 
-	public void setHomeId(Integer homeId) {
+	public void setHomeId(Long homeId) {
 		this.homeId = homeId;
 	}
 	
