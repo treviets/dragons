@@ -61,6 +61,7 @@ public class RoomController {
 		} catch (Exception ex) {
 			response.setStatus(HttpStatus.BAD_GATEWAY);
 			response.setMessage(ex.toString());
+			ex.printStackTrace();
 		}
 
 		return response;

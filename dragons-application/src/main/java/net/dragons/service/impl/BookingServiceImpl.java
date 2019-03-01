@@ -79,6 +79,10 @@ public class BookingServiceImpl implements BookingService {
 		return bookingRepository.findBookingRoom(from, to);
 	}
 	
+	@Override
+	public List<Integer> getBookedRoom(Long from, Long to) {
+		return bookingRepository.findBookedRoom(from, to);
+	}
 	
 	
 

@@ -36,6 +36,10 @@ public class Room {
 	@Column(name="home_id")
 	private Long homeId;
 	
+	@JsonProperty("Code")
+	@Column(name="code")
+	private String code;
+	
 	@JsonProperty("Price")
 	@Column(name="price")
 	private String price;
@@ -44,6 +48,10 @@ public class Room {
 	@Column(name="number_of_guest")
 	private Integer numberOfGuest;
 	
+	@JsonProperty("Description")
+	@Column(name="description")
+	private String description;
+	
 	@JsonProperty("RoomType")
 	@Column(name="room_type")
 	private Integer roomType;
@@ -51,22 +59,6 @@ public class Room {
 	@JsonProperty("RentalType")
 	@Column(name="rental_type")
 	private Integer rentalType;
-	
-	@JsonProperty("Code")
-	@Column(name="code")
-	private String code;
-	
-	@JsonProperty("Description")
-	@Column(name="description")
-	private String description;
-	
-	@JsonProperty("District")
-	@Column(name="district")
-	private Integer district;
-	
-	@JsonProperty("Province")
-	@Column(name="province")
-	private Integer province;
 	
 	@JsonProperty("Bedroom")
 	@Column(name="bedroom") 
@@ -79,6 +71,14 @@ public class Room {
 	@JsonProperty("Bath")
 	@Column(name="bath") 
 	private Integer bath;
+	
+	@JsonProperty("District")
+	@Column(name="district")
+	private Integer district;
+	
+	@JsonProperty("Province")
+	@Column(name="province")
+	private Integer province;
 
 	@JsonProperty("Status")
 	@Column(name="status")

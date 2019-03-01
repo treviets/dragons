@@ -46,6 +46,10 @@ public class BnbBooking {
 	@Column(name="to_date")
 	private Date toDate;
 	
+	@JsonProperty("Summary")
+	@Column(name="summary")
+	private String summary;
+	
 	public Long getId() {
 		return id;
 	}
@@ -85,7 +89,13 @@ public class BnbBooking {
 	public void setHomeId(Long homeId) {
 		this.homeId = homeId;
 	}
-	
-	
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 	
 }
