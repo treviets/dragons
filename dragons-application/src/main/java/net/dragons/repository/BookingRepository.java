@@ -20,7 +20,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long>{
 	
 	List<Booking> findByCustomerId(Long customerId);
 	
-	@Query(value = "SELECT distinct booking.roomId from Booking booking WHERE (unix_timestamp(fromDate) =:fromDate OR :fromDate is NULL) AND (unix_timestamp(toDate) =:toDate OR :toDate is NULL)")
+	@Query(value = "SELECT distinct booking.roomId from Booking booking WHERE (unix_timestamp(fromDate) =:fromDate OR :fromDate is NULL OR :fromDate = 0) AND (unix_timestamp(toDate) =:toDate OR :toDate is NULL OR :toDate = 0)")
 	long[] findBookingRoom(@Param("fromDate") Long fromDate, @Param("toDate") Long toDate);
 
 	
