@@ -37,6 +37,9 @@ public class RoomServiceImpl implements RoomService {
 		if(bookings.length < 1 || bookings == null) {
 			bookings = null;
 		} 
+		if(fromDate == 0 && toDate ==0) {
+			bookings = null;
+		}
 		
 		// Get List of Room not In booked list
 		List<Room> rooms = getRoomsNotBook(bookings, homeId, numberOfGuest, min, max, roomtype);
