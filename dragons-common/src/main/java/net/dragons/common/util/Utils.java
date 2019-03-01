@@ -1,4 +1,4 @@
-package net.dragons.commom.util;
+package net.dragons.common.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

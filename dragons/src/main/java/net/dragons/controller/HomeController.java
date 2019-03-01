@@ -36,6 +36,7 @@ public class HomeController {
 		} catch (Exception ex) {
 			response.setStatus(HttpStatus.BAD_GATEWAY);
 			response.setMessage(ex.toString());
+			ex.printStackTrace();
 		}
 
 		return response;
