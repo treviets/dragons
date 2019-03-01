@@ -16,7 +16,7 @@ import net.dragons.jpa.entity.BnbBooking;
  */
 public interface BnbBookingRepository extends JpaRepository<BnbBooking, Long>{
 	
-	@Query(value = "SELECT distinct booking.roomId from BnbBooking booking WHERE (unix_timestamp(fromDate) =:fromDate OR :fromDate is NULL) AND (unix_timestamp(toDate) =:toDate OR :toDate is NULL)")
+	@Query(value = "SELECT distinct booking.roomId from BnbBooking booking WHERE (unix_timestamp(fromDate) >=:fromDate OR :fromDate is NULL) AND (unix_timestamp(toDate) <=:toDate OR :toDate is NULL)")
 	List<Long> findBnbBooking(@Param("fromDate") Long fromDate, @Param("toDate") Long toDate);
 	
 }

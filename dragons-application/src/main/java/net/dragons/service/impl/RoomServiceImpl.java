@@ -1,8 +1,11 @@
 package net.dragons.service.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 
@@ -38,25 +41,22 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public List<Room> getByFilter(Long homeId, Long fromDate, Long toDate, Integer numberOfGuest,String min, String max, Integer roomtype) {
-		// Select rooms booked on Aribnb site
+		// Lay danh sach cac phong da duoc book tren trang Airbnb
 		List<Long> bnbRooms = bnbBookingService.findBnbBooking(fromDate, toDate);
 		
-		System.out.println(bnbRooms.size());
-		
-		// Get List of Room that're booked
+		// Lay danh sach cac phong da duoc book tren trang The dragon host
 		long[] bookings = bookingService.getBookingRoom(fromDate, toDate);
-		
 		List<Long> ids = Arrays.stream(bookings).boxed().collect(Collectors.toList());
-		if(bookings.length < 1 || bookings == null) {
-			bookings = null;
-		} 
-		if(fromDate == 0 && toDate ==0) {
-			bookings = null;
-		}
+		
+		// Append 2 list lai thanh 1 => Danh sach cac phong da duoc book tren ca 2 web site
+		List<Long> list = new ArrayList<Long>();
+		Stream.of(bnbRooms, ids).forEach(list::addAll);
+		
+		// Remove duplicate trong list
+		List<Long> result = new ArrayList<Long>(new HashSet<>(list));
 		
 		// Get List of Room not In booked list
-		List<Room> rooms = roomRepository.findRoomsNotBooked(roomtype, min, max, ids, homeId, numberOfGuest);
-		
+		List<Room> rooms = roomRepository.findRoomsNotBooked(roomtype, min, max, result, homeId, numberOfGuest);
 		
 		return rooms;
 		
