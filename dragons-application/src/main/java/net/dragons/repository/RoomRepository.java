@@ -24,8 +24,8 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
 	List<Room> findByHomeId(Long homeId);
 
-	@Query(value = "SELECT room FROM Room room WHERE (id NOT IN (:ids) OR (:ids) is NULL) "
-			+ "AND (homeId =:homeId OR :homeId is NULL) "
+	@Query(value = "SELECT room FROM Room room WHERE (id NOT IN (:ids) OR :ids is NULL) "
+			+ "AND (homeId =:homeId OR :homeId is NULL OR :homeId = 0) "
 			+ "AND (numberOfGuest >=:numberOfGuest OR :numberOfGuest is NULL OR :numberOfGuest = 0) "
 			+ "AND ((price >= :min OR :min is NULL) AND (price <= :max OR :max is NULL)) "
 			+ "AND (roomType = :roomtype OR :roomtype = 0)")

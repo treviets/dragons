@@ -49,6 +49,9 @@ public class RoomServiceImpl implements RoomService {
 		List<Long> ids = Arrays.stream(bookings).boxed().collect(Collectors.toList());
 		if(bookings.length < 1 || bookings == null) {
 			bookings = null;
+		} 
+		if(fromDate == 0 && toDate ==0) {
+			bookings = null;
 		}
 		
 		// Get List of Room not In booked list
