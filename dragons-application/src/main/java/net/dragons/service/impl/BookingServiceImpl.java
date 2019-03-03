@@ -75,7 +75,7 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public long[] getBookingRoom(Long from, Long to) {
+	public List<Long> getBookingRoom(Long from, Long to) {
 		return bookingRepository.findBookingRoom(from, to);
 	}
 	

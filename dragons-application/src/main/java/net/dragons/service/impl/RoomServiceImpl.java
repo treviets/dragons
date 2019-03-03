@@ -42,19 +42,26 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public List<Room> getByFilter(Long homeId, Long fromDate, Long toDate, Integer numberOfGuest,String min, String max, Integer roomtype) {
 		// Lay danh sach cac phong da duoc book tren trang Airbnb
-		List<Long> bnbRooms = bnbBookingService.findBnbBooking(fromDate, toDate);
-		
+		List<Long> bnbRooms = new ArrayList<Long>();
+		if (fromDate != null && toDate != null) {
+			bnbRooms = bnbBookingService.findBnbBooking(fromDate, toDate);
+		}
+				
 		// Lay danh sach cac phong da duoc book tren trang The dragon host
-		long[] bookings = bookingService.getBookingRoom(fromDate, toDate);
-		List<Long> ids = Arrays.stream(bookings).boxed().collect(Collectors.toList());
-		
+		List<Long> tdhRooms = new ArrayList<Long>();
+		if (fromDate != null && toDate != null) {
+			tdhRooms = bookingService.getBookingRoom(fromDate, toDate);
+		}
+
 		// Append 2 list lai thanh 1 => Danh sach cac phong da duoc book tren ca 2 web site
 		List<Long> list = new ArrayList<Long>();
-		Stream.of(bnbRooms, ids).forEach(list::addAll);
+		Stream.of(bnbRooms, tdhRooms).forEach(list::addAll);
 		
 		// Remove duplicate trong list
 		List<Long> result = new ArrayList<Long>(new HashSet<>(list));
-		
+		if (result.size() == 0) {
+			result.add(Long.valueOf(0));
+		}
 		// Get List of Room not In booked list
 		List<Room> rooms = roomRepository.findRoomsNotBooked(roomtype, min, max, result, homeId, numberOfGuest);
 		

@@ -15,7 +15,7 @@ public interface BookingService {
 	
 	Long create(BookingDto bookingDto);
 	
-	long[] getBookingRoom(Long from, Long to);
+	List<Long> getBookingRoom(Long from, Long to);
 	
 	List<Integer> getBookedRoom(Long from, Long to);
 
