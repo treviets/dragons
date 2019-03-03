@@ -35,7 +35,7 @@ public class ICalendarServiceImpl implements ICalendarService {
 	
 	private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");  
 
-	//@Scheduled(fixedDelay=5*60*1000)
+	@Scheduled(fixedDelay=5*60*1000)
 	public void loadICalendarFile() throws Exception {
 		// Delete all booking
 		bnbBookingService.deleteAll();
