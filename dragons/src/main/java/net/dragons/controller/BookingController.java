@@ -1,5 +1,7 @@
 package net.dragons.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.dto.BookingDto;
 import net.dragons.dto.ResponseDto;
+import net.dragons.jpa.entity.Room;
 import net.dragons.service.BookingService;
 
 @RestController
@@ -60,4 +63,20 @@ public class BookingController {
 		return response;
 	}
 
+	@RequestMapping(value = "/get_booking/by_room/", method = RequestMethod.GET)
+	@ResponseBody
+	public Object getBookingByRoom(HttpServletRequest request, @RequestParam("roomId") Long roomId) throws Exception {
+		ResponseDto response = new ResponseDto();
+
+		try {
+			response.setData("");
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
+		return response;
+	}
+	
 }
