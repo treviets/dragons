@@ -2,7 +2,6 @@ package net.dragons.service.impl;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -33,13 +32,8 @@ public class ICalendarServiceImpl implements ICalendarService {
 	
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
 	
-	private static final DateFormat DF = new SimpleDateFormat("yyyy-MM-dd");  
-
 	@Scheduled(fixedDelay=5*60*1000)
 	public void loadICalendarFile() throws Exception {
-		// Delete all booking
-		bnbBookingService.deleteAll();
-		
 		// Insert new booking
 		List<Room> rooms = roomService.getByHomeId(Long.valueOf(1));
 		
@@ -73,8 +67,11 @@ public class ICalendarServiceImpl implements ICalendarService {
 					bnb.setFromDate(fromDate);
 					bnb.setToDate(toDate);
 					bnb.setSummary(strSummary);
-					
-					bnbBookingService.create(bnb);
+					try {
+						bnbBookingService.create(bnb);	
+					} catch (Exception ex) {
+
+					}
 					
 				}
 			}
