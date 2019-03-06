@@ -73,17 +73,17 @@ public class LoginController {
 		ResponseLoginDto loginDto = new ResponseLoginDto();
 
 		System.out.println(customerNewDto.getGoogleid());
-		System.out.println(customerNewDto.getFbid());
+		System.out.println(customerNewDto.getFacebookid());
 
 		// check account ton tai trong customer
 		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
 		String passFake = "";
 		if (customerNewEntity == null) {
-			if (customerNewDto.getGoogleid() != "") {
+			if (customerNewDto.getGoogleid() != null) {
 				passFake = customerNewDto.getGoogleid() + "tdh";
 			}
-			if (customerNewDto.getFbid() != null) {
-				passFake = customerNewDto.getFbid() + "tdh";
+			if (customerNewDto.getFacebookid() != null) {
+				passFake = customerNewDto.getFacebookid() + "tdh";
 			}
 			customerNewDto.setPassword(BCrypt.hashpw(passFake, BCrypt.gensalt(12)));
 			int id = customerService.createCustomer(customerNewDto);

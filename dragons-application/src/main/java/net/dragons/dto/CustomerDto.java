@@ -32,7 +32,7 @@ public class CustomerDto {
 	private String googleid;
 	
 	@JsonProperty("Facebookid")
-	private String fbid;
+	private String facebookid;
 	
 	@JsonProperty("Fullname")
 	private String fullname;
@@ -113,12 +113,13 @@ public class CustomerDto {
 		this.googleid = googleid;
 	}
 
-	public String getFbid() {
-		return fbid;
+
+	public String getFacebookid() {
+		return facebookid;
 	}
 
-	public void setFbid(String fbid) {
-		this.fbid = fbid;
+	public void setFacebookid(String facebookid) {
+		this.facebookid = facebookid;
 	}
 
 	public String getFullname() {

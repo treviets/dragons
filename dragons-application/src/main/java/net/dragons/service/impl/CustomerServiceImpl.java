@@ -110,7 +110,7 @@ public class CustomerServiceImpl implements CustomerService {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("++++++++++++++++++++");
-			System.out.println(e.getMessage());
+			System.out.print(e.getMessage());
 
 		}
 
@@ -146,7 +146,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if (customerNewDto.getGoogleid() != null) {
 			entity.setGgId(customerNewDto.getGoogleid());
 		} else {
-			entity.setFbId(customerNewDto.getFbid());
+			entity.setFbId(customerNewDto.getFacebookid());
 		}
 
 		entity.setFamilyName(customerNewDto.getLastname());
