@@ -90,6 +90,9 @@ public class RoomDetailDto {
 	@JsonProperty("Policies")
 	private List<Policy> policies = new ArrayList<>();
 	
+	@JsonProperty("BookingDate")
+	private List<BookingDateDto> bookingDates = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -288,6 +291,14 @@ public class RoomDetailDto {
 
 	public void setService_fee(String service_fee) {
 		this.service_fee = service_fee;
+	}
+
+	public List<BookingDateDto> getBookingDates() {
+		return bookingDates;
+	}
+
+	public void setBookingDates(List<BookingDateDto> bookingDates) {
+		this.bookingDates = bookingDates;
 	}
 	
 	

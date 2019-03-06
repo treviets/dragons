@@ -32,7 +32,7 @@ public class ICalendarServiceImpl implements ICalendarService {
 	
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
 	
-	//@Scheduled(fixedDelay=5*60*1000)
+	@Scheduled(fixedDelay=5*60*1000)
 	public void loadICalendarFile() throws Exception {
 		// Insert new booking
 		List<Room> rooms = roomService.getByHomeId(Long.valueOf(1));
