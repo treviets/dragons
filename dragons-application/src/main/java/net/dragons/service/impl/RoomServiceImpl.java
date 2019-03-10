@@ -69,7 +69,11 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public List<Room> getByHomeId(Long homeId) {
-		return roomRepository.findByHomeId(homeId);
+		if (homeId != null && homeId.longValue() != 0) {
+			return roomRepository.findByHomeId(homeId);
+		}
+		
+		return roomRepository.findAll();
 	}
 
 	@Override

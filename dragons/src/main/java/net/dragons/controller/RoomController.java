@@ -45,9 +45,9 @@ public class RoomController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getRooms(HttpServletRequest request,
-			@RequestParam(name = "homeId", required = false) Long homeId,
-			@RequestParam(name = "from", required = false) Long from,
-			@RequestParam(name = "to", required = false) Long to,
+			@RequestParam(name = "homeId", required = false, defaultValue = "0") Long homeId,
+			@RequestParam(name = "from", required = false, defaultValue = "0") Long from,
+			@RequestParam(name = "to", required = false, defaultValue = "0") Long to,
 			@RequestParam(name = "min", required = false) String min,
 			@RequestParam(name = "max", required = false) String max,
 			@RequestParam(name = "roomtype", required = false) Integer roomtype,
