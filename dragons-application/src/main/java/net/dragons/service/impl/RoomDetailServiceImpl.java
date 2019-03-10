@@ -72,6 +72,9 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 
 	@Override
 	public RoomDetailDto getByRoomId(Long roomId) {
+		if (roomId == 0) {
+			return null;
+		}
 		RoomDetailDto roomDetailDto = new RoomDetailDto();
 		
 		Room room = roomRepository.findById(roomId);
