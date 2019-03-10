@@ -19,6 +19,7 @@ import net.dragons.jpa.entity.Amenity;
 import net.dragons.jpa.entity.BnbBooking;
 import net.dragons.jpa.entity.Booking;
 import net.dragons.jpa.entity.Policy;
+import net.dragons.jpa.entity.Room;
 import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.repository.AccessibilityRepository;
 import net.dragons.repository.AmenityRepository;
@@ -26,6 +27,7 @@ import net.dragons.repository.BnbBookingRepository;
 import net.dragons.repository.BookingRepository;
 import net.dragons.repository.PolicyRepository;
 import net.dragons.repository.RoomDetailRepository;
+import net.dragons.repository.RoomRepository;
 import net.dragons.service.RoomDetailService;
 
 @Service
@@ -33,6 +35,9 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 
 	@Autowired
 	RoomDetailRepository roomDetailRepository;
+	
+	@Autowired
+	RoomRepository roomRepository;
 
 	@Autowired
 	AmenityRepository amenityRepository;
@@ -68,6 +73,11 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 	@Override
 	public RoomDetailDto getByRoomId(Long roomId) {
 		RoomDetailDto roomDetailDto = new RoomDetailDto();
+		
+		Room room = roomRepository.findById(roomId);
+		if (room != null) {
+			roomDetailDto.setRoom(room);
+		}
 		
 		RoomDetail detail = new RoomDetail();
 		detail = roomDetailRepository.findByRoomId(roomId);

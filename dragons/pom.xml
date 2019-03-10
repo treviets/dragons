@@ -215,7 +215,7 @@
 					<deployables>
 						<deployable>
 							<groupId>net.dragons</groupId>
-							<artifactId>dragons</artifactId>
+							<artifactId>dragons-apis</artifactId>
 							<type>war</type>
 							<properties>
 								<context>${project.build.finalName}</context>

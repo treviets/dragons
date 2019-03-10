@@ -53,7 +53,15 @@ public class RoomController {
 			@RequestParam(name = "roomtype", required = false) Integer roomtype,
 			@RequestParam(name = "number_of_guest", required = false) Integer numberOfGuest) throws Exception {
 		ResponseDto response = new ResponseDto();
-
+		
+		if (from.longValue() == 0) {
+			from = null;
+		}
+		
+		if (to.longValue() == 0) {
+			to = null;
+		}
+		
 		try {
 			List<Room> rooms = roomService.getByFilter(homeId, from, to, numberOfGuest, min, max, roomtype);
 			response.setData(rooms);

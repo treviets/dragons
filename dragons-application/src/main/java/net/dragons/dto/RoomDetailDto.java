@@ -11,6 +11,7 @@ import net.dragons.jpa.entity.Accessibility;
 import net.dragons.jpa.entity.Amenity;
 import net.dragons.jpa.entity.Policy;
 import net.dragons.jpa.entity.Review;
+import net.dragons.jpa.entity.Room;
 import net.dragons.jpa.entity.RoomImage;
 
 public class RoomDetailDto {
@@ -74,6 +75,9 @@ public class RoomDetailDto {
 	
 	@JsonProperty("ServiceFee")
 	private String service_fee;
+	
+	@JsonProperty("Room")
+	private Room room;
 	
 	@JsonProperty("Reviews")
 	private List<Review> reviews = new ArrayList<>();
@@ -299,6 +303,14 @@ public class RoomDetailDto {
 
 	public void setBookingDates(List<BookingDateDto> bookingDates) {
 		this.bookingDates = bookingDates;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 	
 	
