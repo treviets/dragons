@@ -1,5 +1,7 @@
 package net.dragons.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,60 +15,50 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
+import net.dragons.dto.AdminBookingDto;
 import net.dragons.dto.BookingDto;
 import net.dragons.dto.ResponseDto;
+import net.dragons.jpa.entity.Room;
+import net.dragons.service.AdminService;
 import net.dragons.service.BookingService;
+import net.dragons.service.RoomService;
 
 @RestController
-@RequestMapping("/booking")
-@Api(value = "Booking API Endpoint", description = "Booking Data Entities Endpoint")
-public class BookingController {
+@RequestMapping("/admin")
+@Api(value = "Admin API Endpoint", description = "Admin Data Entities Endpoint")
+public class AdminController {
 
 	@Autowired
-	private BookingService bookingService;
+	private AdminService adminService;
+	
+	@Autowired
+	private RoomService roomService;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/booking/all", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getAllBookings(HttpServletRequest request) throws Exception {
-		return bookingService.getAll();
-	}
-
-	@RequestMapping(value = "/by_room_id", method = RequestMethod.GET)
-	@ResponseBody
-	public Object getRoomsByRoom(@RequestParam("roomId") Long roomId) throws Exception {
-		return bookingService.getByRoomId(roomId);
-	}
-
-	@RequestMapping(value = "/by_customer_id", method = RequestMethod.GET)
-	@ResponseBody
-	public Object getRoomsByCustomer(@RequestParam("customerId") Long customerId) throws Exception {
-		return bookingService.getByCustomerId(customerId);
-	}
-
-	@RequestMapping(value = "/create_booking", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public Object createNewBooking(@RequestBody BookingDto bookingDto) throws Exception {
 		ResponseDto response = new ResponseDto();
-
+		
 		try {
-			Long id = bookingService.create(bookingDto);
-			response.setData(id);
+			List<AdminBookingDto> result = adminService.getBooking();
+			response.setData(result);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
-			response.setMessage(ex.toString());
 			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
 		}
 
 		return response;
 	}
-
-	@RequestMapping(value = "/get_booking/by_room/", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/room/all", method = RequestMethod.GET)
 	@ResponseBody
-	public Object getBookingByRoom(HttpServletRequest request, @RequestParam("roomId") Long roomId) throws Exception {
+	public Object getAllRooms(HttpServletRequest request) throws Exception {
 		ResponseDto response = new ResponseDto();
-
+		
 		try {
-			response.setData("");
+			List<Room> result = roomService.getAll();
+			response.setData(result);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
 			response.setStatus(HttpStatus.BAD_GATEWAY);

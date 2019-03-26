@@ -36,6 +36,11 @@ public class BnbBookingServiceImpl implements BnbBookingService {
 	public List<Long> findBnbBooking(Long fromDate, Long toDate) {
 		return bnbBookingRepository.findBnbBooking(fromDate, toDate);
 	}
+
+	@Override
+	public List<BnbBooking> getAll() {
+		return bnbBookingRepository.findAll();
+	}
 	
 	
 	

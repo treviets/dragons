@@ -6,7 +6,7 @@ import net.dragons.jpa.entity.Currency;
 
 public interface CurrencyService {
 
-	Currency findById(Long customerId);
+	Currency findById(Long id);
 	
 	List<Currency> findAll();
 	

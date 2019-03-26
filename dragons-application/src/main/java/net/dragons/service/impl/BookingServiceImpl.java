@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.dragons.dto.AdminBookingDto;
 import net.dragons.dto.BookingDto;
 import net.dragons.jpa.entity.Booking;
 import net.dragons.jpa.entity.Customer;
@@ -82,6 +83,12 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public List<Integer> getBookedRoom(Long from, Long to) {
 		return bookingRepository.findBookedRoom(from, to);
+	}
+
+	@Override
+	public List<AdminBookingDto> getForAdmin() {
+		
+		return null;
 	}
 	
 	
