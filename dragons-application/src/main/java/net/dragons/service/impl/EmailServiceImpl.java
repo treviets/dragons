@@ -27,6 +27,7 @@ public class EmailServiceImpl implements EmailService {
 				messageHelper.setFrom("vunhankhtn@gmail.com");
 				messageHelper.setTo(toEmail);
 				messageHelper.setSubject(title);
+				messageHelper.setCc("cs@thedragonshost.com");
 				messageHelper.setText(content, true);
 			}
 		});

@@ -80,6 +80,11 @@ public class RoomServiceImpl implements RoomService {
 	public List<Room> getRoomsNotBook(List<Long> ids, Long homeId, Integer numberOfGuest, String min, String max, Integer roomtype) {
 		return roomRepository.findRoomsNotBooked(roomtype, min, max, ids, homeId, numberOfGuest);
 	}
+
+	@Override
+	public void update(Room room) {
+		roomRepository.save(room);
+	}
 	
 	
 
