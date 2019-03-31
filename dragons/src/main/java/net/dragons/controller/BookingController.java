@@ -1,7 +1,5 @@
 package net.dragons.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.dto.BookingDto;
 import net.dragons.dto.ResponseDto;
-import net.dragons.jpa.entity.Room;
 import net.dragons.service.BookingService;
 
 @RestController
@@ -78,5 +75,6 @@ public class BookingController {
 
 		return response;
 	}
+	
 	
 }

@@ -14,4 +14,6 @@ public interface BnbBookingService {
 	void removeBnbBooking(Long roomId, Date from, Date to);
 	
 	List<Long> findBnbBooking(Long fromDate, Long toDate);
+	
+	List<BnbBooking> getAll();
 }

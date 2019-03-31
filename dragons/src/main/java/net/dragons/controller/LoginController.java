@@ -22,6 +22,15 @@ public class LoginController {
 	@Autowired
 	private CustomerService customerService;
 
+	@RequestMapping(value = "/admin", method = RequestMethod.POST)
+	@ResponseBody
+	public Object adminLogin(CustomerDto customer) throws Exception {
+		ResponseDto response = new ResponseDto();
+		
+		return response;
+		
+	}
+	
 	@RequestMapping(value = "/account", method = RequestMethod.POST)
 	@ResponseBody
 	public Object login(CustomerDto customerNewDto) throws Exception {
@@ -70,11 +79,7 @@ public class LoginController {
 	public @ResponseBody ResponseDto signUpBySocial(CustomerDto customerNewDto) throws Exception {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
-		
 		ResponseLoginDto loginDto = new ResponseLoginDto();
-
-		System.out.println(customerNewDto.getGoogleid());
-		System.out.println(customerNewDto.getFacebookid());
 
 		// check account ton tai trong customer
 		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
@@ -140,4 +145,6 @@ public class LoginController {
 
 		return response;
 	}
+
+	
 }
