@@ -55,6 +55,7 @@ public class LoginController {
 			
 				loginDto.setCusId(cus.getId());
 				loginDto.setToken(token);
+				loginDto.setRole(cus.getRoleId());
 				
 				response.setStatus(HttpStatus.OK);
 				response.setMessage("Success");
