@@ -2,13 +2,16 @@ package net.dragons.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.dragons.jpa.entity.Home;
+import net.dragons.jpa.entity.Room;
+
 public class AdminBookingDto {
 
-	@JsonProperty("HomeId")
-	private Long homeId;
+	@JsonProperty("Home")
+	private Home home;
 	
-	@JsonProperty("RoomId")
-	private Long roomId;
+	@JsonProperty("Room")
+	private Room room;
 
 	@JsonProperty("FromDate")
 	private String fromDate;
@@ -16,20 +19,20 @@ public class AdminBookingDto {
 	@JsonProperty("ToDate")
 	private String toDate;
 
-	public Long getHomeId() {
-		return homeId;
+	public Home getHome() {
+		return home;
 	}
 
-	public void setHomeId(Long homeId) {
-		this.homeId = homeId;
+	public void setHome(Home home) {
+		this.home = home;
 	}
 
-	public Long getRoomId() {
-		return roomId;
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setRoomId(Long roomId) {
-		this.roomId = roomId;
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	public String getFromDate() {

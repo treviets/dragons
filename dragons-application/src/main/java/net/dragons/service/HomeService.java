@@ -8,4 +8,6 @@ public interface HomeService {
 
 	List<Home> getAll();
 	
+	Home findById(Long homeId);
+	
 }

@@ -10,7 +10,7 @@ import net.dragons.jpa.entity.Home;
  * @author NhanNguyen
  *
  */
-public interface HomeRepository extends JpaRepository<Home, Integer>{
+public interface HomeRepository extends JpaRepository<Home, Long>{
 	
-	Home findById(Integer holteId);
+	Home findById(Long id);
 }

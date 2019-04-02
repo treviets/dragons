@@ -12,6 +12,8 @@ import net.dragons.jpa.entity.Booking;
 import net.dragons.service.AdminService;
 import net.dragons.service.BnbBookingService;
 import net.dragons.service.BookingService;
+import net.dragons.service.HomeService;
+import net.dragons.service.RoomService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -21,6 +23,12 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private BookingService bookingService;
+	
+	@Autowired
+	private HomeService hoomService;
+	
+	@Autowired
+	private RoomService roomService;
 
 	@Override
 	public List<AdminBookingDto> getBooking() {
@@ -31,8 +39,8 @@ public class AdminServiceImpl implements AdminService {
 			AdminBookingDto dto = new AdminBookingDto();
 			dto.setFromDate(bnbBooking.getFromDate().toString());
 			dto.setToDate(bnbBooking.getToDate().toString());
-			dto.setHomeId(bnbBooking.getHomeId());
-			dto.setRoomId(bnbBooking.getRoomId());
+			dto.setHome(hoomService.findById(bnbBooking.getHomeId()));
+			dto.setRoom(roomService.findById(bnbBooking.getRoomId()));
 			
 			result.add(dto);
 		}
@@ -43,8 +51,8 @@ public class AdminServiceImpl implements AdminService {
 			AdminBookingDto dto = new AdminBookingDto();
 			dto.setFromDate(booking.getFromDate().toString());
 			dto.setToDate(booking.getToDate().toString());
-			dto.setHomeId(booking.getHomeId());
-			dto.setRoomId(booking.getRoomId());
+			dto.setHome(hoomService.findById(booking.getHomeId()));
+			dto.setRoom(roomService.findById(booking.getRoomId()));
 			
 			result.add(dto);
 		}

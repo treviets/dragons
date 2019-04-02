@@ -19,6 +19,11 @@ public class HomeServiceImpl implements HomeService {
 	public List<Home> getAll() {
 		return homeRepository.findAll();
 	}
+
+	@Override
+	public Home findById(Long homeId) {
+		return homeRepository.findById(homeId);
+	}
 	
 	
 
