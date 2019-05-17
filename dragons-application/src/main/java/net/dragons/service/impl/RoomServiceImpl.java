@@ -83,7 +83,17 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public void update(Room room) {
-		roomRepository.save(room);
+		Room r = roomRepository.findById(room.getId());
+		
+		r.setBath(room.getBath());
+		r.setBed(room.getBed());
+		r.setBedroom(room.getBedroom());
+		r.setCalendar(room.getCalendar());
+		r.setPrice(room.getPrice());
+		r.setNumberOfGuest(room.getNumberOfGuest());
+		r.setCode(room.getCode());
+		
+		roomRepository.save(r);
 	}
 
 	@Override

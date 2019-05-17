@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.swagger.annotations.Api;
 import net.dragons.dto.AdminBookingDto;
 import net.dragons.dto.ResponseDto;
+import net.dragons.dto.RoomImageDto;
 import net.dragons.jpa.entity.Room;
 import net.dragons.service.AdminService;
+import net.dragons.service.RoomImageService;
 import net.dragons.service.RoomService;
 
 @RestController
@@ -29,6 +30,9 @@ public class AdminController {
 	
 	@Autowired
 	private RoomService roomService;
+	
+	@Autowired
+	private RoomImageService roomImageService;
 
 	@RequestMapping(value = "/booking/all", method = RequestMethod.GET)
 	@ResponseBody
@@ -79,6 +83,24 @@ public class AdminController {
 			response.setMessage(ex.toString());
 		}
 
+		return response;
+	}
+	
+	@RequestMapping(value = "/room_image/add", method = RequestMethod.POST)
+	@ResponseBody
+	public Object addImageForRoom(@RequestBody RoomImageDto roomImages) throws Exception {
+		ResponseDto response = new ResponseDto();
+		
+		try {
+			roomImageService.createList(roomImages);
+			response.setData("");
+			response.setMessage("Đã cập nhật thông tin phòng");
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+		
 		return response;
 	}
 	
