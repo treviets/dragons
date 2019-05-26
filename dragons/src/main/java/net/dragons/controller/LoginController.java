@@ -85,6 +85,11 @@ public class LoginController {
 		customerDto.setEmail(request.getParameter("Email"));
 		customerDto.setFacebookid(request.getParameter("Facebookid"));
 		customerDto.setGoogleid(request.getParameter("Googleid"));
+		String userId = request.getParameter("userId");
+		if (!userId.equals("")) {
+			customerDto.setUserId(Integer.parseInt(userId));
+		}
+		
 		
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
@@ -120,15 +125,13 @@ public class LoginController {
 			response.setMessage("Success");
 			response.setStatus(HttpStatus.OK);
 		} else {
-			CustomerNewEntity enti = customerService.getByEmail(customerDto.getEmail());
-
-			// customerService.getByCustomerId(customerDto);
+			CustomerNewEntity customer = customerService.getByEmail(customerDto.getEmail());
 
 			CustomerNewEntity linkExist = customerService.getByEmail(customerDto.getEmail());
 			if (linkExist != null) {
 				long nowMillis = System.currentTimeMillis();
-				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()),
-						String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(customer.getId()),
+						String.valueOf(customer.getEmail()), String.valueOf(customer.getRoleId()), nowMillis);
 				
 				loginDto.setToken(token);
 				loginDto.setCusId(linkExist.getId());
@@ -139,8 +142,8 @@ public class LoginController {
 			} else {
 				customerService.signUpBySocial(customerDto);
 				long nowMillis = System.currentTimeMillis();
-				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()),
-						String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(customer.getId()),
+						String.valueOf(customer.getEmail()), String.valueOf(customer.getRoleId()), nowMillis);
 				CustomerNewEntity cus = customerService.getByEmail(customerDto.getEmail());
 				
 				loginDto.setToken(token);
