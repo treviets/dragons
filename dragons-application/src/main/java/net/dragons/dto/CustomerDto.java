@@ -37,6 +37,7 @@ public class CustomerDto {
 	@JsonProperty("Fullname")
 	private String fullname;
 	
+	@JsonProperty("UserId")
 	private int userId;
 	
 

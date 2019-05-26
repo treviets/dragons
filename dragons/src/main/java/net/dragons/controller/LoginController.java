@@ -3,6 +3,7 @@ package net.dragons.controller;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.POST)
 	@ResponseBody
-	public Object adminLogin(CustomerDto customer) throws Exception {
+	public Object adminLogin(@RequestBody CustomerDto customer) throws Exception {
 		ResponseDto response = new ResponseDto();
 		
 		return response;
@@ -33,7 +34,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/account", method = RequestMethod.POST)
 	@ResponseBody
-	public Object login(CustomerDto customerNewDto) throws Exception {
+	public Object login(@RequestBody CustomerDto customerNewDto) throws Exception {
 		// check account ton tai
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseLoginDto loginDto = new ResponseLoginDto();
@@ -76,29 +77,30 @@ public class LoginController {
 
 	// LOGIN BY SOCIAL USER
 	@RequestMapping(value = "/social", method = RequestMethod.POST)
-	public @ResponseBody ResponseDto signUpBySocial(CustomerDto customerNewDto) throws Exception {
+	public @ResponseBody ResponseDto signUpBySocial(@RequestBody CustomerDto customerDto) throws Exception {
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
 		ResponseLoginDto loginDto = new ResponseLoginDto();
 
 		// check account ton tai trong customer
-		customerNewEntity = customerService.getByEmail(customerNewDto.getEmail());
+		customerNewEntity = customerService.getByEmail(customerDto.getEmail());
 		String passFake = "";
 		if (customerNewEntity == null) {
-			if (customerNewDto.getGoogleid() != null) {
-				passFake = customerNewDto.getGoogleid() + "tdh";
+			if (customerDto.getGoogleid() != null) {
+				passFake = customerDto.getGoogleid() + "tdh";
 			}
-			if (customerNewDto.getFacebookid() != null) {
-				passFake = customerNewDto.getFacebookid() + "tdh";
+			if (customerDto.getFacebookid() != null) {
+				passFake = customerDto.getFacebookid() + "tdh";
 			}
-			customerNewDto.setPassword(BCrypt.hashpw(passFake, BCrypt.gensalt(12)));
-			int id = customerService.createCustomer(customerNewDto);
-			customerNewDto.setUserId(id);
+			customerDto.setPassword(BCrypt.hashpw(passFake, BCrypt.gensalt(12)));
+			
+			int id = customerService.createCustomer(customerDto);
+			customerDto.setUserId(id);
 
-			customerService.signUpBySocial(customerNewDto);
+			customerService.signUpBySocial(customerDto);
 
 			// get customer vua duoc tao
-			CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
+			CustomerNewEntity enti = customerService.getByEmail(customerDto.getEmail());
 
 			long nowMillis = System.currentTimeMillis();
 			String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()),
@@ -110,12 +112,12 @@ public class LoginController {
 			response.setMessage("Success");
 			response.setStatus(HttpStatus.OK);
 		} else {
-			CustomerNewEntity enti = customerService.getByEmail(customerNewDto.getEmail());
+			CustomerNewEntity enti = customerService.getByEmail(customerDto.getEmail());
 
 			// check da ton tai account social
-			customerService.getByCustomerId(customerNewDto);
+			customerService.getByCustomerId(customerDto);
 
-			CustomerNewEntity linkExist = customerService.getByEmail(customerNewDto.getEmail());
+			CustomerNewEntity linkExist = customerService.getByEmail(customerDto.getEmail());
 			if (linkExist != null) {
 				long nowMillis = System.currentTimeMillis();
 				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()),
@@ -128,11 +130,11 @@ public class LoginController {
 				response.setStatus(HttpStatus.OK);
 
 			} else {
-				customerService.signUpBySocial(customerNewDto);
+				customerService.signUpBySocial(customerDto);
 				long nowMillis = System.currentTimeMillis();
 				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()),
 						String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
-				CustomerNewEntity cus = customerService.getByEmail(customerNewDto.getEmail());
+				CustomerNewEntity cus = customerService.getByEmail(customerDto.getEmail());
 				
 				loginDto.setToken(token);
 				loginDto.setCusId(cus.getId());
