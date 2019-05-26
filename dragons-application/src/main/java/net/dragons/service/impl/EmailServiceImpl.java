@@ -24,7 +24,7 @@ public class EmailServiceImpl implements EmailService {
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				messageHelper.setFrom("vunhankhtn@gmail.com");
+				messageHelper.setFrom("admin@thedragonshost.com");
 				messageHelper.setTo(toEmail);
 				messageHelper.setSubject(title);
 				messageHelper.setCc("cs@thedragonshost.com");

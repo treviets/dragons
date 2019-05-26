@@ -25,12 +25,17 @@ public class RoomImageServiceImpl implements RoomImageService {
 		int maxId = getMaxId() + 1;
 
 		for (int i = 0; i < images.size(); i++) {
+			// Save info in database
+			
 			Integer imageName = maxId + i;
 			String image = "/static/img/room/" + roomId.toString() + "/" + imageName.toString() + ".jpg";
 			
 			RoomImage roomImage = new RoomImage();
 			roomImage.setImage(image);
 			roomImage.setRoomId(roomId);
+			
+			// Save image in static folder
+			
 		}
 	}
 
