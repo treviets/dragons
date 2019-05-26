@@ -1,5 +1,8 @@
 package net.dragons.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.http.HttpRequest;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,13 +80,19 @@ public class LoginController {
 
 	// LOGIN BY SOCIAL USER
 	@RequestMapping(value = "/social", method = RequestMethod.POST)
-	public @ResponseBody ResponseDto signUpBySocial(@RequestBody CustomerDto customerDto) throws Exception {
+	public @ResponseBody ResponseDto signUpBySocial(HttpServletRequest request) throws Exception {
+		CustomerDto customerDto = new CustomerDto();
+		customerDto.setEmail(request.getParameter("Email"));
+		customerDto.setFacebookid(request.getParameter("Facebookid"));
+		customerDto.setGoogleid(request.getParameter("Googleid"));
+		
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
 		ResponseLoginDto loginDto = new ResponseLoginDto();
-
+		
 		// check account ton tai trong customer
 		customerNewEntity = customerService.getByEmail(customerDto.getEmail());
+		
 		String passFake = "";
 		if (customerNewEntity == null) {
 			if (customerDto.getGoogleid() != null) {
@@ -99,7 +108,6 @@ public class LoginController {
 
 			customerService.signUpBySocial(customerDto);
 
-			// get customer vua duoc tao
 			CustomerNewEntity enti = customerService.getByEmail(customerDto.getEmail());
 
 			long nowMillis = System.currentTimeMillis();
@@ -114,8 +122,7 @@ public class LoginController {
 		} else {
 			CustomerNewEntity enti = customerService.getByEmail(customerDto.getEmail());
 
-			// check da ton tai account social
-			customerService.getByCustomerId(customerDto);
+			// customerService.getByCustomerId(customerDto);
 
 			CustomerNewEntity linkExist = customerService.getByEmail(customerDto.getEmail());
 			if (linkExist != null) {
