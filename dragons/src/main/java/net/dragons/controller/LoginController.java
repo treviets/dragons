@@ -86,7 +86,7 @@ public class LoginController {
 		customerDto.setFacebookid(request.getParameter("Facebookid"));
 		customerDto.setGoogleid(request.getParameter("Googleid"));
 		String userId = request.getParameter("userId");
-		if (!userId.equals("")) {
+		if (userId != null && !userId.equals("")) {
 			customerDto.setUserId(Integer.parseInt(userId));
 		}
 		
