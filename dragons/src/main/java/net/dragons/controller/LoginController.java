@@ -113,21 +113,23 @@ public class LoginController {
 
 			customerService.signUpBySocial(customerDto);
 
-			CustomerNewEntity enti = customerService.getByEmail(customerDto.getEmail());
+			CustomerNewEntity entity = customerService.getByEmail(customerDto.getEmail());
 
 			long nowMillis = System.currentTimeMillis();
-			String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(enti.getId()),
-					String.valueOf(enti.getEmail()), String.valueOf(enti.getRoleId()), nowMillis);
+			if (entity != null) {
+				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(entity.getId()),
+						String.valueOf(entity.getEmail()), String.valueOf(entity.getRoleId()), nowMillis);
+				loginDto.setToken(token);
+				loginDto.setCusId(entity.getId());
+				response.setData(loginDto);
+				response.setMessage("Success");
+				response.setStatus(HttpStatus.OK);
+			}
 			
-			loginDto.setToken(token);
-			loginDto.setCusId(enti.getId());
-			response.setData(loginDto);
-			response.setMessage("Success");
-			response.setStatus(HttpStatus.OK);
 		} else {
 			CustomerNewEntity customer = customerService.getByEmail(customerDto.getEmail());
-
 			CustomerNewEntity linkExist = customerService.getByEmail(customerDto.getEmail());
+			
 			if (linkExist != null) {
 				long nowMillis = System.currentTimeMillis();
 				String token = TokenAuthenticationService.createJWTSecurity(String.valueOf(customer.getId()),
