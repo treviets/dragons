@@ -4,12 +4,10 @@ import org.springframework.web.client.RestTemplate;
 
 public class HttpService {
 	
-	public static String requestPayment(String url) {
+	public static void requestPayment(String url) {
 		RestTemplate restTemplate = new RestTemplate();
 		
-		String result = restTemplate.getForObject(url, null, "application/json");
-		
-		return result;
+		restTemplate.getForObject(url, null, "application/json");
 	}
 	
 	public static String receiveResponse() {

@@ -1,11 +1,7 @@
 package net.dragons.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +12,6 @@ import io.swagger.annotations.Api;
 import net.dragons.constant.CompleteATMPaymentRequest;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.ResponseDto;
-import net.dragons.jpa.entity.Home;
-import net.dragons.service.HomeService;
 import net.dragons.service.HttpService;
 import net.dragons.service.OnePayService;
 
@@ -51,7 +45,7 @@ public class PaymentController {
 		String urlForATM = OnePayService.buildUrlATM(payATMDto);
 		
 		try {
-			String response = HttpService.requestPayment(urlForATM);
+			HttpService.requestPayment(urlForATM);
 			
 			
 		} catch (Exception ex) {
