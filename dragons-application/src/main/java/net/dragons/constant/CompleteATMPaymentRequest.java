@@ -3,6 +3,7 @@ package net.dragons.constant;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CompleteATMPaymentRequest {
+	
 	@JsonProperty("vpc_AdditionData")
 	private String vpcAdditionData;
 	

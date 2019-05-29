@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.dragons.constant.CompleteATMPaymentRequest;
 import net.dragons.constant.CompletePaymentRequest;
 import net.dragons.constant.OnePayConstant;
+import net.dragons.dto.PayATMDto;
 import net.dragons.jpa.entity.CustomerAddress;
 
 public class OnePayService {
@@ -94,15 +95,14 @@ public class OnePayService {
 		return buf.toString();
 	}
 	
-	public static String buildUrlATM(HttpServletRequest request, String merchantOrderId, String orderCode,
-			float totalAmount, CustomerAddress address) {
+	public static String buildUrlATM(PayATMDto payATMDto) {
 		Map<String, String> fields = new HashMap<String, String>();
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_ATM_MERCHANT_ID);
 		fields.put("vpc_AccessCode", OnePayConstant.ONEPAY_ATM_ACCESS_CODE);
-		fields.put("vpc_MerchTxnRef", merchantOrderId);
-		fields.put("vpc_OrderInfo", orderCode);
-		fields.put("vpc_Amount", String.valueOf((int) totalAmount * 100));
+		fields.put("vpc_MerchTxnRef", payATMDto.getMerchantOrderId());
+		fields.put("vpc_OrderInfo", payATMDto.getOrderCode());
+		fields.put("vpc_Amount", String.valueOf((int) payATMDto.getTotalAmount() * 100));
 		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_RETURN_URL);
 		fields.put("vpc_Version", "2");
 		fields.put("vpc_Command", "pay");
@@ -110,7 +110,7 @@ public class OnePayService {
 		fields.put("vpc_Currency", "VND");
 		fields.put("vpc_TicketNo", "149.28.147.158");
 		fields.put("AgainLink", OnePayConstant.API_DOMAIN);
-		fields.put("Title", "Thanh toan tien mua hang Needii");
+		fields.put("Title", "Thanh toan tien dat phong TheDragonsHost");
 
 		String secureHash = hashAllFields(fields, OnePayConstant.ONEPAY_ATM_SECURE_SECRET);
 		fields.put("vpc_SecureHash", secureHash);
@@ -382,5 +382,24 @@ public class OnePayService {
 			}
 
 		}
+	}
+	
+	public static CompleteATMPaymentRequest parseResponse(HttpServletRequest request) {
+		CompleteATMPaymentRequest responseObject = new CompleteATMPaymentRequest();
+		
+		responseObject.setVpcCommand(request.getParameter("vpc_Command"));
+		responseObject.setVpcLocale(request.getParameter("vpc_Locale"));
+		responseObject.setVpcCurrencyCode(request.getParameter("vpc_CurrencyCode"));
+		responseObject.setVpcMerchTxnRef(request.getParameter("vpc_MerchTxnRef"));
+		responseObject.setVpcMerchant(request.getParameter("vpc_Merchant"));
+		responseObject.setVpcOrderInfo(request.getParameter("vpc_OrderInfo"));
+		responseObject.setVpcAmount(request.getParameter("vpc_Amount"));
+		responseObject.setVpcTxnResponseCode(request.getParameter("vpc_TxnResponseCode"));
+		responseObject.setVpcTransactionNo(request.getParameter("vpc_TransactionNo"));
+		responseObject.setVcpMessage(request.getParameter("vcp_Message"));
+		responseObject.setVpcAdditionData(request.getParameter("vpc_AdditionData"));
+		responseObject.setVpcSecureHash(request.getParameter("vpc_SecureHash"));
+
+		return responseObject;
 	}
 }

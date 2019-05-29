@@ -10,9 +10,8 @@ public final class OnePayConstant {
 	public static final double PLANCK_CONSTANT = 6.62606896e-34;
 	public static final String CMC_DOMAIN_NAME = "http://allin.needii.com.vn";
 	public static final String CMC_RESOURCE_DOMAIN = CMC_DOMAIN_NAME + "/needii";
-	public static final String DOMAIN_NAME = "http://needii.verztecsolution.com";
-	public static final String API_DOMAIN = "http://needii.verztecsolution.com:8080";
-	public static final String RESOURCE_DOMAIN = DOMAIN_NAME + "/needii";
+
+	
 	public static final String SOURCE_FLAG_NAME = "/resource/countries/flag/";
 	public static final String SOURCE_COUNTRY_NAME = "/resource/countries/";
 	public static final String UPLOADED_FOLDER = "webapp/static/images/";
@@ -46,7 +45,9 @@ public final class OnePayConstant {
 	public static final String ONEPAY_ATM_PROCESS_URL = "https://mtf.onepay.vn/onecomm-pay/vpc.op";
 	public static final String ONEPAY_ATM_RE_CHECK_URL = "https://mtf.onepay.vn/onecomm-pay/Vpcdps.op";
 	public static final String ONEPAY_ATM_REFUND_URL = "https://mtf.onepay.vn/onecomm-pay/refund.op";
-	public static final String ONEPAY_ATM_RETURN_URL = API_DOMAIN + "/api/payback";
+	public static final String API_DOMAIN = "http://api.thedragonshost.com:8080";
+
+	public static final String ONEPAY_ATM_RETURN_URL = API_DOMAIN + "/payment/response/by_atm";
 	public static final String ONEPAY_ATM_SECURE_SECRET = "A3EFDFABA8653DF2342E8DAC29B51AF0";
 	
 	public static final String ONEPAY_MERCHANT_ID = "TESTONEPAY";
@@ -57,12 +58,12 @@ public final class OnePayConstant {
 	public static final String ONEPAY_RE_CHECK_URL = "https://mtf.onepay.vn/vpcpay/Vpcdps.op";
 	public static final String ONEPAY_REFUND_URL = "https://mtf.onepay.vn/vpcpay/refund.op";
 	
-	public static final String ONEPAY_RETURN_URL = API_DOMAIN + "/api/payback";
+	public static final String ONEPAY_RETURN_URL = API_DOMAIN + "/payment/response";
 	public static final String ONEPAY_SECURE_SECRET = "6D0870CDE5F24F34F3915FB0045120DB";
 	public static final int CUBIC_METER_CONSTANT = 5000;
 	
 	public static final boolean ENABLE_OTP = false;
-//	public static final AdminRoleEnum ROLE_OTP = AdminRoleEnum.SUPERADMIN;
+
 	public static final int OTP_EXPIRE_IN_SECONDS = 180;
 	
 	public static final String PROMOTION_TYPE_NEEDII_CASH = "NEEDII_CASH";

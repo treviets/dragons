@@ -3,6 +3,7 @@ package net.dragons.constant;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CompletePaymentRequest {
+	
 	@JsonProperty("vpc_OrderInfo")
 	private String vpcOrderInfo;
 	
