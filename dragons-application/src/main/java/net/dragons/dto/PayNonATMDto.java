@@ -2,7 +2,7 @@ package net.dragons.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PayATMDto {
+public class PayNonATMDto {
 
 	@JsonProperty("MerchantOrderId")
 	private String merchantOrderId;
@@ -12,7 +12,7 @@ public class PayATMDto {
 	
 	@JsonProperty("TotalAmount")
 	private float totalAmount;
-
+	
 	@JsonProperty("CustomerPhone")
 	private String customerPhone;
 	
@@ -21,7 +21,7 @@ public class PayATMDto {
 	
 	@JsonProperty("CustomerId")
 	private String customerId;
-	
+
 	public String getMerchantOrderId() {
 		return merchantOrderId;
 	}
@@ -69,5 +69,4 @@ public class PayATMDto {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	
 }

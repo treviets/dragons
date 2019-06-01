@@ -20,6 +20,7 @@ import net.dragons.constant.CompleteATMPaymentRequest;
 import net.dragons.constant.CompletePaymentRequest;
 import net.dragons.constant.OnePayConstant;
 import net.dragons.dto.PayATMDto;
+import net.dragons.dto.PayNonATMDto;
 import net.dragons.jpa.entity.CustomerAddress;
 
 public class OnePayService {
@@ -41,15 +42,14 @@ public class OnePayService {
 		decodeHexArray['f'] = decodeHexArray['F'];
 	}
 
-	public static String buildUrl(HttpServletRequest request, String merchantOrderId, String orderCode,
-			float totalAmount, CustomerAddress address) {
+	public static String buildUrl(PayNonATMDto payNonATMDto, CustomerAddress address) {
 		Map<String, String> fields = new HashMap<String, String>();
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_MERCHANT_ID);
 		fields.put("vpc_AccessCode", OnePayConstant.ONEPAY_ACCESS_CODE);
-		fields.put("vpc_MerchTxnRef", merchantOrderId);
-		fields.put("vpc_OrderInfo", orderCode);
-		fields.put("vpc_Amount", String.valueOf((int) totalAmount * 100)); // onepay quy dinh x them 100
+		fields.put("vpc_MerchTxnRef", payNonATMDto.getMerchantOrderId());
+		fields.put("vpc_OrderInfo", payNonATMDto.getOrderCode());
+		fields.put("vpc_Amount", String.valueOf((int) payNonATMDto.getTotalAmount() * 100));
 		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_RETURN_URL);
 		fields.put("vpc_Version", "2");
 		fields.put("vpc_Command", "pay");
@@ -57,7 +57,7 @@ public class OnePayService {
 		fields.put("vpc_Currency", "VND");
 		fields.put("vpc_TicketNo", "149.28.147.158");
 		fields.put("AgainLink", OnePayConstant.API_DOMAIN);
-		fields.put("Title", "Thanh toan tien mua hang Needii");
+		fields.put("Title", "Thanh toan tien dat phong TheDragonsHost");
 		fields.put("AVS_Street01", address.getFullTextAddress());
 		fields.put("AVS_City", address.getCity().getName());
 		fields.put("AVS_StateProv", address.getDistrict().getName());
