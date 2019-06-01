@@ -31,8 +31,9 @@ public class PaymentController {
 		String urlForATM = OnePayService.buildUrlATM(payATMDto);
 		
 		try {
-			HttpService.requestPayment(urlForATM);
+			String response = HttpService.requestPayment(urlForATM);
 			
+			System.out.println(response);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
