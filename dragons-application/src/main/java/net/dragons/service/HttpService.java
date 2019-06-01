@@ -7,11 +7,9 @@ public class HttpService {
 	public static String requestPayment(String url) {
 		RestTemplate restTemplate = new RestTemplate();
 		
-		String test = restTemplate.getForObject(url, String.class);
+		String response = restTemplate.getForObject(url, String.class);
 		
-		System.out.println(test);
-		
-		return test;
+		return response;
 	}
 	
 	public static String receiveResponse() {

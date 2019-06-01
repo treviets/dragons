@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import net.dragons.constant.CompleteATMPaymentRequest;
+import net.dragons.constant.OnePayConstant;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.dto.ResponseDto;
@@ -28,15 +29,16 @@ public class PaymentController {
 	public ResponseDto payWithATMCard(@RequestBody PayATMDto payATMDto) throws Exception {
 		ResponseDto responseDto = new ResponseDto();
 
-		String urlForATM = OnePayService.buildUrlATM(payATMDto);
-		
+		String urlForATM = OnePayService.buildUrlATM(payATMDto);		
 		try {
-			String response = HttpService.requestPayment(urlForATM);
-			
-			System.out.println(response);
-			
+			HttpService.requestPayment(urlForATM);
+			responseDto.setData(OnePayConstant.ONEPAY_ATM_PROCESS_URL);
+			responseDto.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			responseDto.setData("");
+			responseDto.setMessage(ex.getMessage());
+			responseDto.setStatus(HttpStatus.BAD_GATEWAY);
 		}
 
 		return responseDto;
