@@ -2,7 +2,6 @@ package net.dragons.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.http.HttpRequest;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,17 +84,17 @@ public class LoginController {
 		customerDto.setEmail(request.getParameter("Email"));
 		customerDto.setFacebookid(request.getParameter("Facebookid"));
 		customerDto.setGoogleid(request.getParameter("Googleid"));
+		customerDto.setAvatar(request.getParameter("Img"));
+		
 		String userId = request.getParameter("userId");
 		if (userId != null && !userId.equals("")) {
 			customerDto.setUserId(Integer.parseInt(userId));
 		}
 		
-		
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseDto response = new ResponseDto();
 		ResponseLoginDto loginDto = new ResponseLoginDto();
 		
-		// check account ton tai trong customer
 		customerNewEntity = customerService.getByEmail(customerDto.getEmail());
 		
 		String passFake = "";

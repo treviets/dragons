@@ -22,7 +22,6 @@ import net.dragons.repository.SocialLinkReponsitory;
 import net.dragons.service.CurrencyService;
 import net.dragons.service.CustomerService;
 import net.dragons.service.LanguageService;
-import net.dragons.service.SocialLinkAccountService;
 import util.CustomerRoleConstant;
 import util.CustomerStatusConstant;
 
@@ -43,9 +42,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CurrencyService currencyService;
-	
-//	@Autowired
-//	SocialLinkAccountService socialLinkAccountService;
+
+	// @Autowired
+	// SocialLinkAccountService socialLinkAccountService;
 
 	ModelMapper mapper;
 
@@ -108,7 +107,6 @@ public class CustomerServiceImpl implements CustomerService {
 		try {
 			customerNewRepository.save(customer);
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("++++++++++++++++++++");
 			System.out.print(e.getMessage());
 
@@ -119,7 +117,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerNewEntity getByEmail(String email) {
-		// TODO Auto-generated method stub
 		return customerNewRepository.findByEmail(email);
 	}
 
@@ -172,11 +169,9 @@ public class CustomerServiceImpl implements CustomerService {
 		if (customer != null) {
 			dto.setCustomer(customer);
 		}
-		
+
 		SocialLinkAccount result = socialLinkRepository.findByUserId(customerId.intValue());
 		dto.setSocialLinkAccount(result);
-
-		
 
 		List<Language> languages = languageService.findAll();
 		if (languages != null && !languages.isEmpty()) {
@@ -194,14 +189,14 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void updateCustomerDetail(CustomerDetailDto dto) {
 		Customer customer = customerRepository.findById(dto.getCustomer().getId());
-		
-		if(dto.getCustomer().getPassword() =="") {
+
+		if (dto.getCustomer().getPassword() == "") {
 			customer.setPassword(customer.getPassword());
-		}else {
+		} else {
 			String pass = BCrypt.hashpw(dto.getCustomer().getPassword(), BCrypt.gensalt(12));
 			customer.setPassword(pass);
 		}
-		
+
 		customer.setAvatar(dto.getCustomer().getAvatar());
 		customer.setDateOfBirth(dto.getCustomer().getDateOfBirth());
 		customer.setEmail(dto.getCustomer().getEmail());
@@ -215,7 +210,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setSchool(dto.getCustomer().getSchool());
 		customer.setWork(dto.getCustomer().getWork());
 		customer.setWorkEmail(dto.getCustomer().getWorkEmail());
-		
+
 		customerRepository.save(customer);
 	}
 

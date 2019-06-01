@@ -24,7 +24,7 @@ import net.dragons.service.OnePayService;
 @Api(value = "Payment API Endpoint", description = "Payment Entities Endpoint")
 public class PaymentController {
 
-	@RequestMapping(value = "/by_atm", method = RequestMethod.POST)
+	@RequestMapping(value = "/pay_with_atm", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseDto payWithATMCard(@RequestBody PayATMDto payATMDto) throws Exception {
 		ResponseDto responseDto = new ResponseDto();
@@ -65,9 +65,10 @@ public class PaymentController {
 		return responseDto;
 	}
 	
-	@RequestMapping(value = "/by_non_atm", method = RequestMethod.POST)
+	@RequestMapping(value = "/pay_with_non_atm", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseDto payWithNonATMCard(@RequestBody PayNonATMDto payNonATMDto, @RequestBody CustomerAddress address) throws Exception {
+	public ResponseDto payWithNonATMCard(@RequestBody PayNonATMDto payNonATMDto, 
+										@RequestBody CustomerAddress address) throws Exception {
 		ResponseDto responseDto = new ResponseDto();
 
 		String urlForNonATM = OnePayService.buildUrl(payNonATMDto, address);
