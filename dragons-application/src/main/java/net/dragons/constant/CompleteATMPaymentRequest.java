@@ -37,8 +37,8 @@ public class CompleteATMPaymentRequest {
 	@JsonProperty("vpc_Version")
 	private String vpcVersion;
 	
-	@JsonProperty("vcp_Message")
-	private String vcpMessage;
+	@JsonProperty("vpc_Message")
+	private String vpcMessage;
 	
 	@JsonProperty("vpc_SecureHash")
 	private String vpcSecureHash;
@@ -216,10 +216,10 @@ public class CompleteATMPaymentRequest {
 	}
 
 	public String getVcpMessage() {
-		return vcpMessage == null ? "" : vcpMessage;
+		return vpcMessage == null ? "" : vpcMessage;
 	}
 
-	public void setVcpMessage(String vcpMessage) {
-		this.vcpMessage = vcpMessage;
+	public void setVcpMessage(String vpcMessage) {
+		this.vpcMessage = vpcMessage;
 	}
 }

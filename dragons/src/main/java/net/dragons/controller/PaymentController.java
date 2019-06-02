@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import net.dragons.constant.CompleteATMPaymentRequest;
+import net.dragons.constant.CompletePaymentRequest;
 import net.dragons.constant.OnePayConstant;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
@@ -31,11 +32,9 @@ public class PaymentController {
 
 		String urlForATM = OnePayService.buildUrlATM(payATMDto);		
 		try {
-			HttpService.requestPayment(urlForATM);
-			responseDto.setData(OnePayConstant.ONEPAY_ATM_PROCESS_URL);
+			responseDto.setData(urlForATM);
 			responseDto.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			responseDto.setData("");
 			responseDto.setMessage(ex.getMessage());
 			responseDto.setStatus(HttpStatus.BAD_GATEWAY);
@@ -44,21 +43,24 @@ public class PaymentController {
 		return responseDto;
 	}
 	
-	@RequestMapping(value = "/response/by_atm", method = RequestMethod.GET)
+	@RequestMapping(value = "/response/pay_with_atm", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseDto receiveResponseForATM(HttpServletRequest request) throws Exception {
 		ResponseDto responseDto = new ResponseDto();
 
-		CompleteATMPaymentRequest responseATM = OnePayService.parseResponse(request);
+		CompleteATMPaymentRequest responseATM = OnePayService.parseResponseATM(request);
+		if (!responseATM.getVpcTxnResponseCode().equals("0")) {
+			// Handle error message
+			return null;
+		}
+		
 		boolean isSuccessPayment = OnePayService.validateATMResult(responseATM);
 		
 		if (isSuccessPayment) {
-			responseDto.setData("");
-			responseDto.setMessage("");
+			responseDto.setMessage("THANH TOAN THANH CONG");
 			responseDto.setStatus(HttpStatus.OK);
 		} else {
-			responseDto.setData(null);
-			responseDto.setMessage("");
+			responseDto.setMessage("THANH TOAN THAT BAI");
 			responseDto.setStatus(HttpStatus.BAD_GATEWAY);
 		}
 
@@ -79,8 +81,32 @@ public class PaymentController {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		return responseDto;
+	}
+	
+	@RequestMapping(value = "/response/pay_with_non_atm", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseDto receiveResponseForNonATM(HttpServletRequest request) throws Exception {
+		ResponseDto responseDto = new ResponseDto();
+
+		CompletePaymentRequest responseNonATM = OnePayService.parseResponseNonATM(request);
+		if (!responseNonATM.getVpcTxnResponseCode().equals("0")) {
+			// Handle error message
+			return null;
+		}
+		
+		boolean isSuccessPayment = OnePayService.validateNonATMResult(responseNonATM);
+		
+		if (isSuccessPayment) {
+			responseDto.setMessage("THANH TOAN THANH CONG");
+			responseDto.setStatus(HttpStatus.OK);
+		} else {
+			responseDto.setMessage("THANH TOAN THAT BAI");
+			responseDto.setStatus(HttpStatus.BAD_GATEWAY);
+		}
 
 		return responseDto;
 	}
+	
 
 }

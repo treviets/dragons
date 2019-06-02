@@ -103,7 +103,7 @@ public class OnePayService {
 		fields.put("vpc_MerchTxnRef", payATMDto.getMerchantOrderId());
 		fields.put("vpc_OrderInfo", payATMDto.getOrderCode());
 		fields.put("vpc_Amount", String.valueOf((int) payATMDto.getTotalAmount() * 100));
-		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_RETURN_URL);
+		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_ATM_RETURN_URL);
 		fields.put("vpc_Version", "2");
 		fields.put("vpc_Command", "pay");
 		fields.put("vpc_Locale", "vn");
@@ -113,6 +113,7 @@ public class OnePayService {
 		fields.put("Title", "Thanh toan tien dat phong TheDragonsHost");
 
 		String secureHash = hashAllFields(fields, OnePayConstant.ONEPAY_ATM_SECURE_SECRET);
+		System.out.println(secureHash);
 		fields.put("vpc_SecureHash", secureHash);
 
 		StringBuffer buf = new StringBuffer();
@@ -244,54 +245,7 @@ public class OnePayService {
 		return isValid;
 	}
 
-	public static boolean validateResult(CompletePaymentRequest result) {
-		boolean isValid = false;
-
-		Map<String, String> fields = new HashMap<String, String>();
-
-		fields.put("vpc_OrderInfo", result.getVpcOrderInfo());
-		fields.put("vpc_3DSECI", result.getVpc3DSECI());
-		fields.put("vpc_AVS_Street01", result.getVpcAVSStreet01());
-		fields.put("vpc_Merchant", result.getVpcMerchant());
-		fields.put("vpc_Card", result.getVpcCard());
-		fields.put("vpc_AcqResponseCode", result.getVpcAcqResponseCode());
-		fields.put("AgainLink", result.getAgainLink());
-		fields.put("vpc_AVS_Country", result.getVpcAVSCountry());
-		fields.put("vpc_AuthorizeId", result.getVpcAuthorizeId());
-		fields.put("vpc_3DSenrolled", result.getVpc3DSenrolled());
-		fields.put("vpc_RiskOverallResult", result.getVpcRiskOverallResult());
-		fields.put("vpc_ReceiptNo", result.getVpcReceiptNo());
-		fields.put("vpc_TransactionNo", result.getVpcTransactionNo());
-		fields.put("vpc_AVS_StateProv", result.getVpcAVSStateProv());
-		fields.put("vpc_Locale", result.getVpcLocale());
-		fields.put("vpc_TxnResponseCode", result.getVpcTxnResponseCode());
-		fields.put("vpc_VerToken", result.getVpcVerToken());
-		fields.put("vpc_Amount", result.getVpcAmount());
-		fields.put("vpc_BatchNo", result.getVpcBatchNo());
-		fields.put("vpc_Version", result.getVpcVersion());
-		fields.put("vpc_AVSResultCode", result.getVpcAVSResultCode());
-		fields.put("vpc_VerStatus", result.getVpcVerStatus());
-		fields.put("vpc_Command", result.getVpcCommand());
-		fields.put("vpc_Message", result.getVpcMessage());
-		fields.put("Title", result.getTitle());
-		fields.put("vpc_3DSstatus", result.getVpc3DSstatus());
-		// fields.put("vpc_SecureHash", result.getVpcSecureHash());
-		fields.put("vpc_CardNum", result.getVpcCardNum());
-		fields.put("vpc_AVS_PostCode", result.getVpcAVSPostCode());
-		fields.put("vpc_CSCResultCode", result.getVpcCSCResultCode());
-		fields.put("vpc_MerchTxnRef", result.getVpcMerchTxnRef());
-		fields.put("vpc_VerType", result.getVpcVerType());
-		fields.put("vpc_VerSecurityLevel", result.getVpcVerSecurityLevel());
-		fields.put("vpc_3DSXID", result.getVpc3DSXID());
-		fields.put("vpc_AVS_City", result.getVpcAVSCity());
-
-		String secureHash = hashAllFields(fields, OnePayConstant.ONEPAY_SECURE_SECRET);
-		if (result.getVpcSecureHash().equalsIgnoreCase(secureHash)) {
-			isValid = true;
-		}
-
-		return isValid;
-	}
+	
 
 	private static String null2unknown(String in) {
 		if (in == null || in.length() == 0) {
@@ -384,22 +338,113 @@ public class OnePayService {
 		}
 	}
 	
-	public static CompleteATMPaymentRequest parseResponse(HttpServletRequest request) {
+	public static CompleteATMPaymentRequest parseResponseATM(HttpServletRequest request) {
 		CompleteATMPaymentRequest responseObject = new CompleteATMPaymentRequest();
 		
+		responseObject.setVpcAdditionData(request.getParameter("vpc_AdditionData"));
+		responseObject.setVpcAmount(request.getParameter("vpc_Amount"));
 		responseObject.setVpcCommand(request.getParameter("vpc_Command"));
-		responseObject.setVpcLocale(request.getParameter("vpc_Locale"));
 		responseObject.setVpcCurrencyCode(request.getParameter("vpc_CurrencyCode"));
+		responseObject.setVpcLocale(request.getParameter("vpc_Locale"));
 		responseObject.setVpcMerchTxnRef(request.getParameter("vpc_MerchTxnRef"));
 		responseObject.setVpcMerchant(request.getParameter("vpc_Merchant"));
 		responseObject.setVpcOrderInfo(request.getParameter("vpc_OrderInfo"));
-		responseObject.setVpcAmount(request.getParameter("vpc_Amount"));
 		responseObject.setVpcTxnResponseCode(request.getParameter("vpc_TxnResponseCode"));
 		responseObject.setVpcTransactionNo(request.getParameter("vpc_TransactionNo"));
 		responseObject.setVcpMessage(request.getParameter("vcp_Message"));
-		responseObject.setVpcAdditionData(request.getParameter("vpc_AdditionData"));
-		responseObject.setVpcSecureHash(request.getParameter("vpc_SecureHash"));
 
+		responseObject.setVpcVersion(request.getParameter("vpc_Version"));
+		responseObject.setVpcSecureHash(request.getParameter("vpc_SecureHash"));
 		return responseObject;
+	}
+	
+	public static CompletePaymentRequest parseResponseNonATM(HttpServletRequest request) {
+		CompletePaymentRequest responseObject = new CompletePaymentRequest();
+		
+		responseObject.setVpcOrderInfo(request.getParameter("vpc_OrderInfo"));
+		responseObject.setVpc3DSECI(request.getParameter("vpc_3DSECI"));
+		responseObject.setVpcAVSStreet01(request.getParameter("vpc_AVS_Street01"));
+		responseObject.setVpcMerchant(request.getParameter("vpc_Merchant"));
+		responseObject.setVpcCard(request.getParameter("vpc_Card"));
+		responseObject.setVpcAcqResponseCode(request.getParameter("vpc_AcqResponseCode"));
+		responseObject.setAgainLink(request.getParameter("AgainLink"));
+		responseObject.setVpcAVSCountry(request.getParameter("vpc_AVS_Country"));
+		responseObject.setVpcAuthorizeId(request.getParameter("vpc_AuthorizeId"));
+		responseObject.setVpc3DSenrolled(request.getParameter("vpc_3DSenrolled"));
+		responseObject.setVpcRiskOverallResult(request.getParameter("vpc_RiskOverallResult"));
+		responseObject.setVpcReceiptNo(request.getParameter("vpc_ReceiptNo"));
+		responseObject.setVpcTransactionNo(request.getParameter("vpc_TransactionNo"));
+		responseObject.setVpcAVSStateProv(request.getParameter("vpc_AVS_StateProv"));
+		responseObject.setVpcLocale(request.getParameter("vpc_Locale"));
+		responseObject.setVpcTxnResponseCode(request.getParameter("vpc_TxnResponseCode"));
+		responseObject.setVpcVerToken(request.getParameter("vpc_VerToken"));
+		responseObject.setVpcAmount(request.getParameter("vpc_Amount"));
+		responseObject.setVpcBatchNo(request.getParameter("vpc_BatchNo"));
+		responseObject.setVpcVersion(request.getParameter("vpc_Version"));
+		responseObject.setVpcAVSResultCode(request.getParameter("vpc_AVSResultCode"));
+		responseObject.setVpcVerStatus(request.getParameter("vpc_VerStatus"));
+		responseObject.setVpcCommand(request.getParameter("vpc_Command"));
+		responseObject.setVpcMessage(request.getParameter("vpc_Message"));
+		responseObject.setTitle(request.getParameter("Title"));
+		responseObject.setVpc3DSstatus(request.getParameter("vpc_3DSstatus"));
+		responseObject.setVpcSecureHash(request.getParameter("vpc_SecureHash"));
+		responseObject.setVpcCardNum(request.getParameter("vpc_CardNum"));
+		responseObject.setVpcAVSPostCode(request.getParameter("vpc_AVS_PostCode"));
+		responseObject.setVpcCSCResultCode(request.getParameter("vpc_CSCResultCode"));
+		responseObject.setVpcMerchTxnRef(request.getParameter("vpc_MerchTxnRef"));
+		responseObject.setVpcVerType(request.getParameter("vpc_VerType"));
+		responseObject.setVpcVerSecurityLevel(request.getParameter("vpc_VerSecurityLevel"));
+		responseObject.setVpc3DSXID(request.getParameter("vpc_3DSXID"));
+		responseObject.setVpcAVSCity(request.getParameter("vpc_AVS_City"));
+		
+		return responseObject;
+	}
+	
+	public static boolean validateNonATMResult(CompletePaymentRequest result) {
+		boolean isValid = false;
+
+		Map<String, String> fields = new HashMap<String, String>();
+
+		fields.put("vpc_OrderInfo", result.getVpcOrderInfo());
+		fields.put("vpc_3DSECI", result.getVpc3DSECI());
+		fields.put("vpc_AVS_Street01", result.getVpcAVSStreet01());
+		fields.put("vpc_Merchant", result.getVpcMerchant());
+		fields.put("vpc_Card", result.getVpcCard());
+		fields.put("vpc_AcqResponseCode", result.getVpcAcqResponseCode());
+		fields.put("AgainLink", result.getAgainLink());
+		fields.put("vpc_AVS_Country", result.getVpcAVSCountry());
+		fields.put("vpc_AuthorizeId", result.getVpcAuthorizeId());
+		fields.put("vpc_3DSenrolled", result.getVpc3DSenrolled());
+		fields.put("vpc_RiskOverallResult", result.getVpcRiskOverallResult());
+		fields.put("vpc_ReceiptNo", result.getVpcReceiptNo());
+		fields.put("vpc_TransactionNo", result.getVpcTransactionNo());
+		fields.put("vpc_AVS_StateProv", result.getVpcAVSStateProv());
+		fields.put("vpc_Locale", result.getVpcLocale());
+		fields.put("vpc_TxnResponseCode", result.getVpcTxnResponseCode());
+		fields.put("vpc_VerToken", result.getVpcVerToken());
+		fields.put("vpc_Amount", result.getVpcAmount());
+		fields.put("vpc_BatchNo", result.getVpcBatchNo());
+		fields.put("vpc_Version", result.getVpcVersion());
+		fields.put("vpc_AVSResultCode", result.getVpcAVSResultCode());
+		fields.put("vpc_VerStatus", result.getVpcVerStatus());
+		fields.put("vpc_Command", result.getVpcCommand());
+		fields.put("vpc_Message", result.getVpcMessage());
+		fields.put("Title", result.getTitle());
+		fields.put("vpc_3DSstatus", result.getVpc3DSstatus());
+		fields.put("vpc_CardNum", result.getVpcCardNum());
+		fields.put("vpc_AVS_PostCode", result.getVpcAVSPostCode());
+		fields.put("vpc_CSCResultCode", result.getVpcCSCResultCode());
+		fields.put("vpc_MerchTxnRef", result.getVpcMerchTxnRef());
+		fields.put("vpc_VerType", result.getVpcVerType());
+		fields.put("vpc_VerSecurityLevel", result.getVpcVerSecurityLevel());
+		fields.put("vpc_3DSXID", result.getVpc3DSXID());
+		fields.put("vpc_AVS_City", result.getVpcAVSCity());
+
+		String secureHash = hashAllFields(fields, OnePayConstant.ONEPAY_SECURE_SECRET);
+		if (result.getVpcSecureHash().equalsIgnoreCase(secureHash)) {
+			isValid = true;
+		}
+
+		return isValid;
 	}
 }

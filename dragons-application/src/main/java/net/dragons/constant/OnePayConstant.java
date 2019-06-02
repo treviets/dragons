@@ -5,8 +5,8 @@ public final class OnePayConstant {
         
 	}
 	
-	public static final String API_DOMAIN = "http://api.thedragonshost.com:8080";
-
+//	public static final String API_DOMAIN = "http://api.thedragonshost.com:8080";
+	public static final String API_DOMAIN = "http://localhost:8080/dragons";
 	/*************************************************************************************
 							CONSTANT FOR ATM
 	*/
@@ -16,7 +16,7 @@ public final class OnePayConstant {
 	public static final String ONEPAY_ATM_PROCESS_URL 	= "https://mtf.onepay.vn/onecomm-pay/vpc.op";
 	public static final String ONEPAY_ATM_RE_CHECK_URL 	= "https://mtf.onepay.vn/onecomm-pay/Vpcdps.op";
 	public static final String ONEPAY_ATM_REFUND_URL 	= "https://mtf.onepay.vn/onecomm-pay/refund.op";
-	public static final String ONEPAY_ATM_RETURN_URL 	= API_DOMAIN + "/payment/response/by_atm";
+	public static final String ONEPAY_ATM_RETURN_URL 	=  API_DOMAIN + "/payment/response/pay_with_atm";
 	/*************************************************************************************
 	*/
 	
@@ -33,7 +33,7 @@ public final class OnePayConstant {
 	public static final String ONEPAY_PROCESS_URL 		= "https://mtf.onepay.vn/vpcpay/vpcpay.op";
 	public static final String ONEPAY_RE_CHECK_URL 		= "https://mtf.onepay.vn/vpcpay/Vpcdps.op";
 	public static final String ONEPAY_REFUND_URL 		= "https://mtf.onepay.vn/vpcpay/refund.op";
-	public static final String ONEPAY_RETURN_URL 		= API_DOMAIN + "/payment/response";
+	public static final String ONEPAY_RETURN_URL 		= API_DOMAIN + "/payment/response/pay_with_non_atm";
 	public static final String ONEPAY_SECURE_SECRET 	= "6D0870CDE5F24F34F3915FB0045120DB";
 	/*************************************************************************************
 	*/
