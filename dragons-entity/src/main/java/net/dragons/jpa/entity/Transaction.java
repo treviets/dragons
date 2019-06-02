@@ -28,7 +28,7 @@ public class Transaction {
 	private String customerEmail;
 	
 	@Column(name = "total_amount")
-	private String totalAmount;
+	private float totalAmount;
 	
 	@Column(name = "created_at")
 	private Date createdAt;
@@ -43,10 +43,13 @@ public class Transaction {
 	private String transactionNumber;
 	
 	@Column(name = "status")
-	private boolean status;
+	private String status;
 
 	@Column(name = "payment_type")
 	private String paymentType;
+	
+	@Column(name = "vpc_addition_data")
+	private String additionalData;
 	
 	public long getId() {
 		return id;
@@ -80,11 +83,11 @@ public class Transaction {
 		this.customerEmail = customerEmail;
 	}
 
-	public String getTotalAmount() {
+	public float getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(String totalAmount) {
+	public void setTotalAmount(float totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
@@ -120,20 +123,28 @@ public class Transaction {
 		this.transactionNumber = transactionNumber;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public String getPaymentType() {
 		return paymentType;
 	}
 
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
+	}
+
+	public String getAdditionalData() {
+		return additionalData;
+	}
+
+	public void setAdditionalData(String additionalData) {
+		this.additionalData = additionalData;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

@@ -20,7 +20,7 @@ public class PayATMDto {
 	private String customerEmail;
 	
 	@JsonProperty("CustomerId")
-	private String customerId;
+	private int customerId;
 	
 	public String getMerchantOrderId() {
 		return merchantOrderId;
@@ -62,11 +62,11 @@ public class PayATMDto {
 		this.customerEmail = customerEmail;
 	}
 
-	public String getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 	
