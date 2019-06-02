@@ -245,8 +245,6 @@ public class OnePayService {
 		return isValid;
 	}
 
-	
-
 	private static String null2unknown(String in) {
 		if (in == null || in.length() == 0) {
 			return "No Value Returned";
