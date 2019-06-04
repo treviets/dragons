@@ -2,6 +2,9 @@ package net.dragons.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.dragons.jpa.entity.City;
+import net.dragons.jpa.entity.District;
+
 public class PayNonATMDto {
 
 	@JsonProperty("MerchantOrderId")
@@ -21,6 +24,15 @@ public class PayNonATMDto {
 	
 	@JsonProperty("CustomerId")
 	private String customerId;
+	
+	@JsonProperty("FullTextAddress")
+	private String fullTextAddress;
+	
+	@JsonProperty("City")
+	private City city;
+	
+	@JsonProperty("District")
+	private District district;
 
 	public String getMerchantOrderId() {
 		return merchantOrderId;
@@ -69,4 +81,30 @@ public class PayNonATMDto {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
+
+	public String getFullTextAddress() {
+		return fullTextAddress;
+	}
+
+	public void setFullTextAddress(String fullTextAddress) {
+		this.fullTextAddress = fullTextAddress;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public District getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(District district) {
+		this.district = district;
+	}
+	
+	
 }

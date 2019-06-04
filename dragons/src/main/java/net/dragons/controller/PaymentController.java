@@ -16,8 +16,6 @@ import net.dragons.constant.CompletePaymentRequest;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.dto.ResponseDto;
-import net.dragons.jpa.entity.CustomerAddress;
-import net.dragons.service.HttpService;
 import net.dragons.service.OnePayService;
 import net.dragons.service.TransactionService;
 
@@ -87,15 +85,14 @@ public class PaymentController {
 	
 	@RequestMapping(value = "/pay_with_non_atm", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseDto payWithNonATMCard(@RequestBody PayNonATMDto payNonATMDto, 
-										@RequestBody CustomerAddress address) throws Exception {
+	public ResponseDto payWithNonATMCard(@RequestBody PayNonATMDto payNonATMDto) throws Exception {
 		ResponseDto responseDto = new ResponseDto();
 
-		String urlForNonATM = OnePayService.buildUrl(payNonATMDto, address);
-		
 		try {
-			HttpService.requestPayment(urlForNonATM);
+			String urlForNonATM = OnePayService.buildUrl(payNonATMDto);
 			
+			responseDto.setData(urlForNonATM);
+			responseDto.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

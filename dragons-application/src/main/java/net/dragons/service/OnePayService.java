@@ -42,7 +42,7 @@ public class OnePayService {
 		decodeHexArray['f'] = decodeHexArray['F'];
 	}
 
-	public static String buildUrl(PayNonATMDto payNonATMDto, CustomerAddress address) {
+	public static String buildUrl(PayNonATMDto payNonATMDto) {
 		Map<String, String> fields = new HashMap<String, String>();
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_MERCHANT_ID);
@@ -58,10 +58,10 @@ public class OnePayService {
 		fields.put("vpc_TicketNo", "149.28.147.158");
 		fields.put("AgainLink", OnePayConstant.API_DOMAIN);
 		fields.put("Title", "Thanh toan tien dat phong TheDragonsHost");
-		fields.put("AVS_Street01", address.getFullTextAddress());
-		fields.put("AVS_City", address.getCity().getName());
-		fields.put("AVS_StateProv", address.getDistrict().getName());
-		fields.put("AVS_PostCode", String.valueOf(address.getDistrict().getId()));
+		fields.put("AVS_Street01", payNonATMDto.getFullTextAddress());
+		fields.put("AVS_City", payNonATMDto.getCity().getName());
+		fields.put("AVS_StateProv", payNonATMDto.getDistrict().getName());
+		fields.put("AVS_PostCode", String.valueOf(payNonATMDto.getDistrict().getId()));
 		fields.put("AVS_Country", "VN");
 
 		String secureHash = hashAllFields(fields, OnePayConstant.ONEPAY_SECURE_SECRET);

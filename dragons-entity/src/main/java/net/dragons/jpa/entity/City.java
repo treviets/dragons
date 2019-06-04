@@ -5,15 +5,21 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name="city")
 @NamedQuery(name="City.findAll", query="SELECT c FROM City c")
 public class City {
+	
+	@JsonProperty("Id")
 	@Id
 	private int id;
 
+	@JsonProperty("Name")
 	private String name;
 
+	@JsonProperty("Status")
 	private boolean status;
 
 	public String getName() {
