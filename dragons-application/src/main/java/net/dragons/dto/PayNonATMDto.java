@@ -23,7 +23,7 @@ public class PayNonATMDto {
 	private String customerEmail;
 	
 	@JsonProperty("CustomerId")
-	private String customerId;
+	private int customerId;
 	
 	@JsonProperty("FullTextAddress")
 	private String fullTextAddress;
@@ -74,11 +74,11 @@ public class PayNonATMDto {
 		this.customerEmail = customerEmail;
 	}
 
-	public String getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 

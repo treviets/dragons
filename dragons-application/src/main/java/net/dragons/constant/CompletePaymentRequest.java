@@ -22,6 +22,9 @@ public class CompletePaymentRequest {
 	@JsonProperty("vpc_AcqResponseCode")
 	private String vpcAcqResponseCode;
 	
+	@JsonProperty("vpc_CurrencyCode")
+	private String vpcCurrencyCode;
+	
 	@JsonProperty("AgainLink")
 	private String againLink;
 	
@@ -108,6 +111,9 @@ public class CompletePaymentRequest {
 	
 	@JsonProperty("vpc_Locale")
 	private String vpcLocale;
+	
+	@JsonProperty("vpc_CommercialCard")
+	private String vpcCommercialCard;
 
 	/**
 	 * @return the vpcOrderInfo
@@ -596,4 +602,28 @@ public class CompletePaymentRequest {
 	public void setVpcLocale(String vpcLocale) {
 		this.vpcLocale = vpcLocale;
 	}
+
+	public String getVpcCommercialCard() {
+		return vpcCommercialCard;
+	}
+
+	public void setVpcCommercialCard(String vpcCommercialCard) {
+		this.vpcCommercialCard = vpcCommercialCard;
+	}
+	
+
+	/**
+	 * @return the vpcCurrencyCode
+	 */
+	public String getVpcCurrencyCode() {
+		return vpcCurrencyCode;
+	}
+
+	/**
+	 * @param vpcCurrencyCode the vpcCurrencyCode to set
+	 */
+	public void setVpcCurrencyCode(String vpcCurrencyCode) {
+		this.vpcCurrencyCode = vpcCurrencyCode;
+	}
+	
 }

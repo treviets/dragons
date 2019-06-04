@@ -90,6 +90,7 @@ public class PaymentController {
 
 		try {
 			String urlForNonATM = OnePayService.buildUrl(payNonATMDto);
+			transactionService.createTransactionNonATM(payNonATMDto);
 			
 			responseDto.setData(urlForNonATM);
 			responseDto.setStatus(HttpStatus.OK);
@@ -105,6 +106,10 @@ public class PaymentController {
 		ResponseDto responseDto = new ResponseDto();
 
 		CompletePaymentRequest responseNonATM = OnePayService.parseResponseNonATM(request);
+		
+		// Update result of payment
+		transactionService.updateTransactionNonATM(responseNonATM);
+		
 		if (!responseNonATM.getVpcTxnResponseCode().equals("0")) {
 			// Handle error message
 			return null;

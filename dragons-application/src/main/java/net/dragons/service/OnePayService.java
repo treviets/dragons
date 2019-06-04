@@ -369,7 +369,7 @@ public class OnePayService {
 		responseObject.setVpcAVSCountry(request.getParameter("vpc_AVS_Country"));
 		responseObject.setVpcAuthorizeId(request.getParameter("vpc_AuthorizeId"));
 		responseObject.setVpc3DSenrolled(request.getParameter("vpc_3DSenrolled"));
-		responseObject.setVpcRiskOverallResult(request.getParameter("vpc_RiskOverallResult"));
+		responseObject.setVpcCommercialCard (request.getParameter("vpc_CommercialCard"));
 		responseObject.setVpcReceiptNo(request.getParameter("vpc_ReceiptNo"));
 		responseObject.setVpcTransactionNo(request.getParameter("vpc_TransactionNo"));
 		responseObject.setVpcAVSStateProv(request.getParameter("vpc_AVS_StateProv"));
@@ -394,6 +394,7 @@ public class OnePayService {
 		responseObject.setVpcVerSecurityLevel(request.getParameter("vpc_VerSecurityLevel"));
 		responseObject.setVpc3DSXID(request.getParameter("vpc_3DSXID"));
 		responseObject.setVpcAVSCity(request.getParameter("vpc_AVS_City"));
+		responseObject.setVpcCurrencyCode(request.getParameter("vpc_CurrencyCode"));
 		
 		return responseObject;
 	}
@@ -402,41 +403,44 @@ public class OnePayService {
 		boolean isValid = false;
 
 		Map<String, String> fields = new HashMap<String, String>();
-
-		fields.put("vpc_OrderInfo", result.getVpcOrderInfo());
-		fields.put("vpc_3DSECI", result.getVpc3DSECI());
-		fields.put("vpc_AVS_Street01", result.getVpcAVSStreet01());
-		fields.put("vpc_Merchant", result.getVpcMerchant());
-		fields.put("vpc_Card", result.getVpcCard());
-		fields.put("vpc_AcqResponseCode", result.getVpcAcqResponseCode());
-		fields.put("AgainLink", result.getAgainLink());
-		fields.put("vpc_AVS_Country", result.getVpcAVSCountry());
-		fields.put("vpc_AuthorizeId", result.getVpcAuthorizeId());
-		fields.put("vpc_3DSenrolled", result.getVpc3DSenrolled());
-		fields.put("vpc_RiskOverallResult", result.getVpcRiskOverallResult());
-		fields.put("vpc_ReceiptNo", result.getVpcReceiptNo());
-		fields.put("vpc_TransactionNo", result.getVpcTransactionNo());
-		fields.put("vpc_AVS_StateProv", result.getVpcAVSStateProv());
-		fields.put("vpc_Locale", result.getVpcLocale());
-		fields.put("vpc_TxnResponseCode", result.getVpcTxnResponseCode());
-		fields.put("vpc_VerToken", result.getVpcVerToken());
-		fields.put("vpc_Amount", result.getVpcAmount());
-		fields.put("vpc_BatchNo", result.getVpcBatchNo());
-		fields.put("vpc_Version", result.getVpcVersion());
-		fields.put("vpc_AVSResultCode", result.getVpcAVSResultCode());
-		fields.put("vpc_VerStatus", result.getVpcVerStatus());
 		fields.put("vpc_Command", result.getVpcCommand());
-		fields.put("vpc_Message", result.getVpcMessage());
-		fields.put("Title", result.getTitle());
-		fields.put("vpc_3DSstatus", result.getVpc3DSstatus());
-		fields.put("vpc_CardNum", result.getVpcCardNum());
-		fields.put("vpc_AVS_PostCode", result.getVpcAVSPostCode());
-		fields.put("vpc_CSCResultCode", result.getVpcCSCResultCode());
+		fields.put("vpc_Locale", result.getVpcLocale());
 		fields.put("vpc_MerchTxnRef", result.getVpcMerchTxnRef());
-		fields.put("vpc_VerType", result.getVpcVerType());
-		fields.put("vpc_VerSecurityLevel", result.getVpcVerSecurityLevel());
-		fields.put("vpc_3DSXID", result.getVpc3DSXID());
-		fields.put("vpc_AVS_City", result.getVpcAVSCity());
+		fields.put("vpc_Merchant", result.getVpcMerchant());
+		fields.put("vpc_OrderInfo", result.getVpcOrderInfo());
+		fields.put("vpc_Amount", result.getVpcAmount());
+		fields.put("vpc_TxnResponseCode", result.getVpcTxnResponseCode());
+		fields.put("vpc_TransactionNo", result.getVpcTransactionNo());
+		fields.put("vpc_Message", result.getVpcMessage());
+		fields.put("vpc_AcqResponseCode", result.getVpcAcqResponseCode());
+		fields.put("vpc_AuthorizeId", result.getVpcAuthorizeId());
+		fields.put("vpc_Card", result.getVpcCard());
+		fields.put("vpc_3DSECI", result.getVpc3DSECI());
+		fields.put("vpc_3DSenrolled", result.getVpc3DSenrolled());
+		fields.put("vpc_3DSstatus", result.getVpc3DSstatus());
+		fields.put("vpc_CommercialCard ", result.getVpcCommercialCard ());
+		
+		
+//		fields.put("vpc_AVS_Street01", result.getVpcAVSStreet01());
+//		fields.put("AgainLink", result.getAgainLink());
+//		fields.put("vpc_AVS_Country", result.getVpcAVSCountry());
+//		fields.put("vpc_3DSenrolled", result.getVpc3DSenrolled());
+//		fields.put("vpc_RiskOverallResult", result.getVpcRiskOverallResult());
+//		fields.put("vpc_ReceiptNo", result.getVpcReceiptNo());
+//		fields.put("vpc_AVS_StateProv", result.getVpcAVSStateProv());
+//		fields.put("vpc_VerToken", result.getVpcVerToken());
+//		fields.put("vpc_BatchNo", result.getVpcBatchNo());
+//		fields.put("vpc_Version", result.getVpcVersion());
+//		fields.put("vpc_AVSResultCode", result.getVpcAVSResultCode());
+//		fields.put("vpc_VerStatus", result.getVpcVerStatus());
+//		fields.put("Title", result.getTitle());
+//		fields.put("vpc_CardNum", result.getVpcCardNum());
+//		fields.put("vpc_AVS_PostCode", result.getVpcAVSPostCode());
+//		fields.put("vpc_CSCResultCode", result.getVpcCSCResultCode());
+//		fields.put("vpc_VerType", result.getVpcVerType());
+//		fields.put("vpc_VerSecurityLevel", result.getVpcVerSecurityLevel());
+//		fields.put("vpc_3DSXID", result.getVpc3DSXID());
+//		fields.put("vpc_AVS_City", result.getVpcAVSCity());
 
 		String secureHash = hashAllFields(fields, OnePayConstant.ONEPAY_SECURE_SECRET);
 		if (result.getVpcSecureHash().equalsIgnoreCase(secureHash)) {
