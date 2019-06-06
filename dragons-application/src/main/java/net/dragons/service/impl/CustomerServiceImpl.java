@@ -108,8 +108,7 @@ public class CustomerServiceImpl implements CustomerService {
 			customerNewRepository.save(customer);
 		} catch (Exception e) {
 			System.out.println("++++++++++++++++++++");
-			System.out.print(e.getMessage());
-
+			e.printStackTrace();
 		}
 
 		return customer.getId();

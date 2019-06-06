@@ -86,6 +86,10 @@ public class LoginController {
 		customerDto.setGoogleid(request.getParameter("Googleid"));
 		customerDto.setAvatar(request.getParameter("Img"));
 		
+		customerDto.setFirstname(request.getParameter("Firstname"));
+		customerDto.setLastname(request.getParameter("Lastname"));
+		customerDto.setFullname(request.getParameter("Fullname"));
+		
 		String userId = request.getParameter("userId");
 		if (userId != null && !userId.equals("")) {
 			customerDto.setUserId(Integer.parseInt(userId));
