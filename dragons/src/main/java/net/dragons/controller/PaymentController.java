@@ -62,8 +62,10 @@ public class PaymentController {
 			transactionService.updateTransactionATM(responseATM);
 			
 			if (!responseATM.getVpcTxnResponseCode().equals("0")) {
-				// Handle error message
-				return null;
+				responseDto.setMessage("THANH TOAN THAT BAI");
+				responseDto.setStatus(HttpStatus.BAD_GATEWAY);
+				
+				return responseDto;
 			}
 			
 			boolean isSuccessPayment = OnePayService.validateATMResult(responseATM);
@@ -112,17 +114,11 @@ public class PaymentController {
 		
 		if (!responseNonATM.getVpcTxnResponseCode().equals("0")) {
 			// Handle error message
-			return null;
-		}
-		
-		boolean isSuccessPayment = OnePayService.validateNonATMResult(responseNonATM);
-		
-		if (isSuccessPayment) {
-			responseDto.setMessage("THANH TOAN THANH CONG");
-			responseDto.setStatus(HttpStatus.OK);
-		} else {
 			responseDto.setMessage("THANH TOAN THAT BAI");
 			responseDto.setStatus(HttpStatus.BAD_GATEWAY);
+		} else {
+			responseDto.setMessage("THANH TOAN THANH CONG");
+			responseDto.setStatus(HttpStatus.OK);
 		}
 
 		return responseDto;

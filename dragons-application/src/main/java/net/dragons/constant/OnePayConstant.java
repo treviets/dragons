@@ -5,8 +5,8 @@ public final class OnePayConstant {
         
 	}
 	
-//	public static final String API_DOMAIN = "http://api.thedragonshost.com:8080";
-	public static final String API_DOMAIN = "http://localhost:8080/dragons";
+	public static final String API_DOMAIN = "http://api.thedragonshost.com:8080/dragons";
+//	public static final String API_DOMAIN = "http://localhost:8080/dragons";
 	/*************************************************************************************
 							CONSTANT FOR ATM
 	*/

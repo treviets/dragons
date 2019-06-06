@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PayATMDto {
 
-	@JsonProperty("MerchantOrderId")
-	private String merchantOrderId;
+//	@JsonProperty("MerchantOrderId")
+//	private String merchantOrderId;
 	
 	@JsonProperty("OrderCode")
 	private String orderCode;
@@ -22,13 +22,13 @@ public class PayATMDto {
 	@JsonProperty("CustomerId")
 	private int customerId;
 	
-	public String getMerchantOrderId() {
-		return merchantOrderId;
-	}
-
-	public void setMerchantOrderId(String merchantOrderId) {
-		this.merchantOrderId = merchantOrderId;
-	}
+//	public String getMerchantOrderId() {
+//		return merchantOrderId;
+//	}
+//
+//	public void setMerchantOrderId(String merchantOrderId) {
+//		this.merchantOrderId = merchantOrderId;
+//	}
 
 	public String getOrderCode() {
 		return orderCode;

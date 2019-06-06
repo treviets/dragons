@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -41,13 +42,20 @@ public class OnePayService {
 		decodeHexArray['e'] = decodeHexArray['E'];
 		decodeHexArray['f'] = decodeHexArray['F'];
 	}
+	
+	private static String generateMerchantOrderId() {
+		 UUID uuid = UUID.randomUUID();
+	     String randomUUIDString = uuid.toString();
+	     
+	     return randomUUIDString;
+	}
 
 	public static String buildUrl(PayNonATMDto payNonATMDto) {
 		Map<String, String> fields = new HashMap<String, String>();
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_MERCHANT_ID);
 		fields.put("vpc_AccessCode", OnePayConstant.ONEPAY_ACCESS_CODE);
-		fields.put("vpc_MerchTxnRef", payNonATMDto.getMerchantOrderId());
+		fields.put("vpc_MerchTxnRef", generateMerchantOrderId());
 		fields.put("vpc_OrderInfo", payNonATMDto.getOrderCode());
 		fields.put("vpc_Amount", String.valueOf((int) payNonATMDto.getTotalAmount() * 100));
 		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_RETURN_URL);
@@ -100,7 +108,7 @@ public class OnePayService {
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_ATM_MERCHANT_ID);
 		fields.put("vpc_AccessCode", OnePayConstant.ONEPAY_ATM_ACCESS_CODE);
-		fields.put("vpc_MerchTxnRef", payATMDto.getMerchantOrderId());
+		fields.put("vpc_MerchTxnRef", generateMerchantOrderId());
 		fields.put("vpc_OrderInfo", payATMDto.getOrderCode());
 		fields.put("vpc_Amount", String.valueOf((int) payATMDto.getTotalAmount() * 100));
 		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_ATM_RETURN_URL);

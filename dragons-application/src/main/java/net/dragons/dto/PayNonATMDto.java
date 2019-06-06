@@ -7,9 +7,9 @@ import net.dragons.jpa.entity.District;
 
 public class PayNonATMDto {
 
-	@JsonProperty("MerchantOrderId")
-	private String merchantOrderId;
-	
+//	@JsonProperty("MerchantOrderId")
+//	private String merchantOrderId;
+//	
 	@JsonProperty("OrderCode")
 	private String orderCode;
 	
@@ -34,13 +34,13 @@ public class PayNonATMDto {
 	@JsonProperty("District")
 	private District district;
 
-	public String getMerchantOrderId() {
-		return merchantOrderId;
-	}
-
-	public void setMerchantOrderId(String merchantOrderId) {
-		this.merchantOrderId = merchantOrderId;
-	}
+//	public String getMerchantOrderId() {
+//		return merchantOrderId;
+//	}
+//
+//	public void setMerchantOrderId(String merchantOrderId) {
+//		this.merchantOrderId = merchantOrderId;
+//	}
 
 	public String getOrderCode() {
 		return orderCode;
