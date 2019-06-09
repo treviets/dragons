@@ -1,6 +1,7 @@
 package net.dragons.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -105,7 +106,26 @@ public class TransactionServiceImpl implements TransactionService {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+	}
+
+	@Override
+	public List<Transaction> findAll() {		
+		return transactionRepository.findAll();
+	}
+
+	@Override
+	public List<Transaction> findByPaymentType(String paymentType) {
+		return transactionRepository.findByPaymentType(paymentType);
+	}
+
+	@Override
+	public List<Transaction> findByPaymentStatus(String status) {
+		return transactionRepository.findByStatus(status);
+	}
+
+	@Override
+	public List<Transaction> findByCustomerId(long customerId) {
+		return transactionRepository.findByCustomerId(customerId);
 	}
 
 
