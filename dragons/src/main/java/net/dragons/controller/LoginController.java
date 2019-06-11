@@ -36,14 +36,14 @@ public class LoginController {
 	
 	@RequestMapping(value = "/account", method = RequestMethod.POST)
 	@ResponseBody
-	public Object login(@RequestBody CustomerDto customerNewDto) throws Exception {
+	public Object login(HttpServletRequest request) throws Exception {
 		// check account ton tai
 		CustomerNewEntity customerNewEntity = new CustomerNewEntity();
 		ResponseLoginDto loginDto = new ResponseLoginDto();
 		
 		ResponseDto response = new ResponseDto();
-		String email = customerNewDto.getEmail();
-		String password = customerNewDto.getPassword();
+		String email = request.getParameter("Email");
+		String password = request.getParameter("Password");
 
 		customerNewEntity = customerService.getByEmail(email);
 
