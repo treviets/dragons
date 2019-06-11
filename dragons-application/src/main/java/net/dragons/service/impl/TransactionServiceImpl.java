@@ -56,7 +56,11 @@ public class TransactionServiceImpl implements TransactionService {
 		tran.setMessage(request.getVcpMessage());
 		tran.setResponseCode(request.getVpcTxnResponseCode());
 		tran.setTransactionNumber(request.getVpcTransactionNo());
-		tran.setStatus("FINISHED");
+		if (request.getVpcTxnResponseCode().equals("0")) {
+			tran.setStatus("SUCCESS");
+		} else {
+			tran.setStatus("FAILED");
+		}
 		
 		try {
 			transactionRepository.save(tran);
@@ -99,7 +103,11 @@ public class TransactionServiceImpl implements TransactionService {
 		tran.setMessage(request.getVpcMessage());
 		tran.setResponseCode(request.getVpcTxnResponseCode());
 		tran.setTransactionNumber(request.getVpcTransactionNo());
-		tran.setStatus("FINISHED");
+		if (request.getVpcTxnResponseCode().equals("0")) {
+			tran.setStatus("SUCCESS");
+		} else {
+			tran.setStatus("FAILED");
+		}
 		
 		try {
 			transactionRepository.save(tran);

@@ -43,7 +43,7 @@ public class TransactionController {
 
 	@RequestMapping(value = "/by_customer", method = RequestMethod.GET) 
 	@ResponseBody
-	public ResponseDto findByCustomerId(@RequestParam("customerId") long customerId) throws Exception {
+	public ResponseDto findByCustomerId(@RequestParam("customerId") Long customerId) throws Exception {
 		ResponseDto response = new ResponseDto();
 		
 		try {
