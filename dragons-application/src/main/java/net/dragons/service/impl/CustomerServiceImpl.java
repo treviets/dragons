@@ -1,6 +1,7 @@
 package net.dragons.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getById(Long customerId) {
-		return customerRepository.findById(customerId);
+		Optional<Customer> existingCustomer = customerRepository.findById(customerId);
+		if (existingCustomer.isPresent()) {
+			return existingCustomer.get();
+		}
+		return null;
+		
 	}
 
 	@Override
@@ -164,53 +170,57 @@ public class CustomerServiceImpl implements CustomerService {
 	public CustomerDetailDto getCustomerDetail(Long customerId) {
 		CustomerDetailDto dto = new CustomerDetailDto();
 
-		Customer customer = customerRepository.findById(customerId);
-		if (customer != null) {
+		Optional<Customer> existingCustomer = customerRepository.findById(customerId);
+		if (existingCustomer.isPresent()) {
+			Customer customer = existingCustomer.get();
 			dto.setCustomer(customer);
+			
+			SocialLinkAccount result = socialLinkRepository.findByUserId(customerId.intValue());
+			dto.setSocialLinkAccount(result);
+
+			List<Language> languages = languageService.findAll();
+			if (languages != null && !languages.isEmpty()) {
+				dto.setLanguage(languages);
+			}
+
+			List<Currency> currency = currencyService.findAll();
+			if (currency != null && !currency.isEmpty()) {
+				dto.setCurrency(currency);
+			}
 		}
-
-		SocialLinkAccount result = socialLinkRepository.findByUserId(customerId.intValue());
-		dto.setSocialLinkAccount(result);
-
-		List<Language> languages = languageService.findAll();
-		if (languages != null && !languages.isEmpty()) {
-			dto.setLanguage(languages);
-		}
-
-		List<Currency> currency = currencyService.findAll();
-		if (currency != null && !currency.isEmpty()) {
-			dto.setCurrency(currency);
-		}
-
+		
 		return dto;
 	}
 
 	@Override
 	public void updateCustomerDetail(CustomerDetailDto dto) {
-		Customer customer = customerRepository.findById(dto.getCustomer().getId());
+		Optional<Customer> existingCustomer = customerRepository.findById(dto.getCustomer().getId());
+		if (existingCustomer.isPresent()) {
+			Customer customer = existingCustomer.get();
+			
+			if (dto.getCustomer().getPassword() == "") {
+				customer.setPassword(customer.getPassword());
+			} else {
+				String pass = BCrypt.hashpw(dto.getCustomer().getPassword(), BCrypt.gensalt(12));
+				customer.setPassword(pass);
+			}
 
-		if (dto.getCustomer().getPassword() == "") {
-			customer.setPassword(customer.getPassword());
-		} else {
-			String pass = BCrypt.hashpw(dto.getCustomer().getPassword(), BCrypt.gensalt(12));
-			customer.setPassword(pass);
+			customer.setAvatar(dto.getCustomer().getAvatar());
+			customer.setDateOfBirth(dto.getCustomer().getDateOfBirth());
+			customer.setEmail(dto.getCustomer().getEmail());
+			customer.setFirstName(dto.getCustomer().getFirstName());
+			customer.setHometown(dto.getCustomer().getHometown());
+			customer.setIntroduction(dto.getCustomer().getIntroduction());
+			customer.setLastName(dto.getCustomer().getLastName());
+			customer.setPhone(dto.getCustomer().getPhone());
+			customer.setPreferCurrency(dto.getCustomer().getPreferCurrency());
+			customer.setPreferLanguage(dto.getCustomer().getPreferLanguage());
+			customer.setSchool(dto.getCustomer().getSchool());
+			customer.setWork(dto.getCustomer().getWork());
+			customer.setWorkEmail(dto.getCustomer().getWorkEmail());
+
+			customerRepository.save(customer);
 		}
-
-		customer.setAvatar(dto.getCustomer().getAvatar());
-		customer.setDateOfBirth(dto.getCustomer().getDateOfBirth());
-		customer.setEmail(dto.getCustomer().getEmail());
-		customer.setFirstName(dto.getCustomer().getFirstName());
-		customer.setHometown(dto.getCustomer().getHometown());
-		customer.setIntroduction(dto.getCustomer().getIntroduction());
-		customer.setLastName(dto.getCustomer().getLastName());
-		customer.setPhone(dto.getCustomer().getPhone());
-		customer.setPreferCurrency(dto.getCustomer().getPreferCurrency());
-		customer.setPreferLanguage(dto.getCustomer().getPreferLanguage());
-		customer.setSchool(dto.getCustomer().getSchool());
-		customer.setWork(dto.getCustomer().getWork());
-		customer.setWorkEmail(dto.getCustomer().getWorkEmail());
-
-		customerRepository.save(customer);
 	}
 
 }

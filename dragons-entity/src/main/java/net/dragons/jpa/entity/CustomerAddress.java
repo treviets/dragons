@@ -10,10 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
-/**
- * The persistent class for the customer_addresses database table.
- * 
- */
+
 @Entity
 @Table(name="customer_addresses")
 @NamedQuery(name="CustomerAddress.findAll", query="SELECT c FROM CustomerAddress c")

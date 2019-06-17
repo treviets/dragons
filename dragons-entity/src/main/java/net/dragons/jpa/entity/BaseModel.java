@@ -15,7 +15,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import util.Utils;
 
 
 /**
@@ -68,11 +67,5 @@ public class BaseModel implements Serializable {
 		this.createdAt = createdAt;
 	}
 	
-	public String getCreatedAtFormatVN() {
-		return Utils.getDatetimeFormatVN(createdAt);
-	}
-	
-	public String getUpdatedAtFormatVN() {
-		return Utils.getDatetimeFormatVN(updatedAt);
-	}
+
 }

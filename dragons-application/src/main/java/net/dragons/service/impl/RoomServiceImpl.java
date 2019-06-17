@@ -8,6 +8,9 @@ import java.util.stream.Stream;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.dragons.jpa.entity.Room;
@@ -31,6 +34,12 @@ public class RoomServiceImpl implements RoomService {
 	@Autowired
 	EntityManager entityManager;
 
+	@Override
+	public Page<Room> getAll(int pageNumber, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		return roomRepository.findAll(pageable);
+	}
+	
 	@Override
 	public List<Room> getAll() {
 		return roomRepository.findAll();

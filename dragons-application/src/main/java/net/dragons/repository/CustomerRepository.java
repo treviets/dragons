@@ -3,6 +3,8 @@
  */
 package net.dragons.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import net.dragons.jpa.entity.Customer;
@@ -13,7 +15,7 @@ import net.dragons.jpa.entity.Customer;
  */
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
 	
-	Customer findById(Long id);
+	Optional<Customer> findById(Long id);
 	
 	Customer findByPhone(String phone);
 }

@@ -3,8 +3,6 @@ package net.dragons.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.dragons.jpa.entity.Accessibility;

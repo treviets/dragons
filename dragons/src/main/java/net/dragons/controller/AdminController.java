@@ -5,13 +5,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
+import net.dragons.constant.TheDragonHostConstant;
 import net.dragons.dto.AdminBookingDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.dto.RoomImageDto;
@@ -51,13 +54,13 @@ public class AdminController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/room/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/room/all/{page}", method = RequestMethod.GET)
 	@ResponseBody
-	public Object getAllRooms(HttpServletRequest request) throws Exception {
+	public Object getAllRooms(@PathVariable Integer page) throws Exception {
 		ResponseDto response = new ResponseDto();
 		
 		try {
-			List<Room> result = roomService.getAll();
+			Page<Room> result = roomService.getAll(page, TheDragonHostConstant.PAGE_SIZE);
 			response.setData(result);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

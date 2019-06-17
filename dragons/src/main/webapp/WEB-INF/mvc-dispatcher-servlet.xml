@@ -50,7 +50,9 @@
    
     <!-- Swagger -->
     <bean id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"/>
-
+	
+	<bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
+	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	    <!-- SMTP settings -->
 	    <property name="host" value="smtp.gmail.com" />

@@ -2,6 +2,7 @@ package net.dragons.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,24 +51,26 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	@Override
 	public void updateTransactionATM(CompleteATMPaymentRequest request) {
-		Transaction tran = transactionRepository.findOne(tranId);
-		
-		tran.setAdditionalData(request.getVpcAdditionData());
-		tran.setMessage(request.getVcpMessage());
-		tran.setResponseCode(request.getVpcTxnResponseCode());
-		tran.setTransactionNumber(request.getVpcTransactionNo());
-		if (request.getVpcTxnResponseCode().equals("0")) {
-			tran.setStatus("SUCCESS");
-		} else {
-			tran.setStatus("FAILED");
+		Optional<Transaction> existingTransaction = transactionRepository.findById(tranId);
+		if (existingTransaction.isPresent()) {
+			Transaction tran = existingTransaction.get();
+			
+			tran.setAdditionalData(request.getVpcAdditionData());
+			tran.setMessage(request.getVcpMessage());
+			tran.setResponseCode(request.getVpcTxnResponseCode());
+			tran.setTransactionNumber(request.getVpcTransactionNo());
+			
+			if (request.getVpcTxnResponseCode().equals("0")) {
+				tran.setStatus("SUCCESS");
+			} else {
+				tran.setStatus("FAILED");
+			}	
+			try {
+				transactionRepository.save(tran);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
-		
-		try {
-			transactionRepository.save(tran);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		
 	}
 
 	@Override
@@ -97,23 +100,28 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	@Override
 	public void updateTransactionNonATM(CompletePaymentRequest request) {
-		Transaction tran = transactionRepository.findOne(tranId);
-		
-		tran.setAdditionalData("");
-		tran.setMessage(request.getVpcMessage());
-		tran.setResponseCode(request.getVpcTxnResponseCode());
-		tran.setTransactionNumber(request.getVpcTransactionNo());
-		if (request.getVpcTxnResponseCode().equals("0")) {
-			tran.setStatus("SUCCESS");
-		} else {
-			tran.setStatus("FAILED");
+		Optional<Transaction> existingTransaction = transactionRepository.findById(tranId);
+		if (existingTransaction.isPresent()) {
+			Transaction tran = existingTransaction.get();
+			
+			tran.setAdditionalData("");
+			tran.setMessage(request.getVpcMessage());
+			tran.setResponseCode(request.getVpcTxnResponseCode());
+			tran.setTransactionNumber(request.getVpcTransactionNo());
+			
+			if (request.getVpcTxnResponseCode().equals("0")) {
+				tran.setStatus("SUCCESS");
+			} else {
+				tran.setStatus("FAILED");
+			}
+			
+			try {
+				transactionRepository.save(tran);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 		
-		try {
-			transactionRepository.save(tran);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 
 	@Override

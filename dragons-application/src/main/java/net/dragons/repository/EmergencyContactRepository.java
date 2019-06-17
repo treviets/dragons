@@ -3,6 +3,8 @@
  */
 package net.dragons.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import net.dragons.jpa.entity.EmergencyContact;
 
@@ -12,6 +14,6 @@ import net.dragons.jpa.entity.EmergencyContact;
  */
 public interface EmergencyContactRepository extends JpaRepository<EmergencyContact, Long>{
 	
-	EmergencyContact findById(Long id);
+	Optional<EmergencyContact> findById(Long id);
 	
 }
