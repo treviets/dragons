@@ -1,6 +1,7 @@
 package net.dragons.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,12 @@ public class HomeServiceImpl implements HomeService {
 
 	@Override
 	public Home findById(Long homeId) {
-		return homeRepository.findById(homeId);
+		Optional<Home> existingHome = homeRepository.findById(homeId);
+		if (existingHome.isPresent()) {
+			return existingHome.get();
+		}
+		
+		return new Home();
 	}
 	
 	

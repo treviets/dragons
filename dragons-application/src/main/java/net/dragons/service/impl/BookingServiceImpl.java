@@ -3,6 +3,7 @@ package net.dragons.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,8 +65,12 @@ public class BookingServiceImpl implements BookingService {
 		
 		bookingRepository.save(booking);
 		
-		Customer customer = customerRepository.findById(bookingDto.getCustomerId());
-		emailService.send("The dragon host booking", "Đã book phòng", customer.getEmail());
+		Optional<Customer> existingCustomer = customerRepository.findById(bookingDto.getCustomerId());
+		if (existingCustomer.isPresent()) {
+			Customer customer = existingCustomer.get();
+			emailService.send("The dragon host booking", "Đã book phòng", customer.getEmail());
+		}
+		
 		
 		return booking.getId();
 		} catch (ParseException e) {

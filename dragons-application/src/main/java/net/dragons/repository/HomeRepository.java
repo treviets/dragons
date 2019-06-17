@@ -3,6 +3,8 @@
  */
 package net.dragons.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import net.dragons.jpa.entity.Home;
 
@@ -12,5 +14,5 @@ import net.dragons.jpa.entity.Home;
  */
 public interface HomeRepository extends JpaRepository<Home, Long>{
 	
-	Home findById(Long id);
+	Optional<Home> findById(Long id);
 }

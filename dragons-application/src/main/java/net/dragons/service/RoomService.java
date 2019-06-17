@@ -2,10 +2,16 @@ package net.dragons.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import net.dragons.jpa.entity.Room;
 
 public interface RoomService {
 
+	
+	Page<Room> getAll(int pageNumber, int pageSize);
+	
+	
 	List<Room> getAll();
 	
 	List<Room> getByHomeId(Long homeId);
