@@ -1,9 +1,5 @@
 package net.dragons.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -13,13 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.annotations.Api;
 import net.dragons.constant.TheDragonHostConstant;
-import net.dragons.dto.AdminBookingDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.dto.RoomImageDto;
+import net.dragons.jpa.entity.Booking;
 import net.dragons.jpa.entity.Room;
 import net.dragons.service.AdminService;
+import net.dragons.service.BookingService;
 import net.dragons.service.RoomImageService;
 import net.dragons.service.RoomService;
 
@@ -35,6 +33,10 @@ public class AdminController {
 	private RoomService roomService;
 	
 	@Autowired
+	private BookingService bookingService;
+	
+	
+	@Autowired
 	private RoomImageService roomImageService;
 
 	@RequestMapping(value = "/booking/all/{page}", method = RequestMethod.GET)
@@ -43,7 +45,7 @@ public class AdminController {
 		ResponseDto response = new ResponseDto();
 		
 		try {
-			Page<AdminBookingDto> result = adminService.getBooking(page, TheDragonHostConstant.PAGE_SIZE);
+			Page<Booking> result = bookingService.getAll(page, TheDragonHostConstant.PAGE_SIZE);
 			response.setData(result);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

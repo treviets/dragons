@@ -14,7 +14,7 @@ import io.swagger.annotations.Api;
 import net.dragons.onepay.CompleteATMPaymentRequest;
 import net.dragons.onepay.CompletePaymentRequest;
 import net.dragons.onepay.PaymentResponseATM;
-import net.dragons.onepay.TheDragonHostConstant;
+import net.dragons.constant.TheDragonHostConstant;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.dto.ResponseDto;
