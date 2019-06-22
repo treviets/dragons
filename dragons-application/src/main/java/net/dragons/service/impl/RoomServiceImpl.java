@@ -109,6 +109,19 @@ public class RoomServiceImpl implements RoomService {
 	public Room findById(Long roomId) {
 		return roomRepository.findById(roomId);
 	}
+
+	@Override
+	public Long create(Room room) {
+		// TODO Auto-generated method stub
+		Room r = new Room();
+		try {
+			r = roomRepository.save(room);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return r.getId();
+		
+	}
 	
 	
 
