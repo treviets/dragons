@@ -10,9 +10,9 @@ import net.dragons.jpa.entity.Transaction;
 
 public interface TransactionService {
 	
-	long createTransactionATM(PayATMDto payATMDto);
+	Transaction createTransactionATM(PayATMDto payATMDto);
 	
-	long createTransactionNonATM(PayNonATMDto payNonATMDto);
+	Transaction createTransactionNonATM(PayNonATMDto payNonATMDto);
 	
 	void updateTransactionATM(CompleteATMPaymentRequest request);
 	

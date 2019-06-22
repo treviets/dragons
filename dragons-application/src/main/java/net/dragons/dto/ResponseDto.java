@@ -15,6 +15,16 @@ public class ResponseDto {
 	@JsonProperty("Data")
 	private Object data;
 	
+	public ResponseDto() {
+		
+	}
+	
+	public ResponseDto(HttpStatus status, String message, Object data) {
+		this.data = data;
+		this.message = message;
+		this.status = status;
+	}
+	
 	public Object getData() {
 		return data;
 	}

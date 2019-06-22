@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import net.dragons.constant.CompleteATMPaymentRequest;
 import net.dragons.constant.CompletePaymentRequest;
+import net.dragons.constant.TheDragonHostConstant;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.jpa.entity.Transaction;
 import net.dragons.repository.TransactionRepository;
+import net.dragons.service.ParsingService;
 import net.dragons.service.TransactionService;
 
 @Service
@@ -24,27 +26,29 @@ public class TransactionServiceImpl implements TransactionService {
 	private long tranId = 0;
 	
 	@Override
-	public long createTransactionATM(PayATMDto payATMDto) {
+	public Transaction createTransactionATM(PayATMDto payATMDto) {
 		Transaction tran = new Transaction();
 		
 		tran.setCreatedAt(new Date());
 		tran.setCustomerEmail(payATMDto.getCustomerEmail());
 		tran.setCustomerId(payATMDto.getCustomerId());
 		tran.setCustomerPhone(payATMDto.getCustomerPhone());
-		tran.setPaymentType("ATM");
+		tran.setPaymentType(TheDragonHostConstant.PAY_WITH_ATM);
 		tran.setMessage("");
 		tran.setTotalAmount(payATMDto.getTotalAmount());
-		tran.setStatus("PROCESSING");
+		tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_PROCESSING);
 		tran.setTransactionNumber("");
+		tran.setMerchTxnRef(payATMDto.getMerchTxnRef());
+		
+		tran.setResponseData("");
 		
 		try {
 			transactionRepository.save(tran);
-			tranId = tran.getId();
 			
-			return tranId;
+			return tran;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return 0;
+			return null;
 		}
 		
 	}
@@ -60,10 +64,13 @@ public class TransactionServiceImpl implements TransactionService {
 			tran.setResponseCode(request.getVpcTxnResponseCode());
 			tran.setTransactionNumber(request.getVpcTransactionNo());
 			
+			String responseData = ParsingService.toString(request);
+			tran.setResponseData(responseData);
+			
 			if (request.getVpcTxnResponseCode().equals("0")) {
-				tran.setStatus("SUCCESS");
+				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_SUCCESS);
 			} else {
-				tran.setStatus("FAILED");
+				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_FAILED);
 			}	
 			try {
 				transactionRepository.save(tran);
@@ -74,27 +81,28 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public long createTransactionNonATM(PayNonATMDto payNonATMDto) {
+	public Transaction createTransactionNonATM(PayNonATMDto payNonATMDto) {
 		Transaction tran = new Transaction();
 		
 		tran.setCreatedAt(new Date());
 		tran.setCustomerEmail(payNonATMDto.getCustomerEmail());
 		tran.setCustomerId(payNonATMDto.getCustomerId());
 		tran.setCustomerPhone(payNonATMDto.getCustomerPhone());
-		tran.setPaymentType("Non_ATM");
+		tran.setPaymentType(TheDragonHostConstant.PAY_WITH_NON_ATM);
 		tran.setMessage("");
 		tran.setTotalAmount(payNonATMDto.getTotalAmount());
-		tran.setStatus("PROCESSING");
+		tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_PROCESSING);
 		tran.setTransactionNumber("");
+		tran.setResponseData("");
 		
 		try {
 			transactionRepository.save(tran);
 			tranId = tran.getId();
 			
-			return tranId;
+			return tran;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 	
@@ -108,11 +116,12 @@ public class TransactionServiceImpl implements TransactionService {
 			tran.setMessage(request.getVpcMessage());
 			tran.setResponseCode(request.getVpcTxnResponseCode());
 			tran.setTransactionNumber(request.getVpcTransactionNo());
+			tran.setResponseData("");
 			
 			if (request.getVpcTxnResponseCode().equals("0")) {
-				tran.setStatus("SUCCESS");
+				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_SUCCESS);
 			} else {
-				tran.setStatus("FAILED");
+				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_FAILED);
 			}
 			
 			try {

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.constant.CompleteATMPaymentRequest;
 import net.dragons.constant.CompletePaymentRequest;
+import net.dragons.constant.PaymentResponseATM;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.dto.ResponseDto;
+import net.dragons.jpa.entity.Transaction;
 import net.dragons.service.OnePayService;
 import net.dragons.service.TransactionService;
 
@@ -37,9 +39,9 @@ public class PaymentController {
 			String urlForATM = OnePayService.buildUrlATM(payATMDto);	
 			
 			// Create new record in database
-			transactionService.createTransactionATM(payATMDto);
+			Transaction transaction = transactionService.createTransactionATM(payATMDto);
 			
-			responseDto.setData(urlForATM);
+			responseDto.setData(new PaymentResponseATM(urlForATM, transaction));
 			responseDto.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
 			responseDto.setMessage(ex.getMessage());
@@ -92,9 +94,9 @@ public class PaymentController {
 
 		try {
 			String urlForNonATM = OnePayService.buildUrl(payNonATMDto);
-			transactionService.createTransactionNonATM(payNonATMDto);
+			Transaction transaction = transactionService.createTransactionNonATM(payNonATMDto);
 			
-			responseDto.setData(urlForNonATM);
+			responseDto.setData(new PaymentResponseATM(urlForNonATM, transaction));
 			responseDto.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();

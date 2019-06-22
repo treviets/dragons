@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import net.dragons.dto.AdminBookingDto;
@@ -58,6 +59,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public Page<AdminBookingDto> getBooking(Integer pageNumber, Integer pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

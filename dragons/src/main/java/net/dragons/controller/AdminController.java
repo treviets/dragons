@@ -37,13 +37,13 @@ public class AdminController {
 	@Autowired
 	private RoomImageService roomImageService;
 
-	@RequestMapping(value = "/booking/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/booking/all/{page}", method = RequestMethod.GET)
 	@ResponseBody
-	public Object getAllBookings(HttpServletRequest request) throws Exception {
+	public Object getAllBookings(@PathVariable Integer page) throws Exception {
 		ResponseDto response = new ResponseDto();
 		
 		try {
-			List<AdminBookingDto> result = adminService.getBooking();
+			Page<AdminBookingDto> result = adminService.getBooking(page, TheDragonHostConstant.PAGE_SIZE);
 			response.setData(result);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {

@@ -53,17 +53,25 @@ public class Transaction {
 	@Column(name = "vpc_transaction_no")
 	private String transactionNumber;
 	
+	@JsonProperty("MerchTxnRef")
+	@Column(name = "vpc_merch_txn_ref")
+	private String merchTxnRef ;
+	
 	@JsonProperty("Status")
 	@Column(name = "status")
-	private String status;
+	private int status;
 
 	@JsonProperty("PaymentType")
 	@Column(name = "payment_type")
-	private String paymentType;
+	private int paymentType;
 	
 	@JsonProperty("AdditionalData")
 	@Column(name = "vpc_addition_data")
 	private String additionalData;
+	
+	@JsonProperty("ResponseData")
+	@Column(name = "response_data")
+	private String responseData;
 	
 	public long getId() {
 		return id;
@@ -137,11 +145,11 @@ public class Transaction {
 		this.transactionNumber = transactionNumber;
 	}
 
-	public String getPaymentType() {
+	public int getPaymentType() {
 		return paymentType;
 	}
 
-	public void setPaymentType(String paymentType) {
+	public void setPaymentType(int paymentType) {
 		this.paymentType = paymentType;
 	}
 
@@ -153,12 +161,30 @@ public class Transaction {
 		this.additionalData = additionalData;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 	
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public String getResponseData() {
+		return responseData;
+	}
+
+	public void setResponseData(String responseData) {
+		this.responseData = responseData;
+	}
+
+	public String getMerchTxnRef() {
+		return merchTxnRef;
+	}
+
+	public void setMerchTxnRef(String merchTxnRef) {
+		this.merchTxnRef = merchTxnRef;
+	}
+	
+	
 	
 }

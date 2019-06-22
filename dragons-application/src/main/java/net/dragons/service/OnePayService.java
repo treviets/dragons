@@ -108,7 +108,7 @@ public class OnePayService {
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_ATM_MERCHANT_ID);
 		fields.put("vpc_AccessCode", OnePayConstant.ONEPAY_ATM_ACCESS_CODE);
-		fields.put("vpc_MerchTxnRef", generateMerchantOrderId());
+		fields.put("vpc_MerchTxnRef", payATMDto.getMerchTxnRef());
 		fields.put("vpc_OrderInfo", payATMDto.getOrderCode());
 		fields.put("vpc_Amount", String.valueOf((int) payATMDto.getTotalAmount() * 100));
 		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_ATM_RETURN_URL);
@@ -117,16 +117,16 @@ public class OnePayService {
 		fields.put("vpc_Locale", "vn");
 		fields.put("vpc_Currency", "VND");
 		fields.put("vpc_TicketNo", "149.28.147.158");
-		fields.put("AgainLink", OnePayConstant.API_DOMAIN);
+		fields.put("AgainLink", "https://tdh.thedragonshost.com");
 		fields.put("Title", "Thanh toan tien dat phong TheDragonsHost");
 
 		String secureHash = hashAllFields(fields, OnePayConstant.ONEPAY_ATM_SECURE_SECRET);
-		System.out.println(secureHash);
 		fields.put("vpc_SecureHash", secureHash);
 
 		StringBuffer buf = new StringBuffer();
 		buf.append(OnePayConstant.ONEPAY_ATM_PROCESS_URL).append('?');
 		appendQueryFields(buf, fields);
+		
 		return buf.toString();
 	}
 
