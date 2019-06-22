@@ -17,9 +17,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 
-import net.dragons.constant.CompleteATMPaymentRequest;
-import net.dragons.constant.CompletePaymentRequest;
-import net.dragons.constant.OnePayConstant;
+import net.dragons.onepay.CompleteATMPaymentRequest;
+import net.dragons.onepay.CompletePaymentRequest;
+import net.dragons.onepay.OnePayConstant;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.jpa.entity.CustomerAddress;

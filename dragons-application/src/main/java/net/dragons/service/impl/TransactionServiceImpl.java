@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.dragons.constant.CompleteATMPaymentRequest;
-import net.dragons.constant.CompletePaymentRequest;
-import net.dragons.constant.TheDragonHostConstant;
+import net.dragons.onepay.CompleteATMPaymentRequest;
+import net.dragons.onepay.CompletePaymentRequest;
+import net.dragons.onepay.TheDragonHostConstant;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.jpa.entity.Transaction;
@@ -106,8 +106,10 @@ public class TransactionServiceImpl implements TransactionService {
 		tran.setMessage(request.getVpcMessage());
 		tran.setResponseCode(request.getVpcTxnResponseCode());
 		tran.setTransactionNumber(request.getVpcTransactionNo());
-		tran.setResponseData("");
 
+		String responseData = ParsingService.toString(request);
+		tran.setResponseData(responseData);
+		
 		if (request.getVpcTxnResponseCode().equals("0")) {
 			tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_SUCCESS);
 		} else {

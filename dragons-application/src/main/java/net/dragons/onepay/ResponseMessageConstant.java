@@ -1,4 +1,4 @@
-package net.dragons.constant;
+package net.dragons.onepay;
 
 import java.util.HashMap;
 import java.util.Map;

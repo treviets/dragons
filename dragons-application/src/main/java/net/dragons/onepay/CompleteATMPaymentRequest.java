@@ -1,4 +1,4 @@
-package net.dragons.constant;
+package net.dragons.onepay;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

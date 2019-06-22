@@ -2,8 +2,8 @@ package net.dragons.service;
 
 import java.util.List;
 
-import net.dragons.constant.CompleteATMPaymentRequest;
-import net.dragons.constant.CompletePaymentRequest;
+import net.dragons.onepay.CompleteATMPaymentRequest;
+import net.dragons.onepay.CompletePaymentRequest;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.jpa.entity.Transaction;
