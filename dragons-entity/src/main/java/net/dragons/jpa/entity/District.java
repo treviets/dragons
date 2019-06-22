@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="districts")
+@Table(name="district")
 @NamedQuery(name="District.findAll", query="SELECT p FROM District p")
 public class District {
 	

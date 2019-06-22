@@ -71,14 +71,6 @@ public class Room {
 	@JsonProperty("Bath")
 	@Column(name="bath") 
 	private Integer bath;
-	
-	@JsonProperty("District")
-	@Column(name="district")
-	private Integer district;
-	
-	@JsonProperty("Province")
-	@Column(name="province")
-	private Integer province;
 
 	@JsonProperty("Status")
 	@Column(name="status")
@@ -147,22 +139,6 @@ public class Room {
 
 	public void setRentalType(Integer rentalType) {
 		this.rentalType = rentalType;
-	}
-
-	public Integer getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(Integer district) {
-		this.district = district;
-	}
-
-	public Integer getProvince() {
-		return province;
-	}
-
-	public void setProvince(Integer province) {
-		this.province = province;
 	}
 
 	public Integer getStatus() {

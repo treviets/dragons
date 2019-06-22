@@ -44,6 +44,10 @@ public class Home {
 	@Column(name="address")
 	private String address;
 	
+	@JsonProperty("District")
+	@Column(name="district")
+	private String district;
+	
 	@JsonProperty("City")
 	@Column(name="city")
 	private String city;
@@ -86,6 +90,14 @@ public class Home {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
 	public String getCity() {

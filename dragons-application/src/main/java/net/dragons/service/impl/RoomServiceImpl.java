@@ -112,7 +112,6 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public Long create(Room room) {
-		// TODO Auto-generated method stub
 		Room r = new Room();
 		try {
 			r = roomRepository.save(room);
