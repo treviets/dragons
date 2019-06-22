@@ -134,4 +134,11 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 		return roomDetailDto;
 	}
 
+	@Override
+	public RoomDetail create(RoomDetailDto dto) {
+		
+		
+		return null;
+	}
+
 }

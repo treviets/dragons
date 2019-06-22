@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.constant.TheDragonHostConstant;
 import net.dragons.dto.ResponseDto;
+import net.dragons.dto.RoomDetailDto;
 import net.dragons.dto.RoomImageDto;
 import net.dragons.jpa.entity.Booking;
 import net.dragons.jpa.entity.Room;
-import net.dragons.service.AdminService;
+import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.service.BookingService;
+import net.dragons.service.RoomDetailService;
 import net.dragons.service.RoomImageService;
 import net.dragons.service.RoomService;
 
@@ -25,19 +27,20 @@ import net.dragons.service.RoomService;
 @RequestMapping("/admin")
 @Api(value = "Admin API Endpoint", description = "Admin Data Entities Endpoint")
 public class AdminController {
-
-	@Autowired
-	private AdminService adminService;
-	
-	@Autowired
-	private RoomService roomService;
 	
 	@Autowired
 	private BookingService bookingService;
 	
+	@Autowired
+	private RoomService roomService;	
+
+	@Autowired
+	private RoomDetailService roomDetailService;
 	
 	@Autowired
 	private RoomImageService roomImageService;
+	
+	
 
 	@RequestMapping(value = "/booking/all/{page}", method = RequestMethod.GET)
 	@ResponseBody
@@ -91,6 +94,42 @@ public class AdminController {
 		return response;
 	}
 	
+	@RequestMapping(value = "/room/create", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseDto addRoom(@RequestBody Room dto) throws Exception {
+		ResponseDto response = new ResponseDto();
+		
+		try {
+			Long roomId = roomService.create(dto);
+			response.setData(roomId);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/room_detail/create", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseDto addRoomDetail(@RequestBody RoomDetailDto dto) throws Exception {
+		ResponseDto response = new ResponseDto();
+		
+		try {
+			RoomDetail roomDetail = roomDetailService.create(dto);
+			
+			response.setData(roomDetail);
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+
+		return response;
+	}
+	
+	
 	@RequestMapping(value = "/room_image/add", method = RequestMethod.POST)
 	@ResponseBody
 	public Object addImageForRoom(@RequestBody RoomImageDto roomImages) throws Exception {
@@ -99,7 +138,7 @@ public class AdminController {
 		try {
 			roomImageService.createList(roomImages);
 			response.setData("");
-			response.setMessage("Đã cập nhật thông tin phòng");
+			response.setMessage("Da them hinh");
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
 			response.setStatus(HttpStatus.BAD_GATEWAY);

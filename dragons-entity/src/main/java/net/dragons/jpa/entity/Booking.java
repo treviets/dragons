@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -69,6 +71,11 @@ public class Booking {
 	@JsonProperty("BookingStatus")
 	@Column(name="booking_status")
 	private Integer bookingStatus;
+	
+	@JsonProperty("Room")
+	@OneToOne()
+	@JoinColumn(name="room_id", insertable=false, updatable=false, nullable=false)
+	private Room room;
 	
 	public Long getId() {
 		return id;
@@ -156,6 +163,14 @@ public class Booking {
 
 	public void setHomeId(Long homeId) {
 		this.homeId = homeId;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 	
 	

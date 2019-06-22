@@ -1,4 +1,4 @@
-package net.dragons.onepay;
+package net.dragons.constant;
 
 public final class TheDragonHostConstant {
 	

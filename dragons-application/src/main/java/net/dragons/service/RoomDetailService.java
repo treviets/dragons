@@ -10,4 +10,6 @@ public interface RoomDetailService {
 	List<RoomDetail> getAll();
 	
 	RoomDetailDto getByRoomId(Long roomId);
+	
+	RoomDetail create(RoomDetailDto dto);
 }
