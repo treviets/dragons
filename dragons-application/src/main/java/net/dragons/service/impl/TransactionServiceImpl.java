@@ -2,7 +2,6 @@ package net.dragons.service.impl;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +21,11 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
 	TransactionRepository transactionRepository;
-	
-	private long tranId = 0;
-	
+
 	@Override
 	public Transaction createTransactionATM(PayATMDto payATMDto) {
 		Transaction tran = new Transaction();
-		
+
 		tran.setCreatedAt(new Date());
 		tran.setCustomerEmail(payATMDto.getCustomerEmail());
 		tran.setCustomerId(payATMDto.getCustomerId());
@@ -38,52 +35,48 @@ public class TransactionServiceImpl implements TransactionService {
 		tran.setTotalAmount(payATMDto.getTotalAmount());
 		tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_PROCESSING);
 		tran.setTransactionNumber("");
-		tran.setMerchTxnRef(payATMDto.getMerchTxnRef());
-		
+		tran.setMerchTxnRef(payATMDto.getMerchTrxRef());
 		tran.setResponseData("");
-		
+
 		try {
 			transactionRepository.save(tran);
-			
+
 			return tran;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
+
 	@Override
 	public void updateTransactionATM(CompleteATMPaymentRequest request) {
-		Optional<Transaction> existingTransaction = transactionRepository.findById(tranId);
-		if (existingTransaction.isPresent()) {
-			Transaction tran = existingTransaction.get();
-			
-			tran.setAdditionalData(request.getVpcAdditionData());
-			tran.setMessage(request.getVcpMessage());
-			tran.setResponseCode(request.getVpcTxnResponseCode());
-			tran.setTransactionNumber(request.getVpcTransactionNo());
-			
-			String responseData = ParsingService.toString(request);
-			tran.setResponseData(responseData);
-			
-			if (request.getVpcTxnResponseCode().equals("0")) {
-				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_SUCCESS);
-			} else {
-				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_FAILED);
-			}	
-			try {
-				transactionRepository.save(tran);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+		Transaction tran = transactionRepository.findOneByMerchTxnRef(request.getVpcMerchTxnRef());
+
+		tran.setAdditionalData(request.getVpcAdditionData());
+		tran.setMessage(request.getVcpMessage());
+		tran.setResponseCode(request.getVpcTxnResponseCode());
+		tran.setTransactionNumber(request.getVpcTransactionNo());
+
+		String responseData = ParsingService.toString(request);
+		tran.setResponseData(responseData);
+
+		if (request.getVpcTxnResponseCode().equals("0")) {
+			tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_SUCCESS);
+		} else {
+			tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_FAILED);
+		}
+		try {
+			transactionRepository.save(tran);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 
 	@Override
 	public Transaction createTransactionNonATM(PayNonATMDto payNonATMDto) {
 		Transaction tran = new Transaction();
-		
+
 		tran.setCreatedAt(new Date());
 		tran.setCustomerEmail(payNonATMDto.getCustomerEmail());
 		tran.setCustomerId(payNonATMDto.getCustomerId());
@@ -94,47 +87,43 @@ public class TransactionServiceImpl implements TransactionService {
 		tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_PROCESSING);
 		tran.setTransactionNumber("");
 		tran.setResponseData("");
-		
+		tran.setMerchTxnRef(payNonATMDto.getMerchTrxRef());
 		try {
 			transactionRepository.save(tran);
-			tranId = tran.getId();
-			
+
 			return tran;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
-	
+
 	@Override
 	public void updateTransactionNonATM(CompletePaymentRequest request) {
-		Optional<Transaction> existingTransaction = transactionRepository.findById(tranId);
-		if (existingTransaction.isPresent()) {
-			Transaction tran = existingTransaction.get();
-			
-			tran.setAdditionalData("");
-			tran.setMessage(request.getVpcMessage());
-			tran.setResponseCode(request.getVpcTxnResponseCode());
-			tran.setTransactionNumber(request.getVpcTransactionNo());
-			tran.setResponseData("");
-			
-			if (request.getVpcTxnResponseCode().equals("0")) {
-				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_SUCCESS);
-			} else {
-				tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_FAILED);
-			}
-			
-			try {
-				transactionRepository.save(tran);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+		Transaction tran = transactionRepository.findOneByMerchTxnRef(request.getVpcMerchTxnRef());
+
+		tran.setAdditionalData("");
+		tran.setMessage(request.getVpcMessage());
+		tran.setResponseCode(request.getVpcTxnResponseCode());
+		tran.setTransactionNumber(request.getVpcTransactionNo());
+		tran.setResponseData("");
+
+		if (request.getVpcTxnResponseCode().equals("0")) {
+			tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_SUCCESS);
+		} else {
+			tran.setStatus(TheDragonHostConstant.PAYMENT_STATUS_FAILED);
 		}
-		
+
+		try {
+			transactionRepository.save(tran);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 	}
 
 	@Override
-	public List<Transaction> findAll() {		
+	public List<Transaction> findAll() {
 		return transactionRepository.findAll();
 	}
 
@@ -152,6 +141,5 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<Transaction> findByCustomerId(long customerId) {
 		return transactionRepository.findByCustomerId(customerId);
 	}
-
 
 }

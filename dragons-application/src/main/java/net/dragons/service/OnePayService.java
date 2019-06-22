@@ -55,8 +55,8 @@ public class OnePayService {
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_MERCHANT_ID);
 		fields.put("vpc_AccessCode", OnePayConstant.ONEPAY_ACCESS_CODE);
-		fields.put("vpc_MerchTxnRef", generateMerchantOrderId());
-		fields.put("vpc_OrderInfo", payNonATMDto.getOrderCode());
+		fields.put("vpc_MerchTxnRef", payNonATMDto.getMerchTrxRef());
+		fields.put("vpc_OrderInfo", payNonATMDto.getOrderInfor());
 		fields.put("vpc_Amount", String.valueOf((int) payNonATMDto.getTotalAmount() * 100));
 		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_RETURN_URL);
 		fields.put("vpc_Version", "2");
@@ -108,8 +108,8 @@ public class OnePayService {
 
 		fields.put("vpc_Merchant", OnePayConstant.ONEPAY_ATM_MERCHANT_ID);
 		fields.put("vpc_AccessCode", OnePayConstant.ONEPAY_ATM_ACCESS_CODE);
-		fields.put("vpc_MerchTxnRef", payATMDto.getMerchTxnRef());
-		fields.put("vpc_OrderInfo", payATMDto.getOrderCode());
+		fields.put("vpc_MerchTxnRef", payATMDto.getMerchTrxRef());
+		fields.put("vpc_OrderInfo", payATMDto.getOrderInfor());
 		fields.put("vpc_Amount", String.valueOf((int) payATMDto.getTotalAmount() * 100));
 		fields.put("vpc_ReturnURL", OnePayConstant.ONEPAY_ATM_RETURN_URL);
 		fields.put("vpc_Version", "2");

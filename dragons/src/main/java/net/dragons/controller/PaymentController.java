@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import net.dragons.constant.CompleteATMPaymentRequest;
 import net.dragons.constant.CompletePaymentRequest;
 import net.dragons.constant.PaymentResponseATM;
+import net.dragons.constant.TheDragonHostConstant;
 import net.dragons.dto.PayATMDto;
 import net.dragons.dto.PayNonATMDto;
 import net.dragons.dto.ResponseDto;
@@ -64,19 +65,18 @@ public class PaymentController {
 			transactionService.updateTransactionATM(responseATM);
 			
 			if (!responseATM.getVpcTxnResponseCode().equals("0")) {
-				responseDto.setMessage("THANH TOAN THAT BAI");
+				responseDto.setMessage(TheDragonHostConstant.PAYMENT_FAILED_MESSAGE);
 				responseDto.setStatus(HttpStatus.BAD_GATEWAY);
-				
 				return responseDto;
 			}
 			
 			boolean isSuccessPayment = OnePayService.validateATMResult(responseATM);
 			
 			if (isSuccessPayment) {
-				responseDto.setMessage("THANH TOAN THANH CONG");
+				responseDto.setMessage(TheDragonHostConstant.PAYMENT_SUCCESS_MESSAGE);
 				responseDto.setStatus(HttpStatus.OK);
 			} else {
-				responseDto.setMessage("THANH TOAN THAT BAI");
+				responseDto.setMessage(TheDragonHostConstant.PAYMENT_FAILED_MESSAGE);
 				responseDto.setStatus(HttpStatus.BAD_GATEWAY);
 			}
 		} catch (Exception ex) {
@@ -116,10 +116,10 @@ public class PaymentController {
 		
 		if (!responseNonATM.getVpcTxnResponseCode().equals("0")) {
 			// Handle error message
-			responseDto.setMessage("THANH TOAN THAT BAI");
+			responseDto.setMessage(TheDragonHostConstant.PAYMENT_FAILED_MESSAGE);
 			responseDto.setStatus(HttpStatus.BAD_GATEWAY);
 		} else {
-			responseDto.setMessage("THANH TOAN THANH CONG");
+			responseDto.setMessage(TheDragonHostConstant.PAYMENT_SUCCESS_MESSAGE);
 			responseDto.setStatus(HttpStatus.OK);
 		}
 

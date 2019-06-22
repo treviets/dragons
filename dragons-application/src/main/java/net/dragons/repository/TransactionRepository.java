@@ -23,4 +23,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long>{
 	
 	List<Transaction> findByPaymentType(String paymentType);
 	
+	Transaction findOneByMerchTxnRef(String merchTxnRef);
+	
 }

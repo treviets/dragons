@@ -25,4 +25,5 @@ public interface TransactionService {
 	List<Transaction> findByPaymentStatus(String status);
 	
 	List<Transaction> findByCustomerId(long customerId);
+	
 }

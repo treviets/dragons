@@ -7,8 +7,8 @@ public class PayATMDto {
 	@JsonProperty("MerchTxnRef")
 	private String merchTrxRef;
 	
-	@JsonProperty("OrderCode")
-	private String orderCode;
+	@JsonProperty("OrderInfor")
+	private String orderInfor;
 	
 	@JsonProperty("TotalAmount")
 	private float totalAmount;
@@ -22,20 +22,13 @@ public class PayATMDto {
 	@JsonProperty("CustomerId")
 	private int customerId;
 	
-	public String getMerchTxnRef() {
-		return merchTrxRef;
+
+	public String getOrderInfor() {
+		return orderInfor;
 	}
 
-	public void setMerchTxnRef(String merchTrxRef) {
-		this.merchTrxRef = merchTrxRef;
-	}
-
-	public String getOrderCode() {
-		return orderCode;
-	}
-
-	public void setOrderCode(String orderCode) {
-		this.orderCode = orderCode;
+	public void setOrderInfor(String orderInfor) {
+		this.orderInfor = orderInfor;
 	}
 
 	public float getTotalAmount() {
@@ -69,5 +62,14 @@ public class PayATMDto {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
+
+	public String getMerchTrxRef() {
+		return merchTrxRef;
+	}
+
+	public void setMerchTrxRef(String merchTrxRef) {
+		this.merchTrxRef = merchTrxRef;
+	}
+	
 	
 }
