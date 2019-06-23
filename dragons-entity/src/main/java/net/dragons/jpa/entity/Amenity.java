@@ -42,6 +42,7 @@ public class Amenity {
 	@Column(name="description") 
 	private String description;
 	
+	@JsonProperty("AmenityCategory")
 	@ManyToOne
 	@JoinColumn(name="category_id", insertable = false, updatable = false)
 	private AmenityCategory amenityCategory;

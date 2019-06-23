@@ -42,6 +42,7 @@ public class Accessibility {
 	@Column(name="description") 
 	private String description;
 	
+	@JsonProperty("AccessibilityCategory")
 	@ManyToOne
 	@JoinColumn(name="category_id", insertable = false, updatable = false)
 	private AccessibilityCategory accessibilityCategory;
