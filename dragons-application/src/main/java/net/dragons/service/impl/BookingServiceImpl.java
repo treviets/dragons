@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +34,8 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	EmailService emailService;
 	
+	private ModelMapper modelMapper = new ModelMapper();
+	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(
 	            "yyyy-MM-dd HH:mm:ss");
 
@@ -55,6 +58,7 @@ public class BookingServiceImpl implements BookingService {
 	public Long create(BookingDto bookingDto) {
 		try {
 		Booking booking = new Booking();
+		
 		booking.setCustomerId(bookingDto.getCustomerId());
 		booking.setHomeId(bookingDto.getHomeId());
 		booking.setFromDate(dateFormat.parse(bookingDto.getFromDate()));
@@ -66,6 +70,7 @@ public class BookingServiceImpl implements BookingService {
 		booking.setNumberOfNights(bookingDto.getNumberOfNights());
 		booking.setBookingStatus(BookingStatusConstant.CREATED);
 		
+		
 		bookingRepository.save(booking);
 		
 		Optional<Customer> existingCustomer = customerRepository.findById(bookingDto.getCustomerId());
@@ -73,8 +78,6 @@ public class BookingServiceImpl implements BookingService {
 			Customer customer = existingCustomer.get();
 			emailService.send("The dragon host booking", "Đã book phòng", customer.getEmail());
 		}
-		
-		
 		return booking.getId();
 		} catch (ParseException e) {
 			e.printStackTrace();

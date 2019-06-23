@@ -71,7 +71,7 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 	}
 
 	@Override
-	public RoomDetailDto getByRoomId(Long roomId) {
+	public RoomDetail getByRoomId(Long roomId) {
 		if (roomId == 0) {
 			return null;
 		}
@@ -84,54 +84,19 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 		
 		RoomDetail detail = new RoomDetail();
 		detail = roomDetailRepository.findByRoomId(roomId);
-		
-		String amenity = detail.getAmenity();
-		String[] amenitiesId = amenity.split(",");
-		
-		ArrayList<Long> idList = new ArrayList<Long>();
-		for (String id : amenitiesId)
-			idList.add(Long.valueOf(id).longValue());
-		mapper.map(detail, roomDetailDto);
-		if (idList.size() > 0) {
-			List<Amenity> amenities = amenityRepository.findByIdIn(idList);
-			roomDetailDto.setAmenities(amenities);
-		}
 
-		String accessibility = detail.getAccessibility();
-		String[] accessibilitiesId = accessibility.split(",");
+//		List<BnbBooking> bnbBookings = bnbBookingRepository.findByRoomId(roomId);
+//		for (BnbBooking bnbBooknig : bnbBookings) {
+//			bookingDates.add(new BookingDateDto(bnbBooknig.getFromDate(), bnbBooknig.getToDate()));
+//		}
 		
-		ArrayList<Long> idAccessibilityList = new ArrayList<Long>();
-		for (String id : accessibilitiesId)
-			idAccessibilityList.add(Long.valueOf(id).longValue());
-		if (idList.size() > 0) {
-			List<Accessibility> accessibilities = accessibilityRepository.findByIdIn(idAccessibilityList);
-			roomDetailDto.setAccessibilities(accessibilities);
-		}
-
-		String policyStr = detail.getPolicy();
-		String[] policyArr = policyStr.split(",");
-		if (policyArr.length > 0) {
-			List<Long> ids = Arrays.asList(policyArr).stream().map(s -> Long.parseLong(s.trim()))
-					.collect(Collectors.toList());
-			List<Policy> policies = policyRepository.findByIdIn(ids);
-			roomDetailDto.setPolicies(policies);
-		}
+//		List<Booking> bookings = bookingRepository.findByRoomId(roomId);
+//		for (Booking booking : bookings) {
+//			bookingDates.add(new BookingDateDto(booking.getFromDate(), booking.getToDate()));
+//		}
 		
-		List<BookingDateDto> bookingDates = new ArrayList<>();
 		
-		List<BnbBooking> bnbBookings = bnbBookingRepository.findByRoomId(roomId);
-		for (BnbBooking bnbBooknig : bnbBookings) {
-			bookingDates.add(new BookingDateDto(bnbBooknig.getFromDate(), bnbBooknig.getToDate()));
-		}
-		
-		List<Booking> bookings = bookingRepository.findByRoomId(roomId);
-		for (Booking booking : bookings) {
-			bookingDates.add(new BookingDateDto(booking.getFromDate(), booking.getToDate()));
-		}
-		
-		roomDetailDto.setBookingDates(bookingDates);
-		
-		return roomDetailDto;
+		return detail;
 	}
 
 	@Override

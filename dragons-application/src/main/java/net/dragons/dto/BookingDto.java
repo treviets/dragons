@@ -30,6 +30,9 @@ public class BookingDto {
 	
 	@JsonProperty("TotalAmount")
 	private Double totalAmount;
+	
+	@JsonProperty("TransactionNumber")
+	private String transactionNumber;
 
 	public Long getCustomerId() {
 		return customerId;
@@ -102,8 +105,13 @@ public class BookingDto {
 	public void setNumberOfNights(double numberOfNights) {
 		this.numberOfNights = numberOfNights;
 	}
-	
-	
-	
+
+	public String getTransactionNumber() {
+		return transactionNumber;
+	}
+
+	public void setTransactionNumber(String transactionNumber) {
+		this.transactionNumber = transactionNumber;
+	}
 
 }

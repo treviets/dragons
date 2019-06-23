@@ -62,7 +62,7 @@ public class PaymentController {
 			CompleteATMPaymentRequest responseATM = OnePayService.parseResponseATM(request);
 			
 			// Update result of payment
-			transactionService.updateTransactionATM(responseATM);
+			Transaction tran = transactionService.updateTransactionATM(responseATM);
 			
 			if (!responseATM.getVpcTxnResponseCode().equals("0")) {
 				responseDto.setMessage(TheDragonHostConstant.PAYMENT_FAILED_MESSAGE);
@@ -75,15 +75,14 @@ public class PaymentController {
 			if (isSuccessPayment) {
 				responseDto.setMessage(TheDragonHostConstant.PAYMENT_SUCCESS_MESSAGE);
 				responseDto.setStatus(HttpStatus.OK);
+				responseDto.setData(tran);
 			} else {
 				responseDto.setMessage(TheDragonHostConstant.PAYMENT_FAILED_MESSAGE);
 				responseDto.setStatus(HttpStatus.BAD_GATEWAY);
 			}
 		} catch (Exception ex) {
-			
+			ex.printStackTrace();
 		}
-		
-
 		return responseDto;
 	}
 	

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="room_policy")
-@NamedQuery(name="RoomPolicy.findAll", query="SELECT a FROM RoomPolicy a")
-public class RoomPolicy {
+@Table(name="room_accessibility")
+@NamedQuery(name="RoomAccessibility.findAll", query="SELECT a FROM RoomAccessibility a")
+public class RoomAccessibility {
 	
 	@JsonProperty("Id")
 	@Id
@@ -35,15 +36,21 @@ public class RoomPolicy {
 	@Column(name="room_id")
 	private Long roomId;
 	
-	@JsonProperty("PolicyId")
-	@Column(name="policy_id") 
-	private Long policyId;
+	@JsonProperty("AccessibilityId")
+	@Column(name="accessibility_id") 
+	private Long accessibilityId;
 	
 	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name="room_id", insertable=false, updatable=false, nullable=false)
-	private RoomDetail roomPolicy;
+	private RoomDetail roomAccessibility;
 
+	@JsonProperty("Accessibility")
+	@OneToOne()
+	@JoinColumn(name="accessibility_id", insertable=false, updatable=false, nullable=false)
+	private Accessibility accessibility;
+
+	
 	public Long getId() {
 		return id;
 	}
@@ -60,20 +67,29 @@ public class RoomPolicy {
 		this.roomId = roomId;
 	}
 
-	public Long getPolicyId() {
-		return policyId;
+	public Long getAccessibilityId() {
+		return accessibilityId;
 	}
 
-	public void setPolicyId(Long policyId) {
-		this.policyId = policyId;
+	public void setAccessibilityId(Long accessibilityId) {
+		this.accessibilityId = accessibilityId;
 	}
 
-	public RoomDetail getRoomPolicy() {
-		return roomPolicy;
+	public RoomDetail getRoomAccessibility() {
+		return roomAccessibility;
 	}
 
-	public void setRoomPolicy(RoomDetail roomPolicy) {
-		this.roomPolicy = roomPolicy;
+	public void setRoomAccessibility(RoomDetail roomAccessibility) {
+		this.roomAccessibility = roomAccessibility;
+	}
+
+
+	public Accessibility getAccessibility() {
+		return accessibility;
+	}
+
+	public void setAccessibility(Accessibility accessibility) {
+		this.accessibility = accessibility;
 	}
 
 	

@@ -72,6 +72,10 @@ public class Booking {
 	@Column(name="booking_status")
 	private Integer bookingStatus;
 	
+	@JsonProperty("TransactionNumber")
+	@Column(name="transaction_number")
+	private String transactionNumber;
+	
 	@JsonProperty("Room")
 	@OneToOne()
 	@JoinColumn(name="room_id", insertable=false, updatable=false, nullable=false)
@@ -172,7 +176,13 @@ public class Booking {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
-	
-	
+
+	public String getTransactionNumber() {
+		return transactionNumber;
+	}
+
+	public void setTransactionNumber(String transactionNumber) {
+		this.transactionNumber = transactionNumber;
+	}
 	
 }

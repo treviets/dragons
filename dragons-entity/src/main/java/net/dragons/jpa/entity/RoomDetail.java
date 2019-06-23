@@ -56,7 +56,7 @@ public class RoomDetail {
 	@Column(name="bath") 
 	private Integer bath;
 
-	@JsonProperty("description")
+	@JsonProperty("Description")
 	@Column(name="description") 
 	private String description;
 	
@@ -120,7 +120,6 @@ public class RoomDetail {
 	@Column(name="service_fee")
 	private String service_fee;
 	
-	
 	@JsonProperty("Reviews")
 	@OneToMany(mappedBy="roomDetailId")
 	private List<Review> reviews = new ArrayList<>();
@@ -129,6 +128,17 @@ public class RoomDetail {
 	@OneToMany(mappedBy="roomDetail")
 	private List<RoomImage> images = new ArrayList<>();
 	
+	@JsonProperty("Policies")
+	@OneToMany(mappedBy="roomPolicy")
+	private List<RoomPolicy> policies = new ArrayList<>();
+	
+	@JsonProperty("Amenities")
+	@OneToMany(mappedBy="roomAmenity")
+	private List<RoomAmenity> amenities = new ArrayList<>();
+	
+	@JsonProperty("Accessibilities")
+	@OneToMany(mappedBy="roomAccessibility")
+	private List<RoomAccessibility> accessibilities = new ArrayList<>();
 	
 	
 	public Long getId() {
@@ -329,6 +339,30 @@ public class RoomDetail {
 
 	public void setService_fee(String service_fee) {
 		this.service_fee = service_fee;
+	}
+
+	public List<RoomPolicy> getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(List<RoomPolicy> policies) {
+		this.policies = policies;
+	}
+
+	public List<RoomAmenity> getAmenities() {
+		return amenities;
+	}
+
+	public void setAmenities(List<RoomAmenity> amenities) {
+		this.amenities = amenities;
+	}
+
+	public List<RoomAccessibility> getAccessibilities() {
+		return accessibilities;
+	}
+
+	public void setAccessibilities(List<RoomAccessibility> accessibilities) {
+		this.accessibilities = accessibilities;
 	}
 
 	

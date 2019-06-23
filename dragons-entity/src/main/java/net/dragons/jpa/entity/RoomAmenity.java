@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
-@Table(name="room_policy")
-@NamedQuery(name="RoomPolicy.findAll", query="SELECT a FROM RoomPolicy a")
-public class RoomPolicy {
+@Table(name="room_amenity")
+@NamedQuery(name="RoomAmenity.findAll", query="SELECT a FROM RoomAmenity a")
+public class RoomAmenity {
 	
 	@JsonProperty("Id")
 	@Id
@@ -35,14 +36,19 @@ public class RoomPolicy {
 	@Column(name="room_id")
 	private Long roomId;
 	
-	@JsonProperty("PolicyId")
-	@Column(name="policy_id") 
-	private Long policyId;
+	@JsonProperty("AmenityId")
+	@Column(name="amenity_id") 
+	private Long amenityId;
 	
 	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name="room_id", insertable=false, updatable=false, nullable=false)
-	private RoomDetail roomPolicy;
+	private RoomDetail roomAmenity;
+	
+	@JsonProperty("Amenity")
+	@OneToOne()
+	@JoinColumn(name="amenity_id", insertable=false, updatable=false, nullable=false)
+	private Amenity amenity;
 
 	public Long getId() {
 		return id;
@@ -60,21 +66,30 @@ public class RoomPolicy {
 		this.roomId = roomId;
 	}
 
-	public Long getPolicyId() {
-		return policyId;
+	public Long getAmenityId() {
+		return amenityId;
 	}
 
-	public void setPolicyId(Long policyId) {
-		this.policyId = policyId;
+	public void setAmenityId(Long amenityId) {
+		this.amenityId = amenityId;
 	}
 
-	public RoomDetail getRoomPolicy() {
-		return roomPolicy;
+	public RoomDetail getRoomAmenity() {
+		return roomAmenity;
 	}
 
-	public void setRoomPolicy(RoomDetail roomPolicy) {
-		this.roomPolicy = roomPolicy;
+	public void setRoomAmenity(RoomDetail roomAmenity) {
+		this.roomAmenity = roomAmenity;
 	}
 
+	public Amenity getAmenity() {
+		return amenity;
+	}
+
+	public void setAmenity(Amenity amenity) {
+		this.amenity = amenity;
+	}
 	
+	
+
 }

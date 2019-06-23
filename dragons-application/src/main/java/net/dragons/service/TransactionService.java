@@ -14,7 +14,7 @@ public interface TransactionService {
 	
 	Transaction createTransactionNonATM(PayNonATMDto payNonATMDto);
 	
-	void updateTransactionATM(CompleteATMPaymentRequest request);
+	Transaction updateTransactionATM(CompleteATMPaymentRequest request);
 	
 	Transaction updateTransactionNonATM(CompletePaymentRequest request);
 	

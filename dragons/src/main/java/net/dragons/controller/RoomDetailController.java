@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.dto.ResponseDto;
 import net.dragons.dto.RoomDetailDto;
+import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.service.RoomDetailService;
 
 @RestController
@@ -30,7 +31,7 @@ public class RoomDetailController {
 		ResponseDto response = new ResponseDto();
 
 		try {
-			RoomDetailDto room = roomDetailService.getByRoomId(roomId);
+			RoomDetail room = roomDetailService.getByRoomId(roomId);
 			response.setData(room);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
