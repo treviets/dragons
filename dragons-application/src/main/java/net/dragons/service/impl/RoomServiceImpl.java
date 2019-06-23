@@ -121,6 +121,11 @@ public class RoomServiceImpl implements RoomService {
 		return r.getId();
 		
 	}
+
+	@Override
+	public List<Room> getForICalendar() {
+		return roomRepository.findRoomByCalendar();
+	}
 	
 	
 

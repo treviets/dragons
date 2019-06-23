@@ -1,9 +1,7 @@
 package net.dragons.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -14,12 +12,8 @@ import org.springframework.stereotype.Service;
 
 import net.dragons.dto.BookingDateDto;
 import net.dragons.dto.RoomDetailDto;
-import net.dragons.jpa.entity.Accessibility;
-import net.dragons.jpa.entity.Amenity;
 import net.dragons.jpa.entity.BnbBooking;
 import net.dragons.jpa.entity.Booking;
-import net.dragons.jpa.entity.Policy;
-import net.dragons.jpa.entity.Room;
 import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.repository.AccessibilityRepository;
 import net.dragons.repository.AmenityRepository;
@@ -71,32 +65,35 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 	}
 
 	@Override
-	public RoomDetail getByRoomId(Long roomId) {
+	public RoomDetailDto getByRoomId(Long roomId) {
 		if (roomId == 0) {
 			return null;
 		}
-		RoomDetailDto roomDetailDto = new RoomDetailDto();
 		
-		Room room = roomRepository.findById(roomId);
-		if (room != null) {
-			roomDetailDto.setRoom(room);
+		RoomDetail detail = roomDetailRepository.findByRoomId(roomId);
+		if (detail == null) {
+			return null;
+		}
+
+		RoomDetailDto roomDetailDto = mapper.map(detail, RoomDetailDto.class);
+		
+		List<BookingDateDto> bookingDates = new ArrayList<BookingDateDto>();
+		
+		// Get booked date from Airbnb
+		List<BnbBooking> bnbBookings = bnbBookingRepository.findByRoomId(roomId);
+		for (BnbBooking bnbBooknig : bnbBookings) {
+			bookingDates.add(new BookingDateDto(bnbBooknig.getFromDate(), bnbBooknig.getToDate()));
 		}
 		
-		RoomDetail detail = new RoomDetail();
-		detail = roomDetailRepository.findByRoomId(roomId);
-
-//		List<BnbBooking> bnbBookings = bnbBookingRepository.findByRoomId(roomId);
-//		for (BnbBooking bnbBooknig : bnbBookings) {
-//			bookingDates.add(new BookingDateDto(bnbBooknig.getFromDate(), bnbBooknig.getToDate()));
-//		}
+		// Get booked date from thedragonshost
+		List<Booking> bookings = bookingRepository.findByRoomId(roomId);
+		for (Booking booking : bookings) {
+			bookingDates.add(new BookingDateDto(booking.getFromDate(), booking.getToDate()));
+		}
 		
-//		List<Booking> bookings = bookingRepository.findByRoomId(roomId);
-//		for (Booking booking : bookings) {
-//			bookingDates.add(new BookingDateDto(booking.getFromDate(), booking.getToDate()));
-//		}
+		roomDetailDto.setBookingDates(bookingDates);
 		
-		
-		return detail;
+		return roomDetailDto;
 	}
 
 	@Override

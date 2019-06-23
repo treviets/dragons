@@ -50,6 +50,10 @@ public class BnbBooking {
 	@Column(name="summary")
 	private String summary;
 	
+	@JsonProperty("LastBooking")
+	@Column(name="last_booking")
+	private String lastBooking;
+	
 	public Long getId() {
 		return id;
 	}
@@ -96,6 +100,14 @@ public class BnbBooking {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public String getLastBooking() {
+		return lastBooking;
+	}
+
+	public void setLastBooking(String lastBooking) {
+		this.lastBooking = lastBooking;
 	}
 	
 }

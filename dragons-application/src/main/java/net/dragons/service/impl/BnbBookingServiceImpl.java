@@ -41,6 +41,15 @@ public class BnbBookingServiceImpl implements BnbBookingService {
 	public List<BnbBooking> getAll() {
 		return bnbBookingRepository.findAll();
 	}
+
+	@Override
+	public boolean checkSynchronizeCalendar(Long roomId, String lastBooking) {
+		BnbBooking bnbBooking = bnbBookingRepository.findOneByRoomIdAndLastBooking(roomId, lastBooking);
+		if (bnbBooking != null) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 	

@@ -1,20 +1,21 @@
 package net.dragons.dto;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.dragons.jpa.entity.Accessibility;
-import net.dragons.jpa.entity.Amenity;
-import net.dragons.jpa.entity.Policy;
 import net.dragons.jpa.entity.Review;
-import net.dragons.jpa.entity.Room;
+import net.dragons.jpa.entity.RoomAccessibility;
+import net.dragons.jpa.entity.RoomAmenity;
 import net.dragons.jpa.entity.RoomImage;
+import net.dragons.jpa.entity.RoomPolicy;
 
 public class RoomDetailDto {
 
 	@JsonProperty("Id")
+	@Column(name="id")
 	private Long id;
 	
 	@JsonProperty("RoomId")
@@ -22,6 +23,9 @@ public class RoomDetailDto {
 
 	@JsonProperty("Title")
 	private String title;
+	
+	@JsonProperty("Amenity")
+	private String amenity;
 	
 	@JsonProperty("Bedroom")
 	private Integer bedroom;
@@ -46,12 +50,18 @@ public class RoomDetailDto {
 	
 	@JsonProperty("OtherThings")
 	private String other_things;
-		
+	
 	@JsonProperty("GetAround")
 	private String get_around;
 	
 	@JsonProperty("AboutNeighborhood")
 	private String about_neighborhood;
+	
+	@JsonProperty("Accessibility")
+	private String accessibility;
+	
+	@JsonProperty("Policy")
+	private String policy;
 	
 	@JsonProperty("AdditionalRules")
 	private String additional_rules;
@@ -74,26 +84,23 @@ public class RoomDetailDto {
 	@JsonProperty("ServiceFee")
 	private String service_fee;
 	
-	@JsonProperty("Room")
-	private Room room;
-	
 	@JsonProperty("Reviews")
-	private List<Review> reviews = new ArrayList<>();
+	private List<Review> reviews;
 	
 	@JsonProperty("Images")
-	private List<RoomImage> images = new ArrayList<>();
+	private List<RoomImage> images;
+	
+	@JsonProperty("Policies")
+	private List<RoomPolicy> policies;
 	
 	@JsonProperty("Amenities")
-	private List<Amenity> amenities = new ArrayList<>();
+	private List<RoomAmenity> amenities;
 	
 	@JsonProperty("Accessibilities")
-	private List<Accessibility> accessibilities = new ArrayList<>();
-
-	@JsonProperty("Policies")
-	private List<Policy> policies = new ArrayList<>();
+	private List<RoomAccessibility> accessibilities;
 	
 	@JsonProperty("BookingDate")
-	private List<BookingDateDto> bookingDates = new ArrayList<>();
+	private List<BookingDateDto> bookingDates;
 	
 	public Long getId() {
 		return id;
@@ -117,6 +124,14 @@ public class RoomDetailDto {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getAmenity() {
+		return amenity;
+	}
+
+	public void setAmenity(String amenity) {
+		this.amenity = amenity;
 	}
 
 	public Integer getBedroom() {
@@ -157,14 +172,6 @@ public class RoomDetailDto {
 
 	public void setImages(List<RoomImage> images) {
 		this.images = images;
-	}
-
-	public List<Amenity> getAmenities() {
-		return amenities;
-	}
-
-	public void setAmenities(List<Amenity> amenities) {
-		this.amenities = amenities;
 	}
 
 	public String getDescription() {
@@ -223,20 +230,20 @@ public class RoomDetailDto {
 		this.about_neighborhood = about_neighborhood;
 	}
 
-	public List<Accessibility> getAccessibilities() {
-		return accessibilities;
+	public String getAccessibility() {
+		return accessibility;
 	}
 
-	public void setAccessibilities(List<Accessibility> accessibilities) {
-		this.accessibilities = accessibilities;
+	public void setAccessibility(String accessibility) {
+		this.accessibility = accessibility;
 	}
 
-	public List<Policy> getPolicies() {
-		return policies;
+	public String getPolicy() {
+		return policy;
 	}
 
-	public void setPolicies(List<Policy> policies) {
-		this.policies = policies;
+	public void setPolicy(String policy) {
+		this.policy = policy;
 	}
 
 	public String getAdditional_rules() {
@@ -295,6 +302,30 @@ public class RoomDetailDto {
 		this.service_fee = service_fee;
 	}
 
+	public List<RoomPolicy> getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(List<RoomPolicy> policies) {
+		this.policies = policies;
+	}
+
+	public List<RoomAmenity> getAmenities() {
+		return amenities;
+	}
+
+	public void setAmenities(List<RoomAmenity> amenities) {
+		this.amenities = amenities;
+	}
+
+	public List<RoomAccessibility> getAccessibilities() {
+		return accessibilities;
+	}
+
+	public void setAccessibilities(List<RoomAccessibility> accessibilities) {
+		this.accessibilities = accessibilities;
+	}
+
 	public List<BookingDateDto> getBookingDates() {
 		return bookingDates;
 	}
@@ -302,16 +333,6 @@ public class RoomDetailDto {
 	public void setBookingDates(List<BookingDateDto> bookingDates) {
 		this.bookingDates = bookingDates;
 	}
-
-	public Room getRoom() {
-		return room;
-	}
-
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-	
-	
 	
 	
 }

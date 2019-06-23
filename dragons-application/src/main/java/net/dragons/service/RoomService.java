@@ -25,4 +25,6 @@ public interface RoomService {
 	List<Room> getRoomsNotBook(List<Long> arr, Long homeId, Integer numberOfGuest, String min, String max, Integer roomtype);
 
 	void update(Room room);
+	
+	List<Room> getForICalendar();
 }

@@ -31,4 +31,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 			@Param("max") String max, @Param("ids") List<Long> ids, @Param("homeId") Long homeId,
 			@Param("numberOfGuest") Integer numberOfGuest);
 
+	@Query(value = "SELECT room FROM Room room WHERE calendar != ''")
+	List<Room> findRoomByCalendar();
 }

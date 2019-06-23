@@ -32,10 +32,12 @@ public class ICalendarServiceImpl implements ICalendarService {
 	
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
 	
-	@Scheduled(fixedDelay=5*60*1000)
+	@Scheduled(fixedDelay=10*60*1000)
 	public void loadICalendarFile() throws Exception {
+		
 		// Insert new booking
-		List<Room> rooms = roomService.getByHomeId(Long.valueOf(1));
+		List<Room> rooms = roomService.getForICalendar();
+		System.out.println("Length of rooms: " + rooms.size());
 		
 		for (int i = 0; i < rooms.size(); i++) {
 			System.setProperty("ical4j.unfolding.relaxed", "true");
@@ -51,15 +53,16 @@ public class ICalendarServiceImpl implements ICalendarService {
 				Property pStart = component.getProperty("DTSTART");
 				Property pEnd = component.getProperty("DTEND");
 				Property pSummary = component.getProperty("SUMMARY");
+				Property pLastBooking = component.getProperty("UID");
 				
-				if (pStart != null && pEnd != null && pSummary != null) {
+				if (pStart != null && pEnd != null && pSummary != null && pLastBooking != null) {
 					String strFrom = pStart.getValue();
 					Date fromDate = SDF.parse(strFrom);
 					
 					String strTo = pEnd.getValue();
 					Date toDate = SDF.parse(strTo);
-					
 					String strSummary = pSummary.getValue();
+					String lastBooking = pLastBooking.getValue();
 					
 					BnbBooking bnb = new BnbBooking();
 					bnb.setHomeId(room.getHomeId());
@@ -67,12 +70,13 @@ public class ICalendarServiceImpl implements ICalendarService {
 					bnb.setFromDate(fromDate);
 					bnb.setToDate(toDate);
 					bnb.setSummary(strSummary);
-					try {
-						bnbBookingService.create(bnb);	
-					} catch (Exception ex) {
-
-					}
+					bnb.setLastBooking(lastBooking);
 					
+					boolean isSynchronized = bnbBookingService.checkSynchronizeCalendar(room.getId(), lastBooking);
+					if (isSynchronized == false) {
+						bnbBookingService.create(bnb);	
+					}
+
 				}
 			}
 		}

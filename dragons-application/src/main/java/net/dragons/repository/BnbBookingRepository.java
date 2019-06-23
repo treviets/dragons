@@ -18,4 +18,6 @@ public interface BnbBookingRepository extends JpaRepository<BnbBooking, Long>{
 	List<Long> findBnbBooking(@Param("fromDate") Long fromDate, @Param("toDate") Long toDate);
 	
 	List<BnbBooking> findByRoomId(Long roomId);
+	
+	BnbBooking findOneByRoomIdAndLastBooking(Long roomId, String lastBooking);
 }

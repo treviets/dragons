@@ -16,4 +16,6 @@ public interface BnbBookingService {
 	List<Long> findBnbBooking(Long fromDate, Long toDate);
 	
 	List<BnbBooking> getAll();
+	
+	boolean checkSynchronizeCalendar(Long roomId, String lastBooking);
 }

@@ -31,7 +31,7 @@ public class RoomDetailController {
 		ResponseDto response = new ResponseDto();
 
 		try {
-			RoomDetail room = roomDetailService.getByRoomId(roomId);
+			RoomDetailDto room = roomDetailService.getByRoomId(roomId);
 			response.setData(room);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
