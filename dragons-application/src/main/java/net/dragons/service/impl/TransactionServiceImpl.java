@@ -99,7 +99,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public void updateTransactionNonATM(CompletePaymentRequest request) {
+	public Transaction updateTransactionNonATM(CompletePaymentRequest request) {
 		Transaction tran = transactionRepository.findOneByMerchTxnRef(request.getVpcMerchTxnRef());
 
 		tran.setAdditionalData("");
@@ -118,10 +118,11 @@ public class TransactionServiceImpl implements TransactionService {
 
 		try {
 			transactionRepository.save(tran);
+			return tran;
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			return null;
 		}
-
 	}
 
 	@Override

@@ -112,7 +112,7 @@ public class PaymentController {
 		CompletePaymentRequest responseNonATM = OnePayService.parseResponseNonATM(request);
 		
 		// Update result of payment
-		transactionService.updateTransactionNonATM(responseNonATM);
+		Transaction tran = transactionService.updateTransactionNonATM(responseNonATM);
 		
 		if (!responseNonATM.getVpcTxnResponseCode().equals("0")) {
 			// Handle error message
@@ -121,6 +121,7 @@ public class PaymentController {
 		} else {
 			responseDto.setMessage(TheDragonHostConstant.PAYMENT_SUCCESS_MESSAGE);
 			responseDto.setStatus(HttpStatus.OK);
+			responseDto.setData(tran);
 		}
 
 		return responseDto;

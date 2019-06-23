@@ -39,8 +39,6 @@ public class AdminController {
 	
 	@Autowired
 	private RoomImageService roomImageService;
-	
-	
 
 	@RequestMapping(value = "/booking/all/{page}", method = RequestMethod.GET)
 	@ResponseBody

@@ -16,7 +16,7 @@ public interface TransactionService {
 	
 	void updateTransactionATM(CompleteATMPaymentRequest request);
 	
-	void updateTransactionNonATM(CompletePaymentRequest request);
+	Transaction updateTransactionNonATM(CompletePaymentRequest request);
 	
 	List<Transaction> findAll();
 	
