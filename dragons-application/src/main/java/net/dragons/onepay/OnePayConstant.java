@@ -7,7 +7,7 @@ public final class OnePayConstant {
 	
 
 	public static final String API_DOMAIN = "http://localhost:8080/dragons";
-	public static final String TDH_DOMAIN = "http://localhost:4200";
+	public static final String TDH_DOMAIN = "http://localhost:3000";
 	
 //	public static final String API_DOMAIN = "http://api.thedragonshost.com:8080/dragons";
 //	public static final String TDH_DOMAIN = "https://tdh.thedragonshost.com";

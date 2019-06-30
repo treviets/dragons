@@ -24,6 +24,11 @@ public final class TheDragonHostConstant {
 	public static String ADMIN_UPDATE_ROOM_FAILED_MESSAGE 	= "Update Room Failed";
 	
 	
-	public static String ADMIN_BOOKING_EMAIL_TITLE = "New booking confirmed for your upcoming Saigon trip! You arrives Month day. ";
+	// EMAIL INFOR
+	public static String ADMIN_BOOKING_EMAIL_TITLE 		= "New booking confirmed for your upcoming Saigon trip! You arrives Month day. ";
+	public static String ADMIN_BOOKING_EMAIL_FROM  		= "admin@thedragonshost.com";
+	public static String ADMIN_BOOKING_EMAIL_NAME  		= "ADMIN";
+	public static String ADMIN_BOOKING_EMAIL_IN_CC_LIST = "cs@thedragonshost.com";
+	
 	
 }

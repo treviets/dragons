@@ -143,6 +143,11 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
+	public Transaction findByTransactionNumber(String transactionNumber) {
+		return transactionRepository.findByTransactionNumber(transactionNumber);	
+	}
+
+	@Override
 	public List<Transaction> findByCustomerId(long customerId) {
 		return transactionRepository.findByCustomerId(customerId);
 	}

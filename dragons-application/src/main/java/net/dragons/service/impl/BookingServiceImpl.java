@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,12 +13,15 @@ import org.springframework.stereotype.Service;
 
 import net.dragons.dto.AdminBookingDto;
 import net.dragons.dto.BookingDto;
+import net.dragons.dto.BookingEmailDto;
 import net.dragons.jpa.entity.Booking;
 import net.dragons.jpa.entity.Customer;
+import net.dragons.jpa.entity.Transaction;
 import net.dragons.repository.BookingRepository;
 import net.dragons.repository.CustomerRepository;
 import net.dragons.service.BookingService;
 import net.dragons.service.EmailService;
+import net.dragons.service.TransactionService;
 import util.BookingStatusConstant;
 
 @Service
@@ -34,7 +36,8 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	EmailService emailService;
 	
-	private ModelMapper modelMapper = new ModelMapper();
+	@Autowired
+	TransactionService transactionService;
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(
 	            "yyyy-MM-dd HH:mm:ss");
@@ -55,7 +58,7 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public Long create(BookingDto bookingDto) {
+	public Booking create(BookingDto bookingDto) {
 		try {
 		Booking booking = new Booking();
 		
@@ -75,13 +78,23 @@ public class BookingServiceImpl implements BookingService {
 		
 		Optional<Customer> existingCustomer = customerRepository.findById(bookingDto.getCustomerId());
 		if (existingCustomer.isPresent()) {
+			// Prepare Data
 			Customer customer = existingCustomer.get();
-			emailService.send("The dragon host booking", "Đã book phòng", customer.getEmail());
+			String transactionNumber = bookingDto.getTransactionNumber();
+			Transaction transaction = transactionService.findByTransactionNumber(transactionNumber);
+			
+			BookingEmailDto bookingEmailDto = new BookingEmailDto();
+			bookingEmailDto.setBooking(booking);
+			bookingEmailDto.setCustomer(customer);
+			bookingEmailDto.setTransaction(transaction);
+			
+			
+			emailService.sendBookingEmail(bookingEmailDto);
 		}
-		return booking.getId();
+		return booking;
 		} catch (ParseException e) {
 			e.printStackTrace();
-			return (long) 0;
+			return null;
 		}
 		
 	}
@@ -98,7 +111,6 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public List<AdminBookingDto> getForAdmin() {
-		
 		return null;
 	}
 

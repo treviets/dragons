@@ -1,6 +1,11 @@
 package net.dragons.service.impl;
 
+import javax.mail.Multipart;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -8,6 +13,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import net.dragons.constant.TheDragonHostConstant;
+import net.dragons.dto.BookingEmailDto;
+import net.dragons.jpa.entity.Customer;
 import net.dragons.service.EmailService;
 
 
@@ -18,17 +26,36 @@ public class EmailServiceImpl implements EmailService {
 	JavaMailSender mailSender;
 	
 	@Override
-	public void send(String title, String content, String toEmail) {
+	public void sendBookingEmail(BookingEmailDto dto) {
 
 		mailSender.send(new MimeMessagePreparator() {
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				messageHelper.setFrom("admin@thedragonshost.com");
-				messageHelper.setTo(toEmail);
-				messageHelper.setSubject(title);
-				messageHelper.setCc("cs@thedragonshost.com");
-				messageHelper.setText(content, true);
+				messageHelper.setFrom(new InternetAddress(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_FROM, TheDragonHostConstant.ADMIN_BOOKING_EMAIL_NAME));
+				
+				Customer customer = dto.getCustomer();
+				if (customer != null) {
+					String toEmail = customer.getEmail();
+					messageHelper.setTo(toEmail);
+					
+					String customerName = customer.getFirstName() + customer.getLastName();
+				}
+				
+				
+				messageHelper.setSubject(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_TITLE);
+//				messageHelper.setCc(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_IN_CC_LIST);
+				
+				Multipart multipart = new MimeMultipart();
+				 
+				MimeBodyPart htmlPart = new MimeBodyPart();
+                htmlPart.setContent(messageHelper, "\\static\\email\\booking.html");
+				
+				multipart.addBodyPart(htmlPart);
+				
+				mimeMessage.setContent(multipart);
+				
+				Transport.send(mimeMessage);
 			}
 		});
 	}

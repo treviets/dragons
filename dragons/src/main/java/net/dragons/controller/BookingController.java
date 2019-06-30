@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.dto.BookingDto;
 import net.dragons.dto.ResponseDto;
+import net.dragons.jpa.entity.Booking;
+import net.dragons.jpa.entity.Transaction;
 import net.dragons.service.BookingService;
+import net.dragons.service.TransactionService;
 
 @RestController
 @RequestMapping("/booking")
@@ -24,7 +27,7 @@ public class BookingController {
 
 	@Autowired
 	private BookingService bookingService;
-
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getAllBookings(HttpServletRequest request) throws Exception {
@@ -49,8 +52,8 @@ public class BookingController {
 		ResponseDto response = new ResponseDto();
 
 		try {
-			Long id = bookingService.create(bookingDto);
-			response.setData(id);
+			Booking booking = bookingService.create(bookingDto);
+			response.setData(booking);
 			response.setStatus(HttpStatus.OK);
 		} catch (Exception ex) {
 			response.setMessage(ex.toString());

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import net.dragons.dto.ResponseDto;
 import net.dragons.dto.RoomDetailDto;
-import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.service.RoomDetailService;
 
 @RestController
@@ -45,8 +44,12 @@ public class RoomDetailController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public Object createRoomDetail(@RequestBody RoomDetailDto roomDetailDto) throws Exception {
+		
+		
 		return roomDetailDto;
 	}
 
 
+	
+	
 }

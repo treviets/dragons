@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,6 +44,11 @@ public class RoomPolicy {
 	@ManyToOne()
 	@JoinColumn(name="room_id", insertable=false, updatable=false, nullable=false)
 	private RoomDetail roomPolicy;
+	
+	@JsonProperty("Policy")
+	@OneToOne()
+	@JoinColumn(name="policy_id", insertable=false, updatable=false, nullable=false)
+	private Policy policy;
 
 	public Long getId() {
 		return id;
@@ -76,5 +82,14 @@ public class RoomPolicy {
 		this.roomPolicy = roomPolicy;
 	}
 
+	public Policy getPolicy() {
+		return policy;
+	}
+
+	public void setPolicy(Policy policy) {
+		this.policy = policy;
+	}
+
+	
 	
 }

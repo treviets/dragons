@@ -26,4 +26,6 @@ public interface TransactionService {
 	
 	List<Transaction> findByCustomerId(long customerId);
 	
+	Transaction findByTransactionNumber(String transactionNumber);
+	
 }

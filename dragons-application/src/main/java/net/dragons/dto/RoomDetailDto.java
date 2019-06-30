@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.dragons.jpa.entity.Review;
+import net.dragons.jpa.entity.Room;
 import net.dragons.jpa.entity.RoomAccessibility;
 import net.dragons.jpa.entity.RoomAmenity;
 import net.dragons.jpa.entity.RoomImage;
@@ -101,6 +102,9 @@ public class RoomDetailDto {
 	
 	@JsonProperty("BookingDate")
 	private List<BookingDateDto> bookingDates;
+	
+	@JsonProperty("Room")
+	private Room room;
 	
 	public Long getId() {
 		return id;
@@ -332,6 +336,14 @@ public class RoomDetailDto {
 
 	public void setBookingDates(List<BookingDateDto> bookingDates) {
 		this.bookingDates = bookingDates;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 	
 	

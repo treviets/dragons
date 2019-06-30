@@ -19,6 +19,7 @@ import net.dragons.jpa.entity.Booking;
 import net.dragons.jpa.entity.Room;
 import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.service.BookingService;
+import net.dragons.service.EmailService;
 import net.dragons.service.RoomDetailService;
 import net.dragons.service.RoomImageService;
 import net.dragons.service.RoomService;
@@ -40,6 +41,9 @@ public class AdminController {
 	@Autowired
 	private RoomImageService roomImageService;
 
+	@Autowired
+	private EmailService emailService;
+	
 	@RequestMapping(value = "/booking/all/{page}", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getAllBookings(@PathVariable Integer page) throws Exception {
@@ -146,5 +150,22 @@ public class AdminController {
 		return response;
 	}
 	
-	
+	@RequestMapping(value = "/send_email", method = RequestMethod.GET)
+	@ResponseBody
+	public Object sendEmail() throws Exception {
+		ResponseDto response = new ResponseDto();
+		
+		try {
+			
+			
+			response.setData("");
+			response.setMessage("Da them hinh");
+			response.setStatus(HttpStatus.OK);
+		} catch (Exception ex) {
+			response.setStatus(HttpStatus.BAD_GATEWAY);
+			response.setMessage(ex.toString());
+		}
+		
+		return response;
+	} 
 }

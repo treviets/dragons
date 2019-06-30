@@ -14,6 +14,7 @@ import net.dragons.dto.BookingDateDto;
 import net.dragons.dto.RoomDetailDto;
 import net.dragons.jpa.entity.BnbBooking;
 import net.dragons.jpa.entity.Booking;
+import net.dragons.jpa.entity.Room;
 import net.dragons.jpa.entity.RoomDetail;
 import net.dragons.repository.AccessibilityRepository;
 import net.dragons.repository.AmenityRepository;
@@ -74,8 +75,14 @@ public class RoomDetailServiceImpl implements RoomDetailService {
 		if (detail == null) {
 			return null;
 		}
-
+		
 		RoomDetailDto roomDetailDto = mapper.map(detail, RoomDetailDto.class);
+		
+		Room room = roomRepository.findById(roomId);
+		if (room != null) {
+			roomDetailDto.setRoom(room);
+		}
+
 		
 		List<BookingDateDto> bookingDates = new ArrayList<BookingDateDto>();
 		
