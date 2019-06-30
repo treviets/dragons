@@ -1,5 +1,7 @@
 package net.dragons.service.impl;
 
+import java.util.Locale;
+
 import javax.mail.Multipart;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -8,10 +10,13 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import net.dragons.constant.TheDragonHostConstant;
 import net.dragons.dto.BookingEmailDto;
@@ -24,6 +29,9 @@ public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	JavaMailSender mailSender;
+	
+	@Autowired
+	TemplateEngine templateEngine;
 	
 	@Override
 	public void sendBookingEmail(BookingEmailDto dto) {
@@ -42,21 +50,33 @@ public class EmailServiceImpl implements EmailService {
 					String customerName = customer.getFirstName() + customer.getLastName();
 				}
 				
-				
 				messageHelper.setSubject(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_TITLE);
 //				messageHelper.setCc(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_IN_CC_LIST);
 				
-				Multipart multipart = new MimeMultipart();
-				 
-				MimeBodyPart htmlPart = new MimeBodyPart();
-                htmlPart.setContent(messageHelper, "\\static\\email\\booking.html");
-				
-				multipart.addBodyPart(htmlPart);
-				
-				mimeMessage.setContent(multipart);
-				
-				Transport.send(mimeMessage);
+				Locale locale = LocaleContextHolder.getLocale();
+			    // Prepare the evaluation context
+			    Context context = new Context(locale);
+			    context.setVariable("message", "");
+			    
+				String htmlContent = templateEngine.process("email/booking.html", context);    
+				mimeMessage.setText(htmlContent);
+			
 			}
 		});
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
