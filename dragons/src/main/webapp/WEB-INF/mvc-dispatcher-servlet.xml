@@ -57,8 +57,8 @@
 	    <!-- SMTP settings -->
 	    <property name="host" value="smtp.gmail.com" />
 	    <property name="port" value="587" />
-	    <property name="username" value="automailer@cis.net.vn" />
-	    <property name="password" value="Book1234@" />
+	    <property name="username" value="admin@thedragonshost.com" />
+	    <property name="password" value="dragons@2017" />
 		<property name="javaMailProperties">
 		<props>
 			<prop key="mail.transport.protocol">smtp</prop>
