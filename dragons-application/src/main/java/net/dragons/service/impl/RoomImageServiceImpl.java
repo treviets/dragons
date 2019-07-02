@@ -60,6 +60,12 @@ public class RoomImageServiceImpl implements RoomImageService {
 		
 		return id;
 	}
+
+
+	@Override
+	public List<RoomImage> findByRoomId(Long roomId) {
+		return roomImageRepository.findByRoomId(roomId);
+	}
 	
 	
 	

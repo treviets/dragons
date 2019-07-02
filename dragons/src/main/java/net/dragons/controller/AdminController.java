@@ -150,14 +150,13 @@ public class AdminController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/send_email", method = RequestMethod.GET)
+	@RequestMapping(value = "/send_email", method = RequestMethod.POST)
 	@ResponseBody
 	public Object sendEmail() throws Exception {
 		ResponseDto response = new ResponseDto();
 		
 		try {
-			
-			
+			emailService.sendBookingEmail(null);
 			response.setData("");
 			response.setMessage("Da them hinh");
 			response.setStatus(HttpStatus.OK);
