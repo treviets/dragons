@@ -14,13 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import net.dragons.dto.BookingDto;
-import net.dragons.dto.BookingEmailDto;
 import net.dragons.dto.ResponseDto;
 import net.dragons.jpa.entity.Booking;
-import net.dragons.jpa.entity.Transaction;
 import net.dragons.service.BookingService;
-import net.dragons.service.EmailService;
-import net.dragons.service.TransactionService;
 
 @RestController
 @RequestMapping("/booking")
@@ -29,9 +25,6 @@ public class BookingController {
 
 	@Autowired
 	private BookingService bookingService;
-	
-	@Autowired
-	private EmailService emailService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
@@ -83,23 +76,5 @@ public class BookingController {
 
 		return response;
 	}
-	
-	@RequestMapping(value = "/send_email", method = RequestMethod.POST)
-	@ResponseBody
-	public Object getBookingByRoom(@RequestBody BookingEmailDto dto) throws Exception {
-		ResponseDto response = new ResponseDto();
-
-		try {
-			emailService.sendBookingEmail(dto);
-			response.setData("");
-			response.setStatus(HttpStatus.OK);
-		} catch (Exception ex) {
-			response.setStatus(HttpStatus.BAD_GATEWAY);
-			response.setMessage(ex.toString());
-		}
-
-		return response;
-	}
-	
 	
 }

@@ -72,9 +72,14 @@ public class BookingServiceImpl implements BookingService {
 		booking.setTotalAmount(bookingDto.getTotalAmount());
 		booking.setNumberOfNights(bookingDto.getNumberOfNights());
 		booking.setBookingStatus(BookingStatusConstant.CREATED);
+		booking.setTransactionNumber(bookingDto.getTransactionNumber());
 		
+		try {
+			bookingRepository.save(booking);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		
-		bookingRepository.save(booking);
 		
 		Optional<Customer> existingCustomer = customerRepository.findById(bookingDto.getCustomerId());
 		if (existingCustomer.isPresent()) {

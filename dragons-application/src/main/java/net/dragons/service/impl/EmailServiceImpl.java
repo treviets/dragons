@@ -1,5 +1,6 @@
 package net.dragons.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.mail.internet.InternetAddress;
@@ -39,22 +40,23 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	ConfigurationService configurationService;
 	
+	private static final SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
+	
 	@Override
 	public void sendBookingEmail(BookingEmailDto dto) {
 
 		mailSender.send(new MimeMessagePreparator() {
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
+				
 				MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 				messageHelper.setFrom(new InternetAddress(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_FROM, TheDragonHostConstant.ADMIN_BOOKING_EMAIL_NAME));
-				
 				messageHelper.setSubject(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_TITLE);
 //				messageHelper.setCc(TheDragonHostConstant.ADMIN_BOOKING_EMAIL_IN_CC_LIST);
+				messageHelper.setTo("vunhankhtn@gmail.com");
 				
 				String content = prepareEmailData(dto);
 				messageHelper.setText(content, true);
-				
-				messageHelper.setTo("vunhankhtn@gmail.com");
 			}
 		});
 	}
@@ -71,8 +73,8 @@ public class EmailServiceImpl implements EmailService {
 		
 		Booking booking = dto.getBooking();
 		if (booking != null) {
-			String fromDate = booking.getFromDate().toString();
-			String toDate = booking.getToDate().toString();
+			String fromDate = SDF.format(booking.getFromDate());
+			String toDate = SDF.format(booking.getToDate());
 			String numberOfNight = booking.getNumberOfNights().toString();
 			String numberOfGuest = booking.getNumberOfGuess().toString();
 			
@@ -117,7 +119,7 @@ public class EmailServiceImpl implements EmailService {
 		String imageList = "";
 		for (int i = 0; i < 5; i++) {
 			String base = "<img class='footer-image' src='#image_src#'/>";
-			String src = "http://tdh.thedragonshost.com:8080/dragons/" + images.get(i).getImage();
+			String src = "http://tdh.thedragonshost.com:8080/dragons" + images.get(i).getImage();
 			
 			base = base.replace("#image_src#", src);
 			imageList = imageList + base;
@@ -150,7 +152,7 @@ public class EmailServiceImpl implements EmailService {
 				+ "<div class='cancel-policy row text-center'><div class='title text-center'><strong>Cancellation Policy</strong></div><p class='text-center'>Please note you are within cancellation penalty of 1 night/s fee. No show is subject to 1 night/s fee</p>"
 				+ "<strong class='text-center' style='font-size: 30px;'>We're here for you 24/7</strong><p>Have a question? Chat online with one of our guest services team or email us at cs@thedragonshost.com</p>"
 				+ "<p><strong>And don't forget to post your pictures and video to our Facebook and Instagram</strong></p><p><strong>Facebook: </strong>www.facebook.com/thedragonshost/</p><p><strong>Instagram: </strong>thedragonshost</p></div>"
-				+ "<div class='footer row text-center' style='margin-bottom: 50px;margin-top:15px;'>#{room_images}#</div></div></body></html>";
+				+ "<div class='footer row text-center' style='margin-bottom: 50px;margin-top:15px;'>#room_images#</div></div></body></html>";
 	
 		return email;
 	}
