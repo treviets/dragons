@@ -48,6 +48,14 @@ public class Booking {
 	@Column(name="price")
 	private Double price;
 	
+	@JsonProperty("CleaningFee")
+	@Column(name="cleaning_fee")
+	private Double cleaningFee;
+	
+	@JsonProperty("ServiceFee")
+	@Column(name="service_fee")
+	private Double serviceFee;
+	
 	@JsonProperty("NumberOfGuess")
 	@Column(name="number_of_guess")
 	private Integer numberOfGuess;
@@ -111,6 +119,22 @@ public class Booking {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	public Double getCleaningFee() {
+		return cleaningFee;
+	}
+
+	public void setCleaningFee(Double cleaningFee) {
+		this.cleaningFee = cleaningFee;
+	}
+
+	public Double getServiceFee() {
+		return serviceFee;
+	}
+
+	public void setServiceFee(Double serviceFee) {
+		this.serviceFee = serviceFee;
 	}
 
 	public Integer getNumberOfGuess() {

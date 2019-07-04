@@ -28,6 +28,12 @@ public class BookingDto {
 	@JsonProperty("Price")
 	private Double price;
 	
+	@JsonProperty("CleaningFee")
+	private Double cleaningFee;
+	
+	@JsonProperty("ServiceFee")
+	private Double serviceFee;
+	
 	@JsonProperty("TotalAmount")
 	private Double totalAmount;
 	
@@ -88,6 +94,22 @@ public class BookingDto {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	public Double getCleaningFee() {
+		return cleaningFee;
+	}
+
+	public void setCleaningFee(Double cleaningFee) {
+		this.cleaningFee = cleaningFee;
+	}
+
+	public Double getServiceFee() {
+		return serviceFee;
+	}
+
+	public void setServiceFee(Double serviceFee) {
+		this.serviceFee = serviceFee;
 	}
 
 	public Double getTotalAmount() {

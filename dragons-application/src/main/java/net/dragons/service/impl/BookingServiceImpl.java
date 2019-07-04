@@ -73,6 +73,8 @@ public class BookingServiceImpl implements BookingService {
 		booking.setNumberOfNights(bookingDto.getNumberOfNights());
 		booking.setBookingStatus(BookingStatusConstant.CREATED);
 		booking.setTransactionNumber(bookingDto.getTransactionNumber());
+		booking.setCleaningFee(bookingDto.getCleaningFee());
+		booking.setServiceFee(bookingDto.getServiceFee());
 		
 		try {
 			bookingRepository.save(booking);

@@ -56,6 +56,18 @@ public class Home {
 	@Column(name="status")
 	private String status;
 	
+	@JsonProperty("PassLock")
+	@Column(name="pass_lock")
+	private String passLock;
+	
+	@JsonProperty("WifiName")
+	@Column(name="wifi_name")
+	private String wifiName;
+	
+	@JsonProperty("WifiPass")
+	@Column(name="wifi_pass")
+	private String wifiPass;
+	
 	@JsonProperty("Images")
 	@OneToMany(mappedBy="home")
 	private List<HomeImage> images = new ArrayList<>();
@@ -122,6 +134,30 @@ public class Home {
 
 	public void setImages(List<HomeImage> images) {
 		this.images = images;
+	}
+
+	public String getPassLock() {
+		return passLock;
+	}
+
+	public void setPassLock(String passLock) {
+		this.passLock = passLock;
+	}
+
+	public String getWifiName() {
+		return wifiName;
+	}
+
+	public void setWifiName(String wifiName) {
+		this.wifiName = wifiName;
+	}
+
+	public String getWifiPass() {
+		return wifiPass;
+	}
+
+	public void setWifiPass(String wifiPass) {
+		this.wifiPass = wifiPass;
 	}
 	
 	
