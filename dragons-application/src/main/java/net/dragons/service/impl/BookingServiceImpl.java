@@ -16,7 +16,6 @@ import net.dragons.dto.BookingDto;
 import net.dragons.dto.BookingEmailDto;
 import net.dragons.jpa.entity.Booking;
 import net.dragons.jpa.entity.Customer;
-import net.dragons.jpa.entity.Transaction;
 import net.dragons.repository.BookingRepository;
 import net.dragons.repository.CustomerRepository;
 import net.dragons.service.BookingService;
@@ -87,14 +86,10 @@ public class BookingServiceImpl implements BookingService {
 		if (existingCustomer.isPresent()) {
 			// Prepare Data
 			Customer customer = existingCustomer.get();
-			String transactionNumber = bookingDto.getTransactionNumber();
-			Transaction transaction = transactionService.findByTransactionNumber(transactionNumber);
-			
+		
 			BookingEmailDto bookingEmailDto = new BookingEmailDto();
 			bookingEmailDto.setBooking(booking);
 			bookingEmailDto.setCustomer(customer);
-			bookingEmailDto.setTransaction(transaction);
-			
 			
 			emailService.sendBookingEmail(bookingEmailDto);
 		}
